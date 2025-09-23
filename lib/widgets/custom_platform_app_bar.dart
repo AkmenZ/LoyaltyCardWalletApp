@@ -8,21 +8,23 @@ class CustomPlatformAppBar extends PlatformAppBar {
     required Widget super.title,
     super.leading,
     List<Widget> super.trailingActions = const [],
+    String? previousPageTitle,
   }) : super(
-          material: (_, __) => MaterialAppBarData(
-            surfaceTintColor: Colors.transparent,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-          ),
-          cupertino: (context, __) => CupertinoNavigationBarData(
-            transitionBetweenRoutes: true,
-            automaticBackgroundVisibility: false,
-            border: Border(
-              bottom: BorderSide(
-                color: CupertinoColors.separator.resolveFrom(context),
-                width: 0.5, // tweak to 0.33 for an even finer hairline
-              ),
-            ),
-          ),
-        );
+         material: (_, __) => MaterialAppBarData(
+           surfaceTintColor: Colors.transparent,
+           elevation: 0,
+           scrolledUnderElevation: 0,
+         ),
+         cupertino: (context, __) => CupertinoNavigationBarData(
+           transitionBetweenRoutes: true,
+           automaticBackgroundVisibility: false,
+           previousPageTitle: previousPageTitle,
+           border: Border(
+             bottom: BorderSide(
+               color: CupertinoColors.separator.resolveFrom(context),
+               width: 0.5,
+             ),
+           ),
+         ),
+       );
 }

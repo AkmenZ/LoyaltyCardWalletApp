@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +14,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
+  // Insert some default cards for testing/demo purposes
   Future<void> _insertDefaultCards(BuildContext context) async {
     try {
       final db = await SembastDatabase.open();
@@ -60,11 +60,15 @@ class HomePage extends ConsumerWidget {
       context,
       platformPageRoute(
         context: context,
-        builder: (_) => CardPage(loyaltyCard: card),
+        builder: (_) => CardPage(
+          loyaltyCardId: card.id!,
+          merchant: card.merchant ?? 'Unknown',
+        ),
       ),
     );
   }
 
+  // open Add Card Modal
   void _openAddCardModal(BuildContext context) {
     showCupertinoModalBottomSheet(
       context: context,
@@ -121,15 +125,9 @@ class HomePage extends ConsumerWidget {
           ),
           Expanded(
             child: RefreshIndicator(
-              onRefresh: () => ref.read(loyaltyCardsProvider.notifier).loadCards(),
+              onRefresh: () =>
+                  ref.read(loyaltyCardsProvider.notifier).loadCards(),
               child: loyaltyCardsAsync.when(
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => ListView(
-                  children: [
-                    const SizedBox(height: 120),
-                    Center(child: Text('Error: $e')),
-                  ],
-                ),
                 data: (cards) => cards.isEmpty
                     ? ListView(
                         children: const [
@@ -141,11 +139,11 @@ class HomePage extends ConsumerWidget {
                         padding: const EdgeInsets.all(12),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 1.5,
-                        ),
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 1.5,
+                            ),
                         itemCount: cards.length,
                         itemBuilder: (context, index) {
                           final card = cards[index];
@@ -163,7 +161,7 @@ class HomePage extends ConsumerWidget {
                                     : Theme.of(context).cardColor,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
+                                    color: Colors.black.withValues(alpha: 25),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),
                                   ),
@@ -185,6 +183,13 @@ class HomePage extends ConsumerWidget {
                           );
                         },
                       ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (e, _) => ListView(
+                  children: [
+                    const SizedBox(height: 120),
+                    Center(child: Text('Error: $e')),
+                  ],
+                ),
               ),
             ),
           ),

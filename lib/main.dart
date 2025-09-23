@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         matchCupertinoSystemChromeBrightness: true,
         builder: (context) => PlatformApp(
           title: 'Loyalty Cards',
-          // No need to set material:/cupertino: here from v3.3+
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             DefaultMaterialLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,

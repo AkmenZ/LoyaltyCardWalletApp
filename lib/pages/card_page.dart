@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/edit_card_modal.dart';
+import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class CardPage extends StatelessWidget {
-  const CardPage({super.key, required this.loyaltyCard});
+class CardPage extends ConsumerWidget {
+  const CardPage({
+    super.key,
+    required this.loyaltyCardId,
+    required this.merchant,
+  });
 
-  final LoyaltyCard loyaltyCard;
+  final int loyaltyCardId;
+  final String merchant;
 
-  void _openEditCardModal(BuildContext context) {
+  void _openEditCardModal(BuildContext context, LoyaltyCard card) {
     showCupertinoModalBottomSheet(
       context: context,
       expand: true,
@@ -20,7 +28,7 @@ class CardPage extends StatelessWidget {
         onGenerateRoute: (settings) {
           return platformPageRoute(
             context: context,
-            builder: (context) => EditCardModal(loyaltyCard: loyaltyCard),
+            builder: (context) => EditCardModal(loyaltyCard: card),
           );
         },
       ),
@@ -28,40 +36,64 @@ class CardPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cardAsync = ref.watch(loyaltyCardByIdProvider(loyaltyCardId));
+
     return CustomScaffold(
       appBar: CustomPlatformAppBar(
-        title: Text(loyaltyCard.merchant ?? 'Unknown'),
+        title: Text(merchant),
+        previousPageTitle: 'Cards',
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.edit),
             onPressed: () {
-              // open Edit Card Modal
-              _openEditCardModal(context);
+              final card = cardAsync.asData?.value;
+              if (card != null) {
+                _openEditCardModal(context, card);
+              }
             },
           ),
         ],
       ),
-      body: Column(
-        spacing: 20.0,
-        children: [
-          LoyaltyCardWidget(loyaltyCard: loyaltyCard),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: PlatformElevatedButton(
-              onPressed: () {
-                // TODO: Implement share functionality
-              },
-              child: Row(
-                spacing: 20.0,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Icon(context.platformIcons.share), Text('Share')],
+      body: cardAsync.when(
+        data: (card) {
+          if (card == null) {
+            return ListView(
+              children: const [
+                SizedBox(height: 120),
+                Center(
+                  child: Text('Card not found. It may have been deleted.'),
+                ),
+              ],
+            );
+          }
+          return Column(
+            spacing: 20.0,
+            children: [
+              LoyaltyCardWidget(loyaltyCard: card),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: PlatformElevatedButton(
+                  onPressed: () {
+                    // TODO: Implement share functionality
+                  },
+                  child: Row(
+                    spacing: 20.0,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(context.platformIcons.share),
+                      const Text('Share'),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          SizedBox(height: 40.0),
-        ],
+              const SizedBox(height: 40.0),
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(child: Text('Error: $e')),
       ),
     );
   }
