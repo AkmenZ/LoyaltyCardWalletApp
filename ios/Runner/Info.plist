@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Add these permissions for camera scanning -->
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to scan barcodes</string>
 </dict>
 </plist>

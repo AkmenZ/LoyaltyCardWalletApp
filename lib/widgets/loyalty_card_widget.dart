@@ -13,45 +13,68 @@ class LoyaltyCardWidget extends StatelessWidget {
     final type = (loyaltyCard.barcodeType ?? '').trim().toLowerCase();
 
     return Card(
-      margin: const EdgeInsets.all(12),
+      margin: const EdgeInsets.all(20),
+      color: Colors.white,
+      elevation: 8,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
+          spacing: 20.0,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if ((loyaltyCard.merchant ?? '').isNotEmpty)
-              Text(loyaltyCard.merchant!, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 12),
+              Container(
+                height: 160,
+                color: loyaltyCard.colorHex != null
+                    ? Color(
+                        int.parse(
+                          '0xFF${loyaltyCard.colorHex!.replaceFirst('#', '')}',
+                        ),
+                      )
+                    : Colors.grey.shade300,
+                child: Center(
+                  child: Text(
+                    loyaltyCard.merchant!,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ),
             if (data.isEmpty)
               const Text('No barcode available', textAlign: TextAlign.center)
             else
               AspectRatio(
-                aspectRatio: _isQrLike(type) ? 1 : 3.5,
+                aspectRatio: _isQrLike(type) ? 1 : 2,
                 child: BarcodeWidget(
                   barcode: _symbologyFromString(type),
                   data: data,
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  textPadding: 20.0,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.shadow,
+                    fontSize: 24,
+                  ),
                   drawText: !_isQrLike(type),
                   backgroundColor: Colors.transparent,
                   errorBuilder: (context, err) => Center(
                     child: Text(
                       'Invalid ${type.isEmpty ? 'code128' : type}: $err',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Theme.of(context).colorScheme.error),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                     ),
                   ),
                 ),
               ),
-            const SizedBox(height: 12),
-            if ((loyaltyCard.displayValue ?? '').isNotEmpty)
-              Text(loyaltyCard.displayValue!, textAlign: TextAlign.center),
           ],
         ),
       ),
     );
   }
 
-  static bool _isQrLike(String t) => t.contains('qr') || t.contains('aztec') || t.contains('matrix');
+  static bool _isQrLike(String t) =>
+      t.contains('qr') || t.contains('aztec') || t.contains('matrix');
 
   static Barcode _symbologyFromString(String type) {
     switch (type) {
