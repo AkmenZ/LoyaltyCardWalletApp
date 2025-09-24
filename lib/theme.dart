@@ -35,7 +35,7 @@ final CupertinoThemeData cupertinoLightTheme = MaterialBasedCupertinoThemeData(
   materialTheme: materialLightTheme.copyWith(
     cupertinoOverrideTheme: CupertinoThemeData(
       brightness: Brightness.light,
-      barBackgroundColor: seed
+      // barBackgroundColor: seed
     ),
   ),
 );
@@ -44,7 +44,7 @@ final CupertinoThemeData cupertinoDarkTheme = MaterialBasedCupertinoThemeData(
   materialTheme: materialDarkTheme.copyWith(
     cupertinoOverrideTheme: CupertinoThemeData(
       brightness: Brightness.dark,
-      barBackgroundColor: seed
+      // barBackgroundColor: seed
     ),
   ),
 );

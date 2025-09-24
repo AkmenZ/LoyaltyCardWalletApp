@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'brands.dart';
+part of 'brand.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Brands _$BrandsFromJson(Map<String, dynamic> json) => _Brands(
+_Brand _$BrandFromJson(Map<String, dynamic> json) => _Brand(
   id: json['id'] as String?,
   name: json['name'] as String?,
   logo: json['logo'] as String?,
@@ -17,7 +17,7 @@ _Brands _$BrandsFromJson(Map<String, dynamic> json) => _Brands(
   popular: json['popular'] as bool?,
 );
 
-Map<String, dynamic> _$BrandsToJson(_Brands instance) => <String, dynamic>{
+Map<String, dynamic> _$BrandToJson(_Brand instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'logo': instance.logo,

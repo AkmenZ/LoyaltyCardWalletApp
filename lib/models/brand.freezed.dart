@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'brands.dart';
+part of 'brand.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'brands.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Brands {
+mixin _$Brand {
 
  String? get id; String? get name; String? get logo; String? get colorHex; List<String>? get regions; bool? get popular;
-/// Create a copy of Brands
+/// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$BrandsCopyWith<Brands> get copyWith => _$BrandsCopyWithImpl<Brands>(this as Brands, _$identity);
+$BrandCopyWith<Brand> get copyWith => _$BrandCopyWithImpl<Brand>(this as Brand, _$identity);
 
-  /// Serializes this Brands to a JSON map.
+  /// Serializes this Brand to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Brands&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.regions, regions)&&(identical(other.popular, popular) || other.popular == popular));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.regions, regions)&&(identical(other.popular, popular) || other.popular == popular));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepColl
 
 @override
 String toString() {
-  return 'Brands(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popular: $popular)';
+  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popular: $popular)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $BrandsCopyWith<$Res>  {
-  factory $BrandsCopyWith(Brands value, $Res Function(Brands) _then) = _$BrandsCopyWithImpl;
+abstract mixin class $BrandCopyWith<$Res>  {
+  factory $BrandCopyWith(Brand value, $Res Function(Brand) _then) = _$BrandCopyWithImpl;
 @useResult
 $Res call({
  String? id, String? name, String? logo, String? colorHex, List<String>? regions, bool? popular
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$BrandsCopyWithImpl<$Res>
-    implements $BrandsCopyWith<$Res> {
-  _$BrandsCopyWithImpl(this._self, this._then);
+class _$BrandCopyWithImpl<$Res>
+    implements $BrandCopyWith<$Res> {
+  _$BrandCopyWithImpl(this._self, this._then);
 
-  final Brands _self;
-  final $Res Function(Brands) _then;
+  final Brand _self;
+  final $Res Function(Brand) _then;
 
-/// Create a copy of Brands
+/// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popular = freezed,}) {
   return _then(_self.copyWith(
@@ -80,8 +80,8 @@ as bool?,
 }
 
 
-/// Adds pattern-matching-related methods to [Brands].
-extension BrandsPatterns on Brands {
+/// Adds pattern-matching-related methods to [Brand].
+extension BrandPatterns on Brand {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -94,10 +94,10 @@ extension BrandsPatterns on Brands {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Brands value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Brand value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Brands() when $default != null:
+case _Brand() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -116,10 +116,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Brands value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Brand value)  $default,){
 final _that = this;
 switch (_that) {
-case _Brands():
+case _Brand():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -137,10 +137,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Brands value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Brand value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Brands() when $default != null:
+case _Brand() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -160,7 +160,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  bool? popular)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Brands() when $default != null:
+case _Brand() when $default != null:
 return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popular);case _:
   return orElse();
 
@@ -181,7 +181,7 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  bool? popular)  $default,) {final _that = this;
 switch (_that) {
-case _Brands():
+case _Brand():
 return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popular);case _:
   throw StateError('Unexpected subclass');
 
@@ -201,7 +201,7 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  bool? popular)?  $default,) {final _that = this;
 switch (_that) {
-case _Brands() when $default != null:
+case _Brand() when $default != null:
 return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popular);case _:
   return null;
 
@@ -213,9 +213,9 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _Brands implements Brands {
-  const _Brands({this.id, this.name, this.logo, this.colorHex, final  List<String>? regions, this.popular}): _regions = regions;
-  factory _Brands.fromJson(Map<String, dynamic> json) => _$BrandsFromJson(json);
+class _Brand implements Brand {
+  const _Brand({this.id, this.name, this.logo, this.colorHex, final  List<String>? regions, this.popular}): _regions = regions;
+  factory _Brand.fromJson(Map<String, dynamic> json) => _$BrandFromJson(json);
 
 @override final  String? id;
 @override final  String? name;
@@ -232,20 +232,20 @@ class _Brands implements Brands {
 
 @override final  bool? popular;
 
-/// Create a copy of Brands
+/// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$BrandsCopyWith<_Brands> get copyWith => __$BrandsCopyWithImpl<_Brands>(this, _$identity);
+_$BrandCopyWith<_Brand> get copyWith => __$BrandCopyWithImpl<_Brand>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$BrandsToJson(this, );
+  return _$BrandToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Brands&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._regions, _regions)&&(identical(other.popular, popular) || other.popular == popular));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._regions, _regions)&&(identical(other.popular, popular) || other.popular == popular));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -254,15 +254,15 @@ int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepColl
 
 @override
 String toString() {
-  return 'Brands(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popular: $popular)';
+  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popular: $popular)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$BrandsCopyWith<$Res> implements $BrandsCopyWith<$Res> {
-  factory _$BrandsCopyWith(_Brands value, $Res Function(_Brands) _then) = __$BrandsCopyWithImpl;
+abstract mixin class _$BrandCopyWith<$Res> implements $BrandCopyWith<$Res> {
+  factory _$BrandCopyWith(_Brand value, $Res Function(_Brand) _then) = __$BrandCopyWithImpl;
 @override @useResult
 $Res call({
  String? id, String? name, String? logo, String? colorHex, List<String>? regions, bool? popular
@@ -273,17 +273,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$BrandsCopyWithImpl<$Res>
-    implements _$BrandsCopyWith<$Res> {
-  __$BrandsCopyWithImpl(this._self, this._then);
+class __$BrandCopyWithImpl<$Res>
+    implements _$BrandCopyWith<$Res> {
+  __$BrandCopyWithImpl(this._self, this._then);
 
-  final _Brands _self;
-  final $Res Function(_Brands) _then;
+  final _Brand _self;
+  final $Res Function(_Brand) _then;
 
-/// Create a copy of Brands
+/// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popular = freezed,}) {
-  return _then(_Brands(
+  return _then(_Brand(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to_non_nullable

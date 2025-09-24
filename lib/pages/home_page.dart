@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loyalty_cards_app/db/loyalty_card.dao.dart';
-import 'package:loyalty_cards_app/db/sembast_database.dart';
-import 'package:loyalty_cards_app/models/brands.dart';
+import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/add_card_modal.dart';
 import 'package:loyalty_cards_app/pages/card_page.dart';
@@ -16,48 +14,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  // Insert some default cards for testing/demo purposes
-  Future<void> _insertDefaultCards(BuildContext context) async {
-    try {
-      final db = await SembastDatabase.open();
-      final dao = LoyaltyCardSembastDao(db);
-      final now = DateTime.now().toIso8601String();
-
-      await dao.insert(
-        LoyaltyCard(
-          merchant: 'Tesco',
-          barcode: '634000021015550645',
-          barcodeType: 'code128',
-          colorHex: '#E0E0E0',
-          dateAdded: now,
-          favorite: true,
-          displayValue: '5901 2341 23457',
-        ),
-      );
-
-      await dao.insert(
-        LoyaltyCard(
-          merchant: 'Boots',
-          barcode: '633030010080419621082620',
-          barcodeType: 'code128',
-          colorHex: '#0EA5E9',
-          dateAdded: now,
-          favorite: false,
-          displayValue: 'BTS 1234 567 890',
-        ),
-      );
-
-      await db.close();
-    } catch (e) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Insert failed: $e')));
-    }
-  }
-
   // navigate to card details page
-  void _openCard(BuildContext context, LoyaltyCard card) {
+  void _openCard(BuildContext context, LoyaltyCard card, Brand? brand) {
     Navigator.push(
       context,
       platformPageRoute(
@@ -65,13 +23,14 @@ class HomePage extends ConsumerWidget {
         builder: (_) => CardPage(
           loyaltyCardId: card.id!,
           merchant: card.merchant ?? 'Unknown',
+          brand: brand,
         ),
       ),
     );
   }
 
   // open Add Card Modal
-  void _openAddCardModal(BuildContext context) {
+  void _openAddCardModal(BuildContext context, List<Brand> brands) {
     showCupertinoModalBottomSheet(
       context: context,
       expand: true,
@@ -80,7 +39,7 @@ class HomePage extends ConsumerWidget {
         onGenerateRoute: (settings) {
           return platformPageRoute(
             context: context,
-            builder: (context) => AddCardModal(),
+            builder: (context) => AddCardModal(brands: brands),
           );
         },
       ),
@@ -106,7 +65,7 @@ class HomePage extends ConsumerWidget {
           PlatformIconButton(
             icon: Icon(context.platformIcons.add),
             onPressed: () {
-              _openAddCardModal(context);
+              _openAddCardModal(context, brandsAsync.asData?.value ?? []);
             },
           ),
         ],
@@ -114,17 +73,8 @@ class HomePage extends ConsumerWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-            child: Row(
-              children: [
-                PlatformElevatedButton(
-                  onPressed: () => _insertDefaultCards(context),
-                  child: const Text('Insert default cards'),
-                ),
-                const Spacer(),
-                Text('Total: $count'),
-              ],
-            ),
+            padding: const EdgeInsets.all(12.0),
+            child: Row(children: [const Spacer(), Text('Total: $count ')]),
           ),
           Expanded(
             child: RefreshIndicator(
@@ -161,11 +111,11 @@ class HomePage extends ConsumerWidget {
                             (b) =>
                                 b.name?.toLowerCase() ==
                                 card.merchant?.toLowerCase(),
-                            orElse: () => Brands(),
+                            orElse: () => Brand(),
                           );
 
                           return GestureDetector(
-                            onTap: () => _openCard(context, card),
+                            onTap: () => _openCard(context, card, brand),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 
 class LoyaltyCardWidget extends StatelessWidget {
-  const LoyaltyCardWidget({super.key, required this.loyaltyCard});
+  const LoyaltyCardWidget({super.key, required this.loyaltyCard, this.brand});
 
   final LoyaltyCard loyaltyCard;
+  final Brand? brand;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,13 @@ class LoyaltyCardWidget extends StatelessWidget {
                       )
                     : Colors.grey.shade300,
                 child: Center(
-                  child: Text(
-                    loyaltyCard.merchant!,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  child: brand?.logo != null
+                      ? Image.asset(brand!.logo!, fit: BoxFit.contain)
+                      : Text(
+                          loyaltyCard.merchant ?? 'Unknown',
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                        ),
                 ),
               ),
             if (data.isEmpty)

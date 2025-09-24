@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/pages/scanner_modal.dart';
 import 'package:loyalty_cards_app/widgets/brands_list.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
 class AddCardModal extends StatelessWidget {
-  const AddCardModal({super.key});
+  const AddCardModal({super.key, required this.brands});
+
+  final List<Brand> brands;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +34,12 @@ class AddCardModal extends StatelessWidget {
             PlatformElevatedButton(
               onPressed: () {
                 // navigate to scanner modal
-                Navigator.of(context).push(
-                  platformPageRoute(
-                    context: context,
-                    builder: (_) => const ScannerModal(),
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   platformPageRoute(
+                //     context: context,
+                //     builder: (_) => const ScannerModal(),
+                //   ),
+                // );
               },
               child: const Text('Add Custom Card'),
               material: (_, __) => MaterialElevatedButtonData(
@@ -51,7 +54,7 @@ class AddCardModal extends StatelessWidget {
             ),
             _buildSearchField(context),
             // Brands list
-            Expanded(child: BrandsList()),
+            Expanded(child: BrandsList(brands: brands)),
           ],
         ),
       ),
@@ -66,10 +69,15 @@ class AddCardModal extends StatelessWidget {
         onChanged: (value) {},
       ),
       cupertino: (_, __) => CupertinoSearchTextField(
+        padding: const EdgeInsets.all(8.0),
         placeholder: 'Search for popular merchants',
+        autofocus: true,
         onChanged: (value) {},
-        backgroundColor: CupertinoColors.systemGrey6,
-        borderRadius: BorderRadius.circular(8.0),
+        decoration: BoxDecoration(
+          color: CupertinoColors.systemGrey6,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(color: CupertinoColors.systemGrey4, width: 1.0),
+        ),
       ),
     );
   }

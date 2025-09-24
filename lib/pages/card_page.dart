@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
@@ -15,12 +16,18 @@ class CardPage extends ConsumerWidget {
     super.key,
     required this.loyaltyCardId,
     required this.merchant,
+    this.brand,
   });
 
   final int loyaltyCardId;
   final String merchant;
+  final Brand? brand;
 
-  void _openEditCardModal(BuildContext context, LoyaltyCard card) {
+  void _openEditCardModal(
+    BuildContext context,
+    LoyaltyCard card,
+    Brand? brand,
+  ) {
     showCupertinoModalBottomSheet(
       context: context,
       expand: true,
@@ -28,7 +35,8 @@ class CardPage extends ConsumerWidget {
         onGenerateRoute: (settings) {
           return platformPageRoute(
             context: context,
-            builder: (context) => EditCardModal(loyaltyCard: card),
+            builder: (context) =>
+                EditCardModal(loyaltyCard: card, brand: brand),
           );
         },
       ),
@@ -49,7 +57,7 @@ class CardPage extends ConsumerWidget {
             onPressed: () {
               final card = cardAsync.asData?.value;
               if (card != null) {
-                _openEditCardModal(context, card);
+                _openEditCardModal(context, card, brand);
               }
             },
           ),
@@ -70,7 +78,7 @@ class CardPage extends ConsumerWidget {
           return Column(
             spacing: 20.0,
             children: [
-              LoyaltyCardWidget(loyaltyCard: card),
+              LoyaltyCardWidget(loyaltyCard: card, brand: brand),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

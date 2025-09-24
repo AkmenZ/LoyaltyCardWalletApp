@@ -8,24 +8,23 @@ import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
-class EditCardModal extends ConsumerStatefulWidget {
-  const EditCardModal({super.key, required this.loyaltyCard, this.brand});
+class AddCardManuallyModal extends ConsumerStatefulWidget {
+  const AddCardManuallyModal({super.key, required this.brand});
 
-  final LoyaltyCard loyaltyCard;
-  final Brand? brand;
+  final Brand brand;
 
   @override
-  ConsumerState<EditCardModal> createState() => _EditCardModalState();
+  ConsumerState<AddCardManuallyModal> createState() => _AddCardManuallyModalState();
 }
 
-class _EditCardModalState extends ConsumerState<EditCardModal> {
+class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
   late final TextEditingController _barcodeCtrl;
 
   @override
   void initState() {
     super.initState();
     _barcodeCtrl = TextEditingController(
-      text: widget.loyaltyCard.barcode ?? '',
+      text: '',
     );
   }
 
@@ -35,17 +34,26 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
     super.dispose();
   }
 
-  // save changes method
   Future<void> _save() async {
+    // get the barcode value
     final newBarcode = _barcodeCtrl.text.trim();
 
-    final updated = widget.loyaltyCard.copyWith(
+    // create new LoyaltyCard instance
+    final newCard = LoyaltyCard(
+      merchant: widget.brand.name,
       barcode: newBarcode.isEmpty ? null : newBarcode,
+      barcodeType: null,
+      colorHex: widget.brand.colorHex,
+      dateAdded: DateTime.now().toIso8601String(),
+      favorite: false,
+      displayValue: null,
     );
 
-    await ref.read(loyaltyCardsProvider.notifier).updateCard(updated);
+    // insert into DB via provider
+    await ref.read(loyaltyCardsProvider.notifier).insertCard(newCard);
 
     if (!mounted) return;
+    // close modal
     Navigator.of(context, rootNavigator: true).pop();
   }
 
@@ -54,7 +62,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
     return CustomScaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: CustomPlatformAppBar(
-        title: const Text('Edit Card'),
+        title: const Text('Add Card'),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -71,18 +79,18 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
             // card brand display
             Container(
               height: 160,
-              color: widget.loyaltyCard.colorHex != null
+              color: widget.brand.colorHex != null
                   ? Color(
                       int.parse(
-                        '0xFF${widget.loyaltyCard.colorHex!.replaceFirst('#', '')}',
+                        '0xFF${widget.brand.colorHex!.replaceFirst('#', '')}',
                       ),
                     )
                   : Colors.grey.shade300,
               child: Center(
-                  child: widget.brand?.logo != null
-                      ? Image.asset(widget.brand!.logo!, fit: BoxFit.contain)
+                  child: widget.brand.logo != null
+                      ? Image.asset(widget.brand.logo!, fit: BoxFit.contain)
                       : Text(
-                          widget.loyaltyCard.merchant ?? 'Unknown',
+                          widget.brand.name ?? 'Unknown',
                           style: Theme.of(context).textTheme.titleMedium,
                           textAlign: TextAlign.center,
                         ),
@@ -108,28 +116,6 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
               cupertino: (_, __) => CupertinoElevatedButtonData(
                 color: CupertinoColors.activeBlue,
               ),
-            ),
-            // delete button
-            PlatformTextButton(
-              onPressed: () async {
-                // delete card
-                await ref
-                    .read(loyaltyCardsProvider.notifier)
-                    .deleteCard(widget.loyaltyCard.id!);
-
-                // navigate back to home page
-                if (context.mounted) {
-                  Navigator.of(
-                    context,
-                    rootNavigator: true,
-                  ).popUntil((route) => route.isFirst);
-                }
-              },
-              child: const Text('Delete Card'),
-              material: (_, __) => MaterialTextButtonData(
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-              ),
-              cupertino: (_, __) => CupertinoTextButtonData(color: Colors.red),
             ),
           ],
         ),

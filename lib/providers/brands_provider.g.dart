@@ -15,11 +15,11 @@ const brandsListProvider = BrandsListProvider._();
 final class BrandsListProvider
     extends
         $FunctionalProvider<
-          AsyncValue<List<Brands>>,
-          List<Brands>,
-          FutureOr<List<Brands>>
+          AsyncValue<List<Brand>>,
+          List<Brand>,
+          FutureOr<List<Brand>>
         >
-    with $FutureModifier<List<Brands>>, $FutureProvider<List<Brands>> {
+    with $FutureModifier<List<Brand>>, $FutureProvider<List<Brand>> {
   const BrandsListProvider._()
     : super(
         from: null,
@@ -36,14 +36,14 @@ final class BrandsListProvider
 
   @$internal
   @override
-  $FutureProviderElement<List<Brands>> $createElement(
+  $FutureProviderElement<List<Brand>> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<List<Brands>> create(Ref ref) {
+  FutureOr<List<Brand>> create(Ref ref) {
     return brandsList(ref);
   }
 }
 
-String _$brandsListHash() => r'd2a0debb196c812f40cdee6cb5b2d938095d7155';
+String _$brandsListHash() => r'5fd2b41ebfdc06b9ff4cebfd3e5d0bcf6d5c562d';
