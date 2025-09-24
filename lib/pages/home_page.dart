@@ -3,9 +3,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/db/loyalty_card.dao.dart';
 import 'package:loyalty_cards_app/db/sembast_database.dart';
+import 'package:loyalty_cards_app/models/brands.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/add_card_modal.dart';
 import 'package:loyalty_cards_app/pages/card_page.dart';
+import 'package:loyalty_cards_app/providers/brands_provider.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
@@ -26,7 +28,7 @@ class HomePage extends ConsumerWidget {
           merchant: 'Tesco',
           barcode: '634000021015550645',
           barcodeType: 'code128',
-          colorHex: '#2563EB',
+          colorHex: '#E0E0E0',
           dateAdded: now,
           favorite: true,
           displayValue: '5901 2341 23457',
@@ -88,6 +90,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loyaltyCardsAsync = ref.watch(loyaltyCardsProvider);
+    final brandsAsync = ref.watch(brandsListProvider);
     final count = loyaltyCardsAsync.asData?.value.length ?? 0;
 
     return CustomScaffold(
@@ -128,14 +131,19 @@ class HomePage extends ConsumerWidget {
               onRefresh: () =>
                   ref.read(loyaltyCardsProvider.notifier).loadCards(),
               child: loyaltyCardsAsync.when(
-                data: (cards) => cards.isEmpty
-                    ? ListView(
-                        children: const [
-                          SizedBox(height: 120),
-                          Center(child: Text('No cards yet. Add some!')),
-                        ],
-                      )
-                    : GridView.builder(
+                data: (cards) {
+                  return brandsAsync.when(
+                    data: (brands) {
+                      if (cards.isEmpty) {
+                        return ListView(
+                          children: const [
+                            SizedBox(height: 120),
+                            Center(child: Text('No cards yet. Add some!')),
+                          ],
+                        );
+                      }
+
+                      return GridView.builder(
                         padding: const EdgeInsets.all(12),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -147,6 +155,15 @@ class HomePage extends ConsumerWidget {
                         itemCount: cards.length,
                         itemBuilder: (context, index) {
                           final card = cards[index];
+
+                          // Find matching brand by merchant name
+                          final brand = brands.firstWhere(
+                            (b) =>
+                                b.name?.toLowerCase() ==
+                                card.merchant?.toLowerCase(),
+                            orElse: () => Brands(),
+                          );
+
                           return GestureDetector(
                             onTap: () => _openCard(context, card),
                             child: Container(
@@ -161,7 +178,7 @@ class HomePage extends ConsumerWidget {
                                     : Theme.of(context).cardColor,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 25),
+                                    color: Colors.black.withValues(alpha: 0.1),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),
                                   ),
@@ -170,26 +187,34 @@ class HomePage extends ConsumerWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: Center(
-                                  child: Text(
-                                    card.merchant ?? 'Unknown',
-                                    style: TextStyle(
-                                      color: _getTextColor(card.colorHex),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
+                                  child: brand.logo != null
+                                      ? Image.asset(
+                                          brand.logo!,
+                                          fit: BoxFit.contain,
+                                        )
+                                      : Text(
+                                          card.merchant ?? 'Unknown',
+                                          style: TextStyle(
+                                            color: _getTextColor(card.colorHex),
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                 ),
                               ),
                             ),
                           );
                         },
-                      ),
+                      );
+                    },
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (e, _) =>
+                        Center(child: Text('Error loading brands: $e')),
+                  );
+                },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => ListView(
-                  children: [
-                    const SizedBox(height: 120),
-                    Center(child: Text('Error: $e')),
-                  ],
-                ),
+                error: (e, _) => Center(child: Text('Error loading cards: $e')),
               ),
             ),
           ),

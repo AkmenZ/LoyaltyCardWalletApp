@@ -1,0 +1,26 @@
+[
+  {
+    "id": "dunnesstores",
+    "name": "Dunnes Stores",
+    "logo": "assets/logos/dunnes-stores-logo.png",
+    "colorHex": "#000000",
+    "regions": ["ireland", "uk"],
+    "popular": true
+  },
+  {
+    "id": "tesco",
+    "name": "Tesco",
+    "logo": "assets/logos/tesco-logo.png",
+    "colorHex": "#E0E0E0",
+    "regions": ["ireland", "uk", "poland"],
+    "popular": true
+  },
+  {
+    "id": "maxima",
+    "name": "Maxima",
+    "logo": "assets/logos/maxima-logo.png",
+    "colorHex": "#E0E0E0",
+    "regions": ["latvia", "lithuania", "estonia"],
+    "popular": true
+  }
+]

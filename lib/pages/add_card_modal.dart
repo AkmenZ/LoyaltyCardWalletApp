@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:loyalty_cards_app/pages/scanner_modal.dart';
+import 'package:loyalty_cards_app/widgets/brands_list.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
@@ -49,6 +50,8 @@ class AddCardModal extends StatelessWidget {
               ),
             ),
             _buildSearchField(context),
+            // Brands list
+            Expanded(child: BrandsList()),
           ],
         ),
       ),
