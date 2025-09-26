@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoyaltyCard {
 
- int? get id; String? get merchant; String? get barcode; String? get barcodeType; String? get colorHex; String? get dateAdded; String? get notes; bool get favorite; String? get displayValue;
+ int? get id; String? get merchant; String? get barcode; String? get barcodeType; String? get colorHex; String? get dateAdded; String? get note; bool get favorite;
 /// Create a copy of LoyaltyCard
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LoyaltyCardCopyWith<LoyaltyCard> get copyWith => _$LoyaltyCardCopyWithImpl<Loya
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoyaltyCard&&(identical(other.id, id) || other.id == id)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.barcode, barcode) || other.barcode == barcode)&&(identical(other.barcodeType, barcodeType) || other.barcodeType == barcodeType)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&(identical(other.dateAdded, dateAdded) || other.dateAdded == dateAdded)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.displayValue, displayValue) || other.displayValue == displayValue));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoyaltyCard&&(identical(other.id, id) || other.id == id)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.barcode, barcode) || other.barcode == barcode)&&(identical(other.barcodeType, barcodeType) || other.barcodeType == barcodeType)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&(identical(other.dateAdded, dateAdded) || other.dateAdded == dateAdded)&&(identical(other.note, note) || other.note == note)&&(identical(other.favorite, favorite) || other.favorite == favorite));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,merchant,barcode,barcodeType,colorHex,dateAdded,notes,favorite,displayValue);
+int get hashCode => Object.hash(runtimeType,id,merchant,barcode,barcodeType,colorHex,dateAdded,note,favorite);
 
 @override
 String toString() {
-  return 'LoyaltyCard(id: $id, merchant: $merchant, barcode: $barcode, barcodeType: $barcodeType, colorHex: $colorHex, dateAdded: $dateAdded, notes: $notes, favorite: $favorite, displayValue: $displayValue)';
+  return 'LoyaltyCard(id: $id, merchant: $merchant, barcode: $barcode, barcodeType: $barcodeType, colorHex: $colorHex, dateAdded: $dateAdded, note: $note, favorite: $favorite)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LoyaltyCardCopyWith<$Res>  {
   factory $LoyaltyCardCopyWith(LoyaltyCard value, $Res Function(LoyaltyCard) _then) = _$LoyaltyCardCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? merchant, String? barcode, String? barcodeType, String? colorHex, String? dateAdded, String? notes, bool favorite, String? displayValue
+ int? id, String? merchant, String? barcode, String? barcodeType, String? colorHex, String? dateAdded, String? note, bool favorite
 });
 
 
@@ -65,7 +65,7 @@ class _$LoyaltyCardCopyWithImpl<$Res>
 
 /// Create a copy of LoyaltyCard
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? merchant = freezed,Object? barcode = freezed,Object? barcodeType = freezed,Object? colorHex = freezed,Object? dateAdded = freezed,Object? notes = freezed,Object? favorite = null,Object? displayValue = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? merchant = freezed,Object? barcode = freezed,Object? barcodeType = freezed,Object? colorHex = freezed,Object? dateAdded = freezed,Object? note = freezed,Object? favorite = null,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,merchant: freezed == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
@@ -73,10 +73,9 @@ as String?,barcode: freezed == barcode ? _self.barcode : barcode // ignore: cast
 as String?,barcodeType: freezed == barcodeType ? _self.barcodeType : barcodeType // ignore: cast_nullable_to_non_nullable
 as String?,colorHex: freezed == colorHex ? _self.colorHex : colorHex // ignore: cast_nullable_to_non_nullable
 as String?,dateAdded: freezed == dateAdded ? _self.dateAdded : dateAdded // ignore: cast_nullable_to_non_nullable
-as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,favorite: null == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
-as bool,displayValue: freezed == displayValue ? _self.displayValue : displayValue // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,
   ));
 }
 
@@ -161,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? notes,  bool favorite,  String? displayValue)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? note,  bool favorite)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoyaltyCard() when $default != null:
-return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.notes,_that.favorite,_that.displayValue);case _:
+return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.note,_that.favorite);case _:
   return orElse();
 
 }
@@ -182,10 +181,10 @@ return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.co
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? notes,  bool favorite,  String? displayValue)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? note,  bool favorite)  $default,) {final _that = this;
 switch (_that) {
 case _LoyaltyCard():
-return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.notes,_that.favorite,_that.displayValue);case _:
+return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.note,_that.favorite);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +201,10 @@ return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.co
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? notes,  bool favorite,  String? displayValue)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? merchant,  String? barcode,  String? barcodeType,  String? colorHex,  String? dateAdded,  String? note,  bool favorite)?  $default,) {final _that = this;
 switch (_that) {
 case _LoyaltyCard() when $default != null:
-return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.notes,_that.favorite,_that.displayValue);case _:
+return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.colorHex,_that.dateAdded,_that.note,_that.favorite);case _:
   return null;
 
 }
@@ -217,7 +216,7 @@ return $default(_that.id,_that.merchant,_that.barcode,_that.barcodeType,_that.co
 @JsonSerializable()
 
 class _LoyaltyCard implements LoyaltyCard {
-  const _LoyaltyCard({this.id, this.merchant, this.barcode, this.barcodeType, this.colorHex, this.dateAdded, this.notes, this.favorite = false, this.displayValue});
+  const _LoyaltyCard({this.id, this.merchant, this.barcode, this.barcodeType, this.colorHex, this.dateAdded, this.note, this.favorite = false});
   factory _LoyaltyCard.fromJson(Map<String, dynamic> json) => _$LoyaltyCardFromJson(json);
 
 @override final  int? id;
@@ -226,9 +225,8 @@ class _LoyaltyCard implements LoyaltyCard {
 @override final  String? barcodeType;
 @override final  String? colorHex;
 @override final  String? dateAdded;
-@override final  String? notes;
+@override final  String? note;
 @override@JsonKey() final  bool favorite;
-@override final  String? displayValue;
 
 /// Create a copy of LoyaltyCard
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoyaltyCard&&(identical(other.id, id) || other.id == id)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.barcode, barcode) || other.barcode == barcode)&&(identical(other.barcodeType, barcodeType) || other.barcodeType == barcodeType)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&(identical(other.dateAdded, dateAdded) || other.dateAdded == dateAdded)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.displayValue, displayValue) || other.displayValue == displayValue));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoyaltyCard&&(identical(other.id, id) || other.id == id)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.barcode, barcode) || other.barcode == barcode)&&(identical(other.barcodeType, barcodeType) || other.barcodeType == barcodeType)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&(identical(other.dateAdded, dateAdded) || other.dateAdded == dateAdded)&&(identical(other.note, note) || other.note == note)&&(identical(other.favorite, favorite) || other.favorite == favorite));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,merchant,barcode,barcodeType,colorHex,dateAdded,notes,favorite,displayValue);
+int get hashCode => Object.hash(runtimeType,id,merchant,barcode,barcodeType,colorHex,dateAdded,note,favorite);
 
 @override
 String toString() {
-  return 'LoyaltyCard(id: $id, merchant: $merchant, barcode: $barcode, barcodeType: $barcodeType, colorHex: $colorHex, dateAdded: $dateAdded, notes: $notes, favorite: $favorite, displayValue: $displayValue)';
+  return 'LoyaltyCard(id: $id, merchant: $merchant, barcode: $barcode, barcodeType: $barcodeType, colorHex: $colorHex, dateAdded: $dateAdded, note: $note, favorite: $favorite)';
 }
 
 
@@ -263,7 +261,7 @@ abstract mixin class _$LoyaltyCardCopyWith<$Res> implements $LoyaltyCardCopyWith
   factory _$LoyaltyCardCopyWith(_LoyaltyCard value, $Res Function(_LoyaltyCard) _then) = __$LoyaltyCardCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? merchant, String? barcode, String? barcodeType, String? colorHex, String? dateAdded, String? notes, bool favorite, String? displayValue
+ int? id, String? merchant, String? barcode, String? barcodeType, String? colorHex, String? dateAdded, String? note, bool favorite
 });
 
 
@@ -280,7 +278,7 @@ class __$LoyaltyCardCopyWithImpl<$Res>
 
 /// Create a copy of LoyaltyCard
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? merchant = freezed,Object? barcode = freezed,Object? barcodeType = freezed,Object? colorHex = freezed,Object? dateAdded = freezed,Object? notes = freezed,Object? favorite = null,Object? displayValue = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? merchant = freezed,Object? barcode = freezed,Object? barcodeType = freezed,Object? colorHex = freezed,Object? dateAdded = freezed,Object? note = freezed,Object? favorite = null,}) {
   return _then(_LoyaltyCard(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,merchant: freezed == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
@@ -288,10 +286,9 @@ as String?,barcode: freezed == barcode ? _self.barcode : barcode // ignore: cast
 as String?,barcodeType: freezed == barcodeType ? _self.barcodeType : barcodeType // ignore: cast_nullable_to_non_nullable
 as String?,colorHex: freezed == colorHex ? _self.colorHex : colorHex // ignore: cast_nullable_to_non_nullable
 as String?,dateAdded: freezed == dateAdded ? _self.dateAdded : dateAdded // ignore: cast_nullable_to_non_nullable
-as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,favorite: null == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
-as bool,displayValue: freezed == displayValue ? _self.displayValue : displayValue // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,
   ));
 }
 

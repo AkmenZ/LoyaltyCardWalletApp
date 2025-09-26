@@ -14,7 +14,8 @@ class AddCardManuallyModal extends ConsumerStatefulWidget {
   final Brand brand;
 
   @override
-  ConsumerState<AddCardManuallyModal> createState() => _AddCardManuallyModalState();
+  ConsumerState<AddCardManuallyModal> createState() =>
+      _AddCardManuallyModalState();
 }
 
 class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
@@ -23,9 +24,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
   @override
   void initState() {
     super.initState();
-    _barcodeCtrl = TextEditingController(
-      text: '',
-    );
+    _barcodeCtrl = TextEditingController(text: '');
   }
 
   @override
@@ -46,7 +45,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
       colorHex: widget.brand.colorHex,
       dateAdded: DateTime.now().toIso8601String(),
       favorite: false,
-      displayValue: null,
+      note: null,
     );
 
     // insert into DB via provider
@@ -70,51 +69,76 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+      body: SafeArea(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 20.0,
           children: [
-            // card brand display
-            Container(
-              height: 160,
-              color: widget.brand.colorHex != null
-                  ? Color(
-                      int.parse(
-                        '0xFF${widget.brand.colorHex!.replaceFirst('#', '')}',
-                      ),
-                    )
-                  : Colors.grey.shade300,
-              child: Center(
-                  child: widget.brand.logo != null
-                      ? Image.asset(widget.brand.logo!, fit: BoxFit.contain)
-                      : Text(
-                          widget.brand.name ?? 'Unknown',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
+            // scrollable content
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
                 ),
-            ),
-            // barcode text field
-            PlatformTextFormField(
-              controller: _barcodeCtrl,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              hintText: 'Barcode',
-            ),
-            // save button
-            PlatformElevatedButton(
-              onPressed: _save,
-              child: const Text('Save'),
-              material: (_, __) => MaterialElevatedButtonData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  foregroundColor: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // card brand display
+                    Container(
+                      height: 160,
+                      color: widget.brand.colorHex != null
+                          ? Color(
+                              int.parse(
+                                '0xFF${widget.brand.colorHex!.replaceFirst('#', '')}',
+                              ),
+                            )
+                          : Colors.grey.shade300,
+                      child: Center(
+                        child: widget.brand.logo != null
+                            ? Image.asset(
+                                widget.brand.logo!,
+                                fit: BoxFit.contain,
+                              )
+                            : Text(
+                                widget.brand.name ?? 'Unknown',
+                                style: Theme.of(context).textTheme.titleMedium,
+                                textAlign: TextAlign.center,
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // barcode text field
+                    PlatformTextFormField(
+                      controller: _barcodeCtrl,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      hintText: 'Barcode',
+                    ),
+                  ],
                 ),
               ),
-              cupertino: (_, __) => CupertinoElevatedButtonData(
-                color: CupertinoColors.activeBlue,
+            ),
+            // button pinned to bottom, moves with keyboard
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: PlatformElevatedButton(
+                    onPressed: _save,
+                    child: const Text('Save'),
+                    material: (_, __) => MaterialElevatedButtonData(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                      ),
+                    ),
+                    cupertino: (_, __) => CupertinoElevatedButtonData(
+                      color: CupertinoColors.activeBlue,
+                      originalStyle: false,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

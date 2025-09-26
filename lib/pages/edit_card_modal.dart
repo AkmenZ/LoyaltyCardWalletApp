@@ -20,6 +20,7 @@ class EditCardModal extends ConsumerStatefulWidget {
 
 class _EditCardModalState extends ConsumerState<EditCardModal> {
   late final TextEditingController _barcodeCtrl;
+  late final TextEditingController _noteCtrl;
 
   @override
   void initState() {
@@ -27,11 +28,13 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
     _barcodeCtrl = TextEditingController(
       text: widget.loyaltyCard.barcode ?? '',
     );
+    _noteCtrl = TextEditingController(text: widget.loyaltyCard.note ?? '');
   }
 
   @override
   void dispose() {
     _barcodeCtrl.dispose();
+    _noteCtrl.dispose();
     super.dispose();
   }
 
@@ -53,6 +56,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+      resizeToAvoidBottomInset: true,
       appBar: CustomPlatformAppBar(
         title: const Text('Edit Card'),
         trailingActions: [
@@ -62,77 +66,95 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 20.0,
-          children: [
-            // card brand display
-            Container(
-              height: 160,
-              color: widget.loyaltyCard.colorHex != null
-                  ? Color(
-                      int.parse(
-                        '0xFF${widget.loyaltyCard.colorHex!.replaceFirst('#', '')}',
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                Container(
+                  height: 160,
+                  color: widget.loyaltyCard.colorHex != null
+                      ? Color(
+                          int.parse(
+                            '0xFF${widget.loyaltyCard.colorHex!.replaceFirst('#', '')}',
+                          ),
+                        )
+                      : Colors.grey.shade300,
+                  child: Center(
+                    child: widget.brand?.logo != null
+                        ? Image.asset(
+                            widget.brand!.logo!,
+                            fit: BoxFit.contain,
+                          )
+                        : Text(
+                            widget.loyaltyCard.merchant ?? 'Unknown',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                PlatformTextFormField(
+                  controller: _barcodeCtrl,
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
+                  hintText: 'Barcode',
+                ),
+                const SizedBox(height: 16),
+                PlatformTextFormField(
+                  controller: _noteCtrl,
+                  keyboardType: TextInputType.visiblePassword,
+                  hintText: 'Note',
+                ),
+              ],
+            ),
+          ),
+          // bottom buttons
+          SafeArea(
+            minimum: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PlatformElevatedButton(
+                    onPressed: _save,
+                    child: const Text('Save'),
+                    material: (_, __) => MaterialElevatedButtonData(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size.fromHeight(48),
                       ),
-                    )
-                  : Colors.grey.shade300,
-              child: Center(
-                  child: widget.brand?.logo != null
-                      ? Image.asset(widget.brand!.logo!, fit: BoxFit.contain)
-                      : Text(
-                          widget.loyaltyCard.merchant ?? 'Unknown',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                ),
+                    ),
+                    cupertino: (_, __) => CupertinoElevatedButtonData(
+                      color: CupertinoColors.activeBlue,
+                    ),
+                  ),
+                  PlatformTextButton(
+                    onPressed: () async {
+                      await ref
+                          .read(loyaltyCardsProvider.notifier)
+                          .deleteCard(widget.loyaltyCard.id!);
+                      if (context.mounted) {
+                        Navigator.of(
+                          context,
+                          rootNavigator: true,
+                        ).popUntil((route) => route.isFirst);
+                      }
+                    },
+                    child: const Text('Delete'),
+                    material: (_, __) => MaterialTextButtonData(
+                      style: TextButton.styleFrom(foregroundColor: Colors.red),
+                    ),
+                    cupertino: (_, __) => CupertinoTextButtonData(
+                      color: CupertinoColors.destructiveRed,
+                    ),
+                  ),
+              ],
             ),
-            // barcode text field
-            PlatformTextFormField(
-              controller: _barcodeCtrl,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              hintText: 'Barcode',
-            ),
-            // save button
-            PlatformElevatedButton(
-              onPressed: _save,
-              child: const Text('Save'),
-              material: (_, __) => MaterialElevatedButtonData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  foregroundColor: Colors.white,
-                ),
-              ),
-              cupertino: (_, __) => CupertinoElevatedButtonData(
-                color: CupertinoColors.activeBlue,
-              ),
-            ),
-            // delete button
-            PlatformTextButton(
-              onPressed: () async {
-                // delete card
-                await ref
-                    .read(loyaltyCardsProvider.notifier)
-                    .deleteCard(widget.loyaltyCard.id!);
-
-                // navigate back to home page
-                if (context.mounted) {
-                  Navigator.of(
-                    context,
-                    rootNavigator: true,
-                  ).popUntil((route) => route.isFirst);
-                }
-              },
-              child: const Text('Delete Card'),
-              material: (_, __) => MaterialTextButtonData(
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-              ),
-              cupertino: (_, __) => CupertinoTextButtonData(color: Colors.red),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

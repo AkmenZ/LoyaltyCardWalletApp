@@ -12,9 +12,8 @@ abstract class LoyaltyCard with _$LoyaltyCard {
     String? barcodeType,
     String? colorHex,
     String? dateAdded,
-    String? notes,
+    String? note,
     @Default(false) bool favorite,
-    String? displayValue,
   }) = _LoyaltyCard;
 
   factory LoyaltyCard.fromJson(Map<String, dynamic> json) =>

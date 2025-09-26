@@ -4,7 +4,23 @@
     "name": "Dunnes Stores",
     "logo": "assets/logos/dunnes-stores-logo.png",
     "colorHex": "#000000",
-    "regions": ["ireland", "uk"],
+    "regions": ["ie", "uk"],
+    "popular": true
+  },
+  {
+    "id": "supervalu",
+    "name": "SuperValu",
+    "logo": "assets/logos/super-valu-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["ie", "uk"],
+    "popular": true
+  },
+  {
+    "id": "boots",
+    "name": "Boots",
+    "logo": "assets/logos/boots-logo.png",
+    "colorHex": "#1E1C59",
+    "regions": ["ie", "uk"],
     "popular": true
   },
   {
@@ -12,7 +28,31 @@
     "name": "Tesco",
     "logo": "assets/logos/tesco-logo.png",
     "colorHex": "#E0E0E0",
-    "regions": ["ireland", "uk", "poland"],
+    "regions": ["ie", "uk", "pl"],
+    "popular": true
+  },
+  {
+    "id": "marksandspencer",
+    "name": "Marks & Spencer",
+    "logo": "assets/logos/marks-and-spencer-logo.png",
+    "colorHex": "#000000",
+    "regions": ["uk"],
+    "popular": true
+  },
+  {
+    "id": "lidl",
+    "name": "Lidl",
+    "logo": "assets/logos/lidl-logo.png",
+    "colorHex": "#094FA9",
+    "regions": ["ie", "uk", "lv", "lt", "ee", "pl", "de", "cz", "sk"],
+    "popular": true
+  },
+  {
+    "id": "circlek",
+    "name": "Circle K",
+    "logo": "assets/logos/circle-k-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["ie", "uk", "lv", "lt", "ee", "pl"],
     "popular": true
   },
   {
@@ -20,7 +60,31 @@
     "name": "Maxima",
     "logo": "assets/logos/maxima-logo.png",
     "colorHex": "#E0E0E0",
-    "regions": ["latvia", "lithuania", "estonia"],
+    "regions": ["lv", "lt", "ee"],
+    "popular": true
+  },
+  {
+    "id": "rimi",
+    "name": "Rimi",
+    "logo": "assets/logos/rimi-logo.png",
+    "colorHex": "#DC002E",
+    "regions": ["lv", "lt", "ee"],
+    "popular": true
+  },
+  {
+    "id": "elvi",
+    "name": "Elvi",
+    "logo": "assets/logos/elvi-logo.png",
+    "colorHex": "#FDE121",
+    "regions": ["lv"],
+    "popular": true
+  },
+  {
+    "id": "kaufland",
+    "name": "Kaufland",
+    "logo": "assets/logos/kaufland-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["de", "pl", "cz", "sk"],
     "popular": true
   }
 ]

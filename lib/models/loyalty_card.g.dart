@@ -13,9 +13,8 @@ _LoyaltyCard _$LoyaltyCardFromJson(Map<String, dynamic> json) => _LoyaltyCard(
   barcodeType: json['barcodeType'] as String?,
   colorHex: json['colorHex'] as String?,
   dateAdded: json['dateAdded'] as String?,
-  notes: json['notes'] as String?,
+  note: json['note'] as String?,
   favorite: json['favorite'] as bool? ?? false,
-  displayValue: json['displayValue'] as String?,
 );
 
 Map<String, dynamic> _$LoyaltyCardToJson(_LoyaltyCard instance) =>
@@ -26,7 +25,6 @@ Map<String, dynamic> _$LoyaltyCardToJson(_LoyaltyCard instance) =>
       'barcodeType': instance.barcodeType,
       'colorHex': instance.colorHex,
       'dateAdded': instance.dateAdded,
-      'notes': instance.notes,
+      'note': instance.note,
       'favorite': instance.favorite,
-      'displayValue': instance.displayValue,
     };

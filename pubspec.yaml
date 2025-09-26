@@ -24,6 +24,7 @@ dependencies:
   mobile_scanner: ^7.0.1
   modal_bottom_sheet: ^3.0.0
   flutter_platform_widgets: ^9.0.0
+  country_flags: ^4.0.1
 
 dev_dependencies:
   flutter_test:
