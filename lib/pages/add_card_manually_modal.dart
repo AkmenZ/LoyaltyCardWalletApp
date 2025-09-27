@@ -6,6 +6,7 @@ import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/validators.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
@@ -42,7 +43,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
     final newCard = LoyaltyCard(
       merchant: widget.brand.name,
       barcode: newBarcode.isEmpty ? null : newBarcode,
-      barcodeType: null,
+      barcodeType: _determineBarcodeType(newBarcode),
       colorHex: widget.brand.colorHex,
       dateAdded: DateTime.now().toIso8601String(),
       favorite: false,
@@ -55,6 +56,23 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
     if (!mounted) return;
     // close modal
     Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  // determine type of barcode
+  String _determineBarcodeType(String barcode) {
+    final digitsOnly = RegExp(r'^\d+$');
+    final cleanedBarcode = barcode.trim();
+
+    if (digitsOnly.hasMatch(cleanedBarcode)) {
+      if (cleanedBarcode.length == 13 && isValidEan13(cleanedBarcode)) {
+        return 'ean13';
+      }
+      if (cleanedBarcode.length == 8 && isValidEan8(cleanedBarcode)) {
+        return 'ean8';
+      }
+    }
+
+    return 'code128'; // most general fallback
   }
 
   @override
@@ -136,16 +154,9 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
               width: double.infinity,
               child: PlatformElevatedButton(
                 onPressed: _save,
-                child: Text(
-                  'Save',
-                  style: TextStyle(
-                    color: onSeed,
-                  ),
-                ),
+                child: Text('Save', style: TextStyle(color: onSeed)),
                 material: (_, __) => MaterialElevatedButtonData(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: seed,
-                  ),
+                  style: ElevatedButton.styleFrom(backgroundColor: seed),
                 ),
                 cupertino: (_, __) {
                   return CupertinoElevatedButtonData(

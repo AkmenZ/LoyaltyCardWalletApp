@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
+import 'package:loyalty_cards_app/theme.dart';
 
 class LoyaltyCardWidget extends StatelessWidget {
   const LoyaltyCardWidget({super.key, required this.loyaltyCard, this.brand});
@@ -16,7 +17,7 @@ class LoyaltyCardWidget extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.all(20),
-      color: Colors.white,
+      color: onSeed,
       elevation: 8,
       child: Padding(
         padding: const EdgeInsets.all(12.0),

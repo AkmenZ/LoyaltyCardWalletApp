@@ -102,11 +102,7 @@ class CardPage extends ConsumerWidget {
                     ],
                   ),
                   material: (_, __) => MaterialElevatedButtonData(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(
-                        context,
-                      ).colorScheme.primaryContainer,
-                    ),
+                    style: ElevatedButton.styleFrom(backgroundColor: seed),
                   ),
                   cupertino: (_, __) {
                     return CupertinoElevatedButtonData(
@@ -116,7 +112,7 @@ class CardPage extends ConsumerWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 40.0),
+              const SizedBox(height: 20.0),
             ],
           );
         },
