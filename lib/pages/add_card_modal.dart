@@ -4,6 +4,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
+import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
+import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/brands_list.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
@@ -20,8 +22,8 @@ class AddCardModal extends StatefulWidget {
 class _AddCardModalState extends State<AddCardModal> {
   String _search = '';
 
-  // region selection
-  String _selectedRegion = 'all';
+  // selected region (from saved preference or default to 'all')
+  String _selectedRegion = SharedPrefs.getString('preferred_region') ?? 'all';
   late final ValueNotifier<String?> _regionValue;
 
   // regions list
@@ -29,7 +31,7 @@ class _AddCardModalState extends State<AddCardModal> {
 
   static const double _flagSize = 20.0;
   static const double _buttonSize = 36.0;
-  static const double _menuWidth = 40.0;
+  static const double _menuWidth = 46.0;
 
   @override
   void initState() {
@@ -159,16 +161,27 @@ class _AddCardModalState extends State<AddCardModal> {
                 //   ),
                 // );
               },
-              child: const Text('Add Custom Card'),
+              // add custom card button
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(context.platformIcons.add, color: onSeed),
+                  const Text(
+                    'Add Custom Card',
+                    style: TextStyle(color: onSeed),
+                  ),
+                  const Icon(Icons.add_card, color: onSeed),
+                ],
+              ),
               material: (_, __) => MaterialElevatedButtonData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: seed),
               ),
-              cupertino: (_, __) => CupertinoElevatedButtonData(
-                color: CupertinoColors.activeBlue,
-              ),
+              cupertino: (_, __) {
+                return CupertinoElevatedButtonData(
+                  color: seed,
+                  sizeStyle: CupertinoButtonSize.small,
+                );
+              },
             ),
             // search widget
             _buildSearchField(context),
@@ -182,12 +195,14 @@ class _AddCardModalState extends State<AddCardModal> {
 
   // search field
   Widget _buildSearchField(BuildContext context) {
+    final cupertinoTheme = CupertinoTheme.of(context);
+
     return PlatformWidget(
       material: (_, __) => SearchBar(
         hintText: 'Aa...',
         elevation: WidgetStateProperty.all(0),
         leading: const Icon(Icons.search),
-        trailing: [_buildRegionDropdown(context)],
+        trailing: [_buildRegionDropdown(context)], // region dropdown
         onChanged: (value) => setState(() => _search = value),
       ),
       cupertino: (_, __) => CupertinoTextField(
@@ -200,10 +215,10 @@ class _AddCardModalState extends State<AddCardModal> {
         ),
         suffix: Padding(
           padding: const EdgeInsetsDirectional.only(end: 6.0),
-          child: _buildRegionDropdown(context),
+          child: _buildRegionDropdown(context), // region dropdown
         ),
         decoration: BoxDecoration(
-          color: CupertinoColors.systemGrey6,
+          color: cupertinoTheme.barBackgroundColor,
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(color: CupertinoColors.systemGrey4, width: 1.0),
         ),
@@ -224,11 +239,13 @@ class _AddCardModalState extends State<AddCardModal> {
         color: Colors.transparent,
         child: DropdownButton2<String>(
           valueListenable: _regionValue,
-          onChanged: (val) {
+          onChanged: (val) async {
             if (val == null) return;
             // update notifier
             _regionValue.value = val;
             setState(() => _selectedRegion = val);
+            // save preference
+            await SharedPrefs.setString('preferred_region', val);
           },
 
           // closed button
@@ -244,7 +261,7 @@ class _AddCardModalState extends State<AddCardModal> {
               .map(
                 (r) => DropdownItem<String>(
                   value: r,
-                  height: _buttonSize + 4,
+                  height: _buttonSize + 6,
                   alignment: Alignment.center,
                   child: buildIcon(r), // icon
                 ),
@@ -263,17 +280,15 @@ class _AddCardModalState extends State<AddCardModal> {
 
           // dropdown (menu) style
           dropdownStyleData: DropdownStyleData(
-            width: _menuWidth, // same width as button
-            padding: EdgeInsets.zero, // remove menu padding
+            width: _menuWidth,
+            padding: EdgeInsets.zero,
             elevation: 8,
             decoration: BoxDecoration(
-              color: Theme.of(
-                context,
-              ).colorScheme.surface, // set transparent to debug if desired
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.transparent),
             ),
-            offset: const Offset(0, -4), // small gap below the button
+            offset: const Offset(0, -6), // small gap below the button
             direction: DropdownDirection.textDirection,
           ),
 

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
+import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
@@ -54,6 +55,8 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
 
   @override
   Widget build(BuildContext context) {
+    final cupertinoTheme = CupertinoTheme.of(context);
+
     return CustomScaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       resizeToAvoidBottomInset: true,
@@ -72,6 +75,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                // card brand display
                 Container(
                   height: 160,
                   color: widget.loyaltyCard.colorHex != null
@@ -83,10 +87,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                       : Colors.grey.shade300,
                   child: Center(
                     child: widget.brand?.logo != null
-                        ? Image.asset(
-                            widget.brand!.logo!,
-                            fit: BoxFit.contain,
-                          )
+                        ? Image.asset(widget.brand!.logo!, fit: BoxFit.contain)
                         : Text(
                             widget.loyaltyCard.merchant ?? 'Unknown',
                             style: Theme.of(context).textTheme.titleMedium,
@@ -100,13 +101,47 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                   autofocus: true,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
-                  hintText: 'Barcode',
+                  maxLength: 50,
+                  material: (_, __) => MaterialTextFormFieldData(
+                    decoration: InputDecoration(
+                      labelText: 'Barcode',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      counterText: '',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  cupertino: (_, __) => CupertinoTextFormFieldData(
+                    placeholder: 'Barcode',
+                    decoration: BoxDecoration(
+                      color: cupertinoTheme.barBackgroundColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 PlatformTextFormField(
                   controller: _noteCtrl,
+                  maxLength: 50,
                   keyboardType: TextInputType.visiblePassword,
-                  hintText: 'Note',
+                  material: (_, __) => MaterialTextFormFieldData(
+                    decoration: InputDecoration(
+                      labelText: 'Note (optional)',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      counterText: '',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  cupertino: (_, __) => CupertinoTextFormFieldData(
+                    placeholder: 'Note (optional)',
+                    decoration: BoxDecoration(
+                      color: cupertinoTheme.barBackgroundColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -117,21 +152,27 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                PlatformElevatedButton(
+                // save button
+                SizedBox(
+                  width: double.infinity,
+                  child: PlatformElevatedButton(
                     onPressed: _save,
-                    child: const Text('Save'),
+                    child: const Text('Save', style: TextStyle(color: onSeed)),
                     material: (_, __) => MaterialElevatedButtonData(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size.fromHeight(48),
-                      ),
+                      style: ElevatedButton.styleFrom(backgroundColor: seed),
                     ),
-                    cupertino: (_, __) => CupertinoElevatedButtonData(
-                      color: CupertinoColors.activeBlue,
-                    ),
+                    cupertino: (_, __) {
+                      return CupertinoElevatedButtonData(
+                        color: seed,
+                        sizeStyle: CupertinoButtonSize.small,
+                      );
+                    },
                   ),
-                  PlatformTextButton(
+                ),
+                // delete button
+                SizedBox(
+                  width: double.infinity,
+                  child: PlatformTextButton(
                     onPressed: () async {
                       await ref
                           .read(loyaltyCardsProvider.notifier)
@@ -143,14 +184,30 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                         ).popUntil((route) => route.isFirst);
                       }
                     },
-                    child: const Text('Delete'),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          context.platformIcons.delete,
+                          size: 20,
+                          color: Colors.red,
+                        ),
+                        const SizedBox(width: 6),
+                        const Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    ),
                     material: (_, __) => MaterialTextButtonData(
                       style: TextButton.styleFrom(foregroundColor: Colors.red),
                     ),
                     cupertino: (_, __) => CupertinoTextButtonData(
-                      color: CupertinoColors.destructiveRed,
+                      color: CupertinoColors.transparent,
+                      sizeStyle: CupertinoButtonSize.small,
                     ),
                   ),
+                ),
               ],
             ),
           ),

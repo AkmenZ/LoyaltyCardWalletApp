@@ -44,7 +44,10 @@ class BrandsList extends StatelessWidget {
                   ), // 👈 rounded bg for logo
                 ),
                 child: brand.logo != null
-                    ? Image.asset(brand.logo!, width: 32, height: 32)
+                    ? AspectRatio(
+                        aspectRatio: 3 / 2,
+                        child: Image.asset(brand.logo!, fit: BoxFit.contain),
+                      )
                     : const Icon(Icons.store, size: 24, color: Colors.white),
               ),
               title: Text(

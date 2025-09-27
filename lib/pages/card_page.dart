@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
+import 'package:loyalty_cards_app/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
@@ -23,6 +25,7 @@ class CardPage extends ConsumerWidget {
   final String merchant;
   final Brand? brand;
 
+  // open edit card modal
   void _openEditCardModal(
     BuildContext context,
     LoyaltyCard card,
@@ -71,7 +74,7 @@ class CardPage extends ConsumerWidget {
               children: const [
                 SizedBox(height: 120),
                 Center(
-                  child: Text('Card not found. It may have been deleted.'),
+                  child: Text('Card not found. It may have been deleted!'),
                 ),
               ],
             );
@@ -79,8 +82,11 @@ class CardPage extends ConsumerWidget {
           return Column(
             spacing: 20.0,
             children: [
+              // card display
               LoyaltyCardWidget(loyaltyCard: card, brand: brand),
+              // spacer
               const Spacer(),
+              // share button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: PlatformElevatedButton(
@@ -91,10 +97,23 @@ class CardPage extends ConsumerWidget {
                     spacing: 20.0,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(context.platformIcons.share),
-                      const Text('Share'),
+                      Icon(context.platformIcons.share, color: onSeed),
+                      const Text('Share', style: TextStyle(color: onSeed)),
                     ],
                   ),
+                  material: (_, __) => MaterialElevatedButtonData(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer,
+                    ),
+                  ),
+                  cupertino: (_, __) {
+                    return CupertinoElevatedButtonData(
+                      color: seed,
+                      sizeStyle: CupertinoButtonSize.small,
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 40.0),

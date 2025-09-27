@@ -5,13 +5,13 @@ const ThemeMode themeMode = ThemeMode.system;
 
 // App brand color
 const Color seed = Colors.indigoAccent;
+const Color onSeed = Colors.white;
 
 final ThemeData materialLightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.light),
   useMaterial3: true,
   appBarTheme: const AppBarTheme(
-    backgroundColor: seed,
-    foregroundColor: Colors.white,
+    backgroundColor: CupertinoColors.systemGrey5,
     elevation: 0,
     surfaceTintColor: Colors.transparent,
     scrolledUnderElevation: 0,
@@ -21,9 +21,8 @@ final ThemeData materialLightTheme = ThemeData(
 final ThemeData materialDarkTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.dark),
   useMaterial3: true,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: seed,
-    foregroundColor: Colors.white,
+  appBarTheme: AppBarTheme(
+    backgroundColor: CupertinoColors.systemGrey5.darkColor,
     elevation: 0,
     surfaceTintColor: Colors.transparent,
     scrolledUnderElevation: 0,
@@ -35,7 +34,7 @@ final CupertinoThemeData cupertinoLightTheme = MaterialBasedCupertinoThemeData(
   materialTheme: materialLightTheme.copyWith(
     cupertinoOverrideTheme: CupertinoThemeData(
       brightness: Brightness.light,
-      barBackgroundColor: CupertinoColors.systemGrey6,
+      barBackgroundColor: CupertinoColors.systemGrey5,
     ),
   ),
 );
