@@ -4,56 +4,88 @@
     "name": "Dunnes Stores",
     "logo": "assets/logos/dunnes-stores-logo.png",
     "colorHex": "#000000",
-    "regions": ["ie", "uk"],
-    "popular": true
+    "regions": ["ie", "gb"],
+    "popularRegions": ["ie"]
   },
   {
     "id": "supervalu",
     "name": "SuperValu",
     "logo": "assets/logos/super-valu-logo.png",
     "colorHex": "#FFFFFF",
-    "regions": ["ie", "uk"],
-    "popular": true
+    "regions": ["ie", "gb"],
+    "popularRegions": ["ie"]
   },
   {
     "id": "boots",
     "name": "Boots",
     "logo": "assets/logos/boots-logo.png",
     "colorHex": "#1E1C59",
-    "regions": ["ie", "uk"],
-    "popular": true
+    "regions": ["ie", "gb"],
+    "popularRegions": ["ie"]
   },
   {
     "id": "tesco",
     "name": "Tesco",
     "logo": "assets/logos/tesco-logo.png",
     "colorHex": "#E0E0E0",
-    "regions": ["ie", "uk", "pl"],
-    "popular": true
+    "regions": ["ie", "gb", "pl"],
+    "popularRegions": ["ie", "gb", "pl"]
+  },
+  {
+    "id": "asda",
+    "name": "Asda",
+    "logo": "assets/logos/asda-logo.png",
+    "colorHex": "#000000",
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
+  },
+  {
+    "id": "sainsburys",
+    "name": "Sainsbury's",
+    "logo": "assets/logos/sainsburys-logo.png",
+    "colorHex": "#E18E22",
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
   },
   {
     "id": "marksandspencer",
     "name": "Marks & Spencer",
     "logo": "assets/logos/marks-and-spencer-logo.png",
     "colorHex": "#000000",
-    "regions": ["uk"],
-    "popular": true
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
+  },
+  {
+    "id": "morrisons",
+    "name": "Morrisons",
+    "logo": "assets/logos/morrisons-logo.png",
+    "colorHex": "#014a26",
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
+  },
+  {
+    "id": "iceland",
+    "name": "Iceland",
+    "logo": "assets/logos/iceland-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
   },
   {
     "id": "lidl",
     "name": "Lidl",
     "logo": "assets/logos/lidl-logo.png",
     "colorHex": "#094FA9",
-    "regions": ["ie", "uk", "lv", "lt", "ee", "pl", "de", "cz", "sk"],
-    "popular": true
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de", "cz"],
+    "popularRegions": ["ie", "gb", "lv", "lt", "ee", "pl", "de", "cz"]
   },
   {
     "id": "circlek",
     "name": "Circle K",
     "logo": "assets/logos/circle-k-logo.png",
     "colorHex": "#FFFFFF",
-    "regions": ["ie", "uk", "lv", "lt", "ee", "pl"],
-    "popular": true
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl"],
+    "popularRegions": []
   },
   {
     "id": "maxima",
@@ -61,7 +93,7 @@
     "logo": "assets/logos/maxima-logo.png",
     "colorHex": "#E0E0E0",
     "regions": ["lv", "lt", "ee"],
-    "popular": true
+    "popularRegions": ["lv", "lt", "ee"]
   },
   {
     "id": "rimi",
@@ -69,7 +101,7 @@
     "logo": "assets/logos/rimi-logo.png",
     "colorHex": "#DC002E",
     "regions": ["lv", "lt", "ee"],
-    "popular": true
+    "popularRegions": ["lv", "lt", "ee"]
   },
   {
     "id": "elvi",
@@ -77,14 +109,38 @@
     "logo": "assets/logos/elvi-logo.png",
     "colorHex": "#FDE121",
     "regions": ["lv"],
-    "popular": true
+    "popularRegions": []
+  },
+  {
+    "id": "iki",
+    "name": "Iki",
+    "logo": "assets/logos/iki-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lt"],
+    "popularRegions": ["lt"]
   },
   {
     "id": "kaufland",
     "name": "Kaufland",
     "logo": "assets/logos/kaufland-logo.png",
     "colorHex": "#FFFFFF",
-    "regions": ["de", "pl", "cz", "sk"],
-    "popular": true
+    "regions": ["de", "pl", "cz"],
+    "popularRegions": ["de", "pl", "cz"]
+  },
+  {
+    "id": "edeka",
+    "name": "Edeka",
+    "logo": "assets/logos/edeka-logo.png",
+    "colorHex": "#FEE501",
+    "regions": ["de"],
+    "popularRegions": ["de"]
+  },
+  {
+    "id": "biedronka",
+    "name": "Biedronka",
+    "logo": "assets/logos/biedronka-logo.png",
+    "colorHex": "#FDE121",
+    "regions": ["pl"],
+    "popularRegions": ["pl"]
   }
 ]

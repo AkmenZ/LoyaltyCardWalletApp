@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:country_flags/country_flags.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/widgets/brands_list.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
@@ -18,21 +19,36 @@ class AddCardModal extends StatefulWidget {
 
 class _AddCardModalState extends State<AddCardModal> {
   String _search = '';
+
+  // region selection
   String _selectedRegion = 'all';
-  late final List<String>
-  _regionOptions; // e.g. ['all', 'cz', 'de', 'ee', 'ie', 'lt', 'lv', 'pl', 'sk', 'uk']
+  late final ValueNotifier<String?> _regionValue;
+
+  // regions list
+  late final List<String> _regionOptions;
+
+  static const double _flagSize = 20.0;
+  static const double _buttonSize = 36.0;
+  static const double _menuWidth = 40.0;
 
   @override
   void initState() {
     super.initState();
     _regionOptions = _computeRegions(widget.brands);
+    _regionValue = ValueNotifier<String?>(_selectedRegion);
   }
 
+  @override
+  void dispose() {
+    _regionValue.dispose();
+    super.dispose();
+  }
+
+  // compute unique regions from all brands
   List<String> _computeRegions(List<Brand> brands) {
     final set = <String>{};
     for (final b in brands) {
-      final regs = (b.regions ?? <String>[]);
-      for (final r in regs) {
+      for (final r in (b.regions ?? const <String>[])) {
         final code = r.trim().toLowerCase();
         if (code.isNotEmpty) set.add(code);
       }
@@ -41,38 +57,78 @@ class _AddCardModalState extends State<AddCardModal> {
     return ['all', ...list];
   }
 
+  // filtered and sorted brands
   List<Brand> get _filteredBrands {
     final q = _search.trim().toLowerCase();
-    return widget.brands.where((b) {
-      final matchesSearch = q.isEmpty
-          ? true
-          : (b.name ?? '').toLowerCase().contains(q);
-      final matchesRegion = _selectedRegion == 'all'
-          ? true
-          : (b.regions ?? <String>[])
-                .map((e) => e.toLowerCase())
-                .contains(_selectedRegion);
+    final region = _selectedRegion.toLowerCase();
+
+    bool brandInRegion(Brand b) {
+      final regs = b.regions ?? const <String>[];
+      return regs.map((e) => e.toLowerCase()).contains(region);
+    }
+
+    bool isPopularInRegion(Brand b, String r) {
+      final pops = b.popularRegions ?? const <String>[];
+      return pops.map((e) => e.toLowerCase()).contains(r);
+    }
+
+    int compareAlpha(Brand a, Brand b) {
+      String key(Brand x) {
+        final name = x.name?.trim();
+        if (name != null && name.isNotEmpty) return name.toLowerCase();
+        final id = x.id?.trim();
+        return (id == null || id.isEmpty) ? '' : id.toLowerCase();
+      }
+
+      return key(a).compareTo(key(b));
+    }
+
+    final list = widget.brands.where((b) {
+      final nameLower = (b.name ?? '').toLowerCase();
+      final matchesSearch = q.isEmpty ? true : nameLower.contains(q);
+      final matchesRegion = region == 'all' ? true : brandInRegion(b);
       return matchesSearch && matchesRegion;
     }).toList();
+
+    if (region == 'all') {
+      list.sort(compareAlpha);
+    } else {
+      list.sort((a, b) {
+        final aPop = isPopularInRegion(a, region);
+        final bPop = isPopularInRegion(b, region);
+        if (aPop != bPop) return aPop ? -1 : 1; // popular first
+        return compareAlpha(a, b); // then alpha
+      });
+    }
+
+    return list;
   }
 
-  // Map input to ISO 3166-1 alpha-2 for the flag widget.
-  // country_flags expects 'GB' instead of 'UK'.
+  // map to ISO 3166-1 alpha-2 for country_flags
   String _toFlagCode(String code) {
     final c = code.trim().toLowerCase();
-    if (c == 'uk') return 'GB';
     return c.toUpperCase();
   }
 
-  Widget _flagIcon(String code, {double size = 20}) {
+  // flag icon
+  Widget _flagIcon(String code, {double size = _flagSize}) {
     return CountryFlag.fromCountryCode(
       _toFlagCode(code),
       theme: ImageTheme(shape: const Circle(), width: size, height: size),
     );
   }
 
-  String _displayText(String code) =>
-      code == 'all' ? 'ALL' : code.toUpperCase();
+  // earth icon for "all"
+  Widget _earthIcon({double size = _flagSize}) {
+    return ClipOval(
+      child: Image.asset(
+        'assets/images/earth-icon.png',
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,15 +170,9 @@ class _AddCardModalState extends State<AddCardModal> {
                 color: CupertinoColors.activeBlue,
               ),
             ),
-            // Search + Region row
-            Row(
-              children: [
-                Expanded(flex: 4, child: _buildSearchField(context)),
-                const SizedBox(width: 12),
-                Expanded(flex: 1, child: _buildRegionDropdown(context)),
-              ],
-            ),
-            // Filtered brands list
+            // search widget
+            _buildSearchField(context),
+            // filtered brands list
             Expanded(child: BrandsList(brands: _filteredBrands)),
           ],
         ),
@@ -130,18 +180,28 @@ class _AddCardModalState extends State<AddCardModal> {
     );
   }
 
+  // search field
   Widget _buildSearchField(BuildContext context) {
     return PlatformWidget(
       material: (_, __) => SearchBar(
-        hintText: 'Search for popular merchants',
+        hintText: 'Aa...',
         elevation: WidgetStateProperty.all(0),
+        leading: const Icon(Icons.search),
+        trailing: [_buildRegionDropdown(context)],
         onChanged: (value) => setState(() => _search = value),
       ),
-      cupertino: (_, __) => CupertinoSearchTextField(
+      cupertino: (_, __) => CupertinoTextField(
+        placeholder: 'Aa...',
         padding: const EdgeInsets.all(8.0),
-        placeholder: 'Search for popular merchants',
-        autofocus: true,
         onChanged: (value) => setState(() => _search = value),
+        prefix: const Padding(
+          padding: EdgeInsetsDirectional.only(start: 6.0),
+          child: Icon(CupertinoIcons.search),
+        ),
+        suffix: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 6.0),
+          child: _buildRegionDropdown(context),
+        ),
         decoration: BoxDecoration(
           color: CupertinoColors.systemGrey6,
           borderRadius: BorderRadius.circular(8.0),
@@ -151,104 +211,74 @@ class _AddCardModalState extends State<AddCardModal> {
     );
   }
 
+  // dropdown button
   Widget _buildRegionDropdown(BuildContext context) {
-    return PlatformWidget(
-      // Material dropdown with flags (uses full width of its Expanded)
-      material: (_, __) => DropdownButtonFormField<String>(
-        initialValue: _selectedRegion,
-        isDense: true,
-        isExpanded: false,
-        items: _regionOptions.map((r) {
-          final isAll = r == 'all';
-          return DropdownMenuItem(
-            value: r,
-            child: Row(
-              children: [
-                if (!isAll)
-                  _flagIcon(r, size: 18)
-                else
-                  const Icon(Icons.public, size: 18),
-                if (!isAll)
-                  const SizedBox(width: 8)
-                else
-                  const SizedBox(width: 8),
-                // If you want no text for "all", comment the next line out.
-                if (!isAll) Text(_displayText(r)),
-                if (isAll) const SizedBox.shrink(),
-              ],
-            ),
-          );
-        }).toList(),
-        onChanged: (val) {
-          if (val == null) return;
-          setState(() => _selectedRegion = val);
-        },
-        decoration: const InputDecoration(
-          labelText: '',
-          border: null,
-          isDense: true,
-          icon: null,
-          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-        ),
-      ),
-      // Cupertino button + action sheet with flags (button fills its Expanded width)
-      cupertino: (_, __) => SizedBox(
-        width: double.infinity,
-        child: CupertinoButton(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          color: CupertinoColors.systemGrey5,
-          borderRadius: BorderRadius.circular(8),
-          onPressed: () {
-            showCupertinoModalPopup(
-              context: context,
-              builder: (_) => CupertinoActionSheet(
-                title: const Text('Select Region'),
-                actions: _regionOptions.map((r) {
-                  final isAll = r == 'all';
-                  return CupertinoActionSheetAction(
-                    onPressed: () {
-                      setState(() => _selectedRegion = r);
-                      Navigator.of(context).pop();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (!isAll)
-                          _flagIcon(r, size: 20)
-                        else
-                          const Icon(CupertinoIcons.globe, size: 20),
-                        const SizedBox(width: 8),
-                        // If you want no text for "all", comment the next line out.
-                        if (!isAll)
-                          Text(_displayText(r))
-                        else
-                          const SizedBox.shrink(),
-                      ],
-                    ),
-                  );
-                }).toList(),
-                cancelButton: CupertinoActionSheetAction(
-                  onPressed: () => Navigator.of(context).pop(),
-                  isDefaultAction: true,
-                  child: const Text('Cancel'),
-                ),
-              ),
-            );
+    Widget buildIcon(String r) => r == 'all'
+        ? _earthIcon(size: _flagSize)
+        : _flagIcon(r, size: _flagSize);
+
+    final String selected = _regionValue.value ?? 'all';
+
+    return DropdownButtonHideUnderline(
+      child: Material(
+        color: Colors.transparent,
+        child: DropdownButton2<String>(
+          valueListenable: _regionValue,
+          onChanged: (val) {
+            if (val == null) return;
+            // update notifier
+            _regionValue.value = val;
+            setState(() => _selectedRegion = val);
           },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (_selectedRegion != 'all')
-                _flagIcon(_selectedRegion, size: 18)
-              else
-                const Icon(CupertinoIcons.globe, size: 18),
-              const SizedBox(width: 6),
-              // If you want to hide text when "all" is selected, comment next line:
-              if (_selectedRegion != 'all') Text(_displayText(_selectedRegion)),
-              const SizedBox(width: 4),
-              const Icon(CupertinoIcons.chevron_down, size: 14),
-            ],
+
+          // closed button
+          customButton: Container(
+            height: _buttonSize,
+            width: _menuWidth,
+            decoration: BoxDecoration(color: Colors.transparent),
+            child: Center(child: buildIcon(selected)),
           ),
+
+          // items
+          items: _regionOptions
+              .map(
+                (r) => DropdownItem<String>(
+                  value: r,
+                  height: _buttonSize + 4,
+                  alignment: Alignment.center,
+                  child: buildIcon(r), // icon
+                ),
+              )
+              .toList(),
+
+          // hide chevron
+          iconStyleData: const IconStyleData(icon: SizedBox.shrink()),
+
+          // button style
+          buttonStyleData: const ButtonStyleData(
+            height: _buttonSize,
+            width: _menuWidth,
+            padding: EdgeInsets.zero,
+          ),
+
+          // dropdown (menu) style
+          dropdownStyleData: DropdownStyleData(
+            width: _menuWidth, // same width as button
+            padding: EdgeInsets.zero, // remove menu padding
+            elevation: 8,
+            decoration: BoxDecoration(
+              color: Theme.of(
+                context,
+              ).colorScheme.surface, // set transparent to debug if desired
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.transparent),
+            ),
+            offset: const Offset(0, -4), // small gap below the button
+            direction: DropdownDirection.textDirection,
+          ),
+
+          // menu items style (no inner padding so icons are perfectly centered)
+          menuItemStyleData: const MenuItemStyleData(padding: EdgeInsets.zero),
         ),
       ),
     );

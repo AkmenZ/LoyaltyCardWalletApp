@@ -25,6 +25,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   flutter_platform_widgets: ^9.0.0
   country_flags: ^4.0.1
+  dropdown_button2: ^3.0.0-beta.23
 
 dev_dependencies:
   flutter_test:
@@ -46,5 +47,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logos/
+    - assets/images/
     - assets/data/
 

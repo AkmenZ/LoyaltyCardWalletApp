@@ -14,7 +14,9 @@ _Brand _$BrandFromJson(Map<String, dynamic> json) => _Brand(
   regions: (json['regions'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  popular: json['popular'] as bool?,
+  popularRegions: (json['popularRegions'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
 );
 
 Map<String, dynamic> _$BrandToJson(_Brand instance) => <String, dynamic>{
@@ -23,5 +25,5 @@ Map<String, dynamic> _$BrandToJson(_Brand instance) => <String, dynamic>{
   'logo': instance.logo,
   'colorHex': instance.colorHex,
   'regions': instance.regions,
-  'popular': instance.popular,
+  'popularRegions': instance.popularRegions,
 };

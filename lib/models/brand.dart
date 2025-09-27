@@ -11,7 +11,7 @@ abstract class Brand with _$Brand {
     String? logo,
     String? colorHex,
     List<String>? regions,
-    bool? popular,
+    List<String>? popularRegions,
   }) = _Brand;
 
   factory Brand.fromJson(Map<String, dynamic> json) =>

@@ -34,7 +34,7 @@ class HomePage extends ConsumerWidget {
     showCupertinoModalBottomSheet(
       context: context,
       expand: true,
-      backgroundColor: Colors.amber,
+      barrierColor: Colors.black.withValues(alpha: 0.7),
       builder: (context) => Navigator(
         onGenerateRoute: (settings) {
           return platformPageRoute(

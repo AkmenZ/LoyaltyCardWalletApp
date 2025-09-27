@@ -13,6 +13,7 @@ class BrandsList extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: brands.length,
         itemBuilder: (context, index) {
           final brand = brands[index];
@@ -22,13 +23,13 @@ class BrandsList extends StatelessWidget {
                 bottom: BorderSide(
                   color: Colors.grey,
                   width: 0.5,
-                ), // 👈 bottom border
+                ), // bottom border
               ),
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
-                vertical: 12, // 👈 makes the tile a bit taller
+                vertical: 10,
               ),
               leading: Container(
                 padding: const EdgeInsets.all(8),
