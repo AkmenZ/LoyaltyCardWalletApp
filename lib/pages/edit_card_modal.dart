@@ -8,6 +8,7 @@ import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
+import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
 
 class EditCardModal extends ConsumerStatefulWidget {
   const EditCardModal({super.key, required this.loyaltyCard, this.brand});
@@ -75,25 +76,13 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                // card brand display
-                Container(
-                  height: 160,
-                  color: widget.loyaltyCard.colorHex != null
-                      ? Color(
-                          int.parse(
-                            '0xFF${widget.loyaltyCard.colorHex!.replaceFirst('#', '')}',
-                          ),
-                        )
-                      : Colors.grey.shade300,
-                  child: Center(
-                    child: widget.brand?.logo != null
-                        ? Image.asset(widget.brand!.logo!, fit: BoxFit.contain)
-                        : Text(
-                            widget.loyaltyCard.merchant ?? 'Unknown',
-                            style: Theme.of(context).textTheme.titleMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                  ),
+                // loyalty card header
+                LoyaltyCardHeader(
+                  colorHex: widget.loyaltyCard.colorHex,
+                  merchant: widget.loyaltyCard.merchant,
+                  isCustom: widget.loyaltyCard.isCustom,
+                  brandLogo: widget.brand?.logo,
+                  customLogo: widget.loyaltyCard.customLogo,
                 ),
                 const SizedBox(height: 16),
                 PlatformTextFormField(

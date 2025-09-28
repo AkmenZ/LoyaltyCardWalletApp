@@ -3,6 +3,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
 
 class LoyaltyCardWidget extends StatelessWidget {
   const LoyaltyCardWidget({super.key, required this.loyaltyCard, this.brand});
@@ -27,24 +28,13 @@ class LoyaltyCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if ((loyaltyCard.merchant ?? '').isNotEmpty)
-              Container(
-                height: 160,
-                color: loyaltyCard.colorHex != null
-                    ? Color(
-                        int.parse(
-                          '0xFF${loyaltyCard.colorHex!.replaceFirst('#', '')}',
-                        ),
-                      )
-                    : Colors.grey.shade300,
-                child: Center(
-                  child: brand?.logo != null
-                      ? Image.asset(brand!.logo!, fit: BoxFit.contain)
-                      : Text(
-                          loyaltyCard.merchant ?? 'Unknown',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                ),
+              // loyalty card header
+              LoyaltyCardHeader(
+                colorHex: loyaltyCard.colorHex,
+                merchant: loyaltyCard.merchant,
+                isCustom: loyaltyCard.isCustom,
+                brandLogo: brand?.logo,
+                customLogo: loyaltyCard.customLogo,
               ),
             if (data.isEmpty)
               const Text('No barcode available', textAlign: TextAlign.center)

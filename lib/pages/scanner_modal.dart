@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/pages/add_card_manually_modal.dart';
-import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'package:loyalty_cards_app/models/brand.dart';
@@ -125,51 +125,12 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
             top: 20,
             left: 20,
             right: 20,
-            child: Container(
-              height: 160,
-              color: widget.brand.colorHex != null
-                  ? Color(
-                      int.parse(
-                        '0xFF${widget.brand.colorHex!.replaceFirst('#', '')}',
-                      ),
-                    )
-                  : Colors.grey.shade300,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  spacing: 4.0,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (widget.brand.logo != null)
-                      Expanded(
-                        child: Image.asset(
-                          widget.brand.logo!,
-                          fit: BoxFit.contain,
-                        ),
-                      )
-                    else
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            widget.brand.name ?? 'Unknown',
-                            style: Theme.of(context).textTheme.titleMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    if (widget.brand.isCustom)
-                      Text(
-                        widget.brand.name ?? 'Custom Card',
-                        style: TextStyle(
-                          color: onSeed,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
+            child: LoyaltyCardHeader(
+              colorHex: widget.brand.colorHex,
+              merchant: widget.brand.name,
+              isCustom: widget.brand.isCustom,
+              brandLogo: widget.brand.isCustom ? null : widget.brand.logo,
+              customLogo: widget.brand.isCustom ? widget.brand.logo : null,
             ),
           ),
           // instructions overlay

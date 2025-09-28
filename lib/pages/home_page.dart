@@ -106,10 +106,10 @@ class HomePage extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final card = cards[index];
 
-                          // Find matching brand by merchant name
+                          // find matching brand by merchant name (if not custom card)
                           final brand = brands.firstWhere(
                             (b) =>
-                                b.isCustom == false &&
+                                card.isCustom == false &&
                                 (b.name?.toLowerCase() ==
                                     card.merchant?.toLowerCase()),
                             orElse: () => Brand(isCustom: true),

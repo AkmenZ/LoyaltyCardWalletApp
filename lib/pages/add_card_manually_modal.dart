@@ -9,6 +9,7 @@ import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/validators.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
+import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
 
 class AddCardManuallyModal extends ConsumerStatefulWidget {
   const AddCardManuallyModal({super.key, required this.brand});
@@ -83,25 +84,13 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
             child: ListView(
               padding: const EdgeInsets.all(16.0),
               children: [
-                // card brand display
-                Container(
-                  height: 160,
-                  color: widget.brand.colorHex != null
-                      ? Color(
-                          int.parse(
-                            '0xFF${widget.brand.colorHex!.replaceFirst('#', '')}',
-                          ),
-                        )
-                      : Colors.grey.shade300,
-                  child: Center(
-                    child: widget.brand.logo != null
-                        ? Image.asset(widget.brand.logo!, fit: BoxFit.contain)
-                        : Text(
-                            widget.brand.name ?? 'Unknown',
-                            style: Theme.of(context).textTheme.titleMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                  ),
+                // loyalty card header
+                LoyaltyCardHeader(
+                  colorHex: widget.brand.colorHex,
+                  merchant: widget.brand.name,
+                  isCustom: widget.brand.isCustom,
+                  brandLogo: widget.brand.isCustom ? null : widget.brand.logo,
+                  customLogo: widget.brand.isCustom ? widget.brand.logo : null,
                 ),
                 const SizedBox(height: 16),
                 // barcode text field

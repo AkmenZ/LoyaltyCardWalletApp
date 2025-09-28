@@ -125,7 +125,15 @@
     "logo": "assets/logos/ksenukai-logo.png",
     "colorHex": "#000000",
     "regions": ["lv"],
-    "popularRegions": ["lv"]
+    "popularRegions": []
+  },
+  {
+    "id": "lido",
+    "name": "Lido",
+    "logo": "assets/logos/lido-logo.png",
+    "colorHex": "#2C5A9A",
+    "regions": ["lv"],
+    "popularRegions": []
   },
   {
     "id": "iki",
