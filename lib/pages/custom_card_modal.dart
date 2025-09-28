@@ -1,0 +1,201 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/widgets/color_picker.dart';
+import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
+import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
+import 'package:loyalty_cards_app/widgets/icon_picker.dart';
+
+class CustomCardModal extends ConsumerStatefulWidget {
+  const CustomCardModal({super.key});
+
+  @override
+  ConsumerState<CustomCardModal> createState() => _CustomCardModalState();
+}
+
+class _CustomCardModalState extends ConsumerState<CustomCardModal> {
+  late final TextEditingController _nameCtrl;
+  Color? currentColor;
+  String? selectedIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameCtrl = TextEditingController(text: '');
+    currentColor = myColors[0];
+    selectedIcon = icons[0];
+
+    _nameCtrl.addListener(() {
+      setState(() {}); // rebuild whenever text changes
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    super.dispose();
+  }
+
+  // colors list
+  final List<Color> myColors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.cyan,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.brown,
+    Colors.grey.shade800,
+  ];
+
+  // icons list
+  final icons = [
+    'assets/images/grocery.png',
+    'assets/images/shopping.png',
+    'assets/images/restaurant.png',
+    'assets/images/gym.png',
+    'assets/images/spa.png',
+    'assets/images/sports.png',
+    'assets/images/coffee.png',
+    'assets/images/pharmacy.png',
+    'assets/images/burger.png',
+    'assets/images/pizza.png',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final cupertinoTheme = CupertinoTheme.of(context);
+
+    return CustomScaffold(
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+      resizeToAvoidBottomInset: true,
+      appBar: CustomPlatformAppBar(
+        title: const Text('Add Custom Card'),
+        trailingActions: [
+          PlatformIconButton(
+            icon: Icon(context.platformIcons.clear),
+            onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                // card preview
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 70.0),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: currentColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        spacing: 4.0,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            selectedIcon!,
+                            width: MediaQuery.of(context).size.width * 0.20,
+                            height: MediaQuery.of(context).size.width * 0.20,
+                            fit: BoxFit.contain,
+                          ),
+                          Text(
+                            _nameCtrl.text,
+                            style: const TextStyle(
+                              color: onSeed,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // card color picker
+                ColorPicker(
+                  colors: myColors,
+                  selectedColor: currentColor,
+                  onColorSelected: (color) {
+                    setState(() => currentColor = color);
+                  },
+                ),
+                // icon picker
+                IconPicker(
+                  assetPaths: icons,
+                  selectedAssetPath: selectedIcon,
+                  onIconSelected: (icon) => setState(() => selectedIcon = icon),
+                ),
+                const SizedBox(height: 16),
+                // name input
+                PlatformTextFormField(
+                  controller: _nameCtrl,
+                  autofocus: true,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  maxLength: 50,
+                  onChanged: (_) =>
+                      setState(() {}), // rebuild to update preview
+                  material: (_, __) => MaterialTextFormFieldData(
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      counterText: '',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  cupertino: (_, __) => CupertinoTextFormFieldData(
+                    placeholder: 'Name',
+                    decoration: BoxDecoration(
+                      color: cupertinoTheme.barBackgroundColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // bottom buttons
+          SafeArea(
+            minimum: const EdgeInsets.all(16),
+            child: SizedBox(
+              width: double.infinity,
+              child: PlatformElevatedButton(
+                onPressed: () {},
+                child: const Text('Continue', style: TextStyle(color: onSeed)),
+                material: (_, __) => MaterialElevatedButtonData(
+                  style: ElevatedButton.styleFrom(backgroundColor: seed),
+                ),
+                cupertino: (_, __) {
+                  return CupertinoElevatedButtonData(
+                    color: seed,
+                    sizeStyle: CupertinoButtonSize.small,
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

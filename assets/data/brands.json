@@ -142,5 +142,13 @@
     "colorHex": "#FDE121",
     "regions": ["pl"],
     "popularRegions": ["pl"]
+  },
+  {
+    "id": "zabka",
+    "name": "Zabka",
+    "logo": "assets/logos/zabka-logo.png",
+    "colorHex": "#006524",
+    "regions": ["pl"],
+    "popularRegions": ["pl"]
   }
 ]

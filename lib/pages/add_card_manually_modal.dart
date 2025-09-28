@@ -43,7 +43,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
     final newCard = LoyaltyCard(
       merchant: widget.brand.name,
       barcode: newBarcode.isEmpty ? null : newBarcode,
-      barcodeType: _determineBarcodeType(newBarcode),
+      barcodeType: determineBarcodeType(newBarcode),
       colorHex: widget.brand.colorHex,
       dateAdded: DateTime.now().toIso8601String(),
       favorite: false,
@@ -56,23 +56,6 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
     if (!mounted) return;
     // close modal
     Navigator.of(context, rootNavigator: true).pop();
-  }
-
-  // determine type of barcode
-  String _determineBarcodeType(String barcode) {
-    final digitsOnly = RegExp(r'^\d+$');
-    final cleanedBarcode = barcode.trim();
-
-    if (digitsOnly.hasMatch(cleanedBarcode)) {
-      if (cleanedBarcode.length == 13 && isValidEan13(cleanedBarcode)) {
-        return 'ean13';
-      }
-      if (cleanedBarcode.length == 8 && isValidEan8(cleanedBarcode)) {
-        return 'ean8';
-      }
-    }
-
-    return 'code128'; // most general fallback
   }
 
   @override

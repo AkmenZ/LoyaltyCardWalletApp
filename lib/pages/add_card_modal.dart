@@ -4,6 +4,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
+import 'package:loyalty_cards_app/pages/custom_card_modal.dart';
 import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/brands_list.dart';
@@ -153,13 +154,13 @@ class _AddCardModalState extends State<AddCardModal> {
           children: [
             PlatformElevatedButton(
               onPressed: () {
-                // navigate to scanner modal
-                // Navigator.of(context).push(
-                //   platformPageRoute(
-                //     context: context,
-                //     builder: (_) => const ScannerModal(),
-                //   ),
-                // );
+                // navigate to custom card modal
+                Navigator.of(context).push(
+                  platformPageRoute(
+                    context: context,
+                    builder: (_) => const CustomCardModal(),
+                  ),
+                );
               },
               // add custom card button
               child: Row(

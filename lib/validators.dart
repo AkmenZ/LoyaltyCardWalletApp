@@ -1,5 +1,22 @@
 // public methods for validating barcodes
 
+// determine type of barcode
+  String determineBarcodeType(String barcode) {
+    final digitsOnly = RegExp(r'^\d+$');
+    final cleanedBarcode = barcode.trim();
+
+    if (digitsOnly.hasMatch(cleanedBarcode)) {
+      if (cleanedBarcode.length == 13 && isValidEan13(cleanedBarcode)) {
+        return 'ean13';
+      }
+      if (cleanedBarcode.length == 8 && isValidEan8(cleanedBarcode)) {
+        return 'ean8';
+      }
+    }
+
+    return 'code128'; // most general fallback
+  }
+
 // validate EAN-8
 bool isValidEan8(String code) {
   if (code.length != 8 || !RegExp(r'^\d{8}$').hasMatch(code)) return false;
