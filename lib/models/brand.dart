@@ -12,6 +12,7 @@ abstract class Brand with _$Brand {
     String? colorHex,
     List<String>? regions,
     List<String>? popularRegions,
+    @Default(false) bool isCustom,
   }) = _Brand;
 
   factory Brand.fromJson(Map<String, dynamic> json) =>

@@ -15,6 +15,8 @@ _LoyaltyCard _$LoyaltyCardFromJson(Map<String, dynamic> json) => _LoyaltyCard(
   dateAdded: json['dateAdded'] as String?,
   note: json['note'] as String?,
   favorite: json['favorite'] as bool? ?? false,
+  isCustom: json['isCustom'] as bool? ?? false,
+  customLogo: json['customLogo'] as String?,
 );
 
 Map<String, dynamic> _$LoyaltyCardToJson(_LoyaltyCard instance) =>
@@ -27,4 +29,6 @@ Map<String, dynamic> _$LoyaltyCardToJson(_LoyaltyCard instance) =>
       'dateAdded': instance.dateAdded,
       'note': instance.note,
       'favorite': instance.favorite,
+      'isCustom': instance.isCustom,
+      'customLogo': instance.customLogo,
     };

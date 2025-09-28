@@ -112,6 +112,22 @@
     "popularRegions": []
   },
   {
+    "id": "depo",
+    "name": "Depo",
+    "logo": "assets/logos/depo-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "ksenukai",
+    "name": "Ksenukai",
+    "logo": "assets/logos/ksenukai-logo.png",
+    "colorHex": "#000000",
+    "regions": ["lv"],
+    "popularRegions": ["lv"]
+  },
+  {
     "id": "iki",
     "name": "Iki",
     "logo": "assets/logos/iki-logo.png",

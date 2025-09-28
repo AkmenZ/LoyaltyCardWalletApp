@@ -109,9 +109,10 @@ class HomePage extends ConsumerWidget {
                           // Find matching brand by merchant name
                           final brand = brands.firstWhere(
                             (b) =>
-                                b.name?.toLowerCase() ==
-                                card.merchant?.toLowerCase(),
-                            orElse: () => Brand(),
+                                b.isCustom == false &&
+                                (b.name?.toLowerCase() ==
+                                    card.merchant?.toLowerCase()),
+                            orElse: () => Brand(isCustom: true),
                           );
 
                           return GestureDetector(
@@ -136,19 +137,44 @@ class HomePage extends ConsumerWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
+                                // card brand
                                 child: Center(
                                   child: brand.logo != null
                                       ? Image.asset(
                                           brand.logo!,
                                           fit: BoxFit.contain,
                                         )
-                                      : Text(
-                                          card.merchant ?? 'Unknown',
-                                          style: TextStyle(
-                                            color: _getTextColor(card.colorHex),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          textAlign: TextAlign.center,
+                                      // custom card
+                                      : Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            if (card.isCustom)
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    12.0,
+                                                  ),
+                                                  child: Image.asset(
+                                                    card.customLogo ??
+                                                        'assets/images/custom.png',
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ),
+                                            Text(
+                                              card.merchant ?? 'Unknown',
+                                              style: TextStyle(
+                                                color: _getTextColor(
+                                                  card.colorHex,
+                                                ),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
                                         ),
                                 ),
                               ),

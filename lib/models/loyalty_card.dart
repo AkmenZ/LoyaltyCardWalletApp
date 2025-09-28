@@ -14,6 +14,8 @@ abstract class LoyaltyCard with _$LoyaltyCard {
     String? dateAdded,
     String? note,
     @Default(false) bool favorite,
+    @Default(false) bool isCustom,
+    String? customLogo,
   }) = _LoyaltyCard;
 
   factory LoyaltyCard.fromJson(Map<String, dynamic> json) =>

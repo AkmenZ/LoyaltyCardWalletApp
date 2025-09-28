@@ -48,6 +48,8 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
       dateAdded: DateTime.now().toIso8601String(),
       favorite: false,
       note: null,
+      isCustom: widget.brand.isCustom,
+      customLogo: widget.brand.isCustom ? widget.brand.logo : null,
     );
 
     // insert into DB via provider

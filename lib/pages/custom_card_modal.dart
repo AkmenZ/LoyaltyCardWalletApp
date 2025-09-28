@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/models/brand.dart';
+import 'package:loyalty_cards_app/pages/scanner_modal.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/color_picker.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
@@ -19,6 +21,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
   late final TextEditingController _nameCtrl;
   Color? currentColor;
   String? selectedIcon;
+  Brand? brand;
 
   @override
   void initState() {
@@ -180,7 +183,27 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
             child: SizedBox(
               width: double.infinity,
               child: PlatformElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // define brand
+                  // brand for custom cards
+                  brand = Brand(
+                    name: _nameCtrl.text.isEmpty
+                        ? 'Custom Card'
+                        : _nameCtrl.text,
+                    colorHex: currentColor!.value
+                        .toRadixString(16)
+                        .padLeft(8, '0'),
+                    logo: selectedIcon!,
+                    isCustom: true,
+                  );
+                  // navigate to scanner modal
+                  Navigator.of(context).push(
+                    platformPageRoute(
+                      context: context,
+                      builder: (_) => ScannerModal(brand: brand!),
+                    ),
+                  );
+                },
                 child: const Text('Continue', style: TextStyle(color: onSeed)),
                 material: (_, __) => MaterialElevatedButtonData(
                   style: ElevatedButton.styleFrom(backgroundColor: seed),

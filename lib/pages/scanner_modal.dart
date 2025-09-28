@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/pages/add_card_manually_modal.dart';
+import 'package:loyalty_cards_app/theme.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'package:loyalty_cards_app/models/brand.dart';
@@ -133,14 +134,41 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
                       ),
                     )
                   : Colors.grey.shade300,
-              child: Center(
-                child: widget.brand.logo != null
-                    ? Image.asset(widget.brand.logo!, fit: BoxFit.contain)
-                    : Text(
-                        widget.brand.name ?? 'Unknown',
-                        style: Theme.of(context).textTheme.titleMedium,
-                        textAlign: TextAlign.center,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  spacing: 4.0,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (widget.brand.logo != null)
+                      Expanded(
+                        child: Image.asset(
+                          widget.brand.logo!,
+                          fit: BoxFit.contain,
+                        ),
+                      )
+                    else
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            widget.brand.name ?? 'Unknown',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
+                    if (widget.brand.isCustom)
+                      Text(
+                        widget.brand.name ?? 'Custom Card',
+                        style: TextStyle(
+                          color: onSeed,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

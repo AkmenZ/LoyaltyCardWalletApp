@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Brand {
 
- String? get id; String? get name; String? get logo; String? get colorHex; List<String>? get regions; List<String>? get popularRegions;
+ String? get id; String? get name; String? get logo; String? get colorHex; List<String>? get regions; List<String>? get popularRegions; bool get isCustom;
 /// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BrandCopyWith<Brand> get copyWith => _$BrandCopyWithImpl<Brand>(this as Brand, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.regions, regions)&&const DeepCollectionEquality().equals(other.popularRegions, popularRegions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.regions, regions)&&const DeepCollectionEquality().equals(other.popularRegions, popularRegions)&&(identical(other.isCustom, isCustom) || other.isCustom == isCustom));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepCollectionEquality().hash(regions),const DeepCollectionEquality().hash(popularRegions));
+int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepCollectionEquality().hash(regions),const DeepCollectionEquality().hash(popularRegions),isCustom);
 
 @override
 String toString() {
-  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popularRegions: $popularRegions)';
+  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popularRegions: $popularRegions, isCustom: $isCustom)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BrandCopyWith<$Res>  {
   factory $BrandCopyWith(Brand value, $Res Function(Brand) _then) = _$BrandCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? name, String? logo, String? colorHex, List<String>? regions, List<String>? popularRegions
+ String? id, String? name, String? logo, String? colorHex, List<String>? regions, List<String>? popularRegions, bool isCustom
 });
 
 
@@ -65,7 +65,7 @@ class _$BrandCopyWithImpl<$Res>
 
 /// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popularRegions = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popularRegions = freezed,Object? isCustom = null,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to
 as String?,colorHex: freezed == colorHex ? _self.colorHex : colorHex // ignore: cast_nullable_to_non_nullable
 as String?,regions: freezed == regions ? _self.regions : regions // ignore: cast_nullable_to_non_nullable
 as List<String>?,popularRegions: freezed == popularRegions ? _self.popularRegions : popularRegions // ignore: cast_nullable_to_non_nullable
-as List<String>?,
+as List<String>?,isCustom: null == isCustom ? _self.isCustom : isCustom // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions,  bool isCustom)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Brand() when $default != null:
-return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions);case _:
+return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions,_that.isCustom);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions,  bool isCustom)  $default,) {final _that = this;
 switch (_that) {
 case _Brand():
-return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions);case _:
+return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions,_that.isCustom);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? logo,  String? colorHex,  List<String>? regions,  List<String>? popularRegions,  bool isCustom)?  $default,) {final _that = this;
 switch (_that) {
 case _Brand() when $default != null:
-return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions);case _:
+return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_that.popularRegions,_that.isCustom);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.name,_that.logo,_that.colorHex,_that.regions,_tha
 @JsonSerializable()
 
 class _Brand implements Brand {
-  const _Brand({this.id, this.name, this.logo, this.colorHex, final  List<String>? regions, final  List<String>? popularRegions}): _regions = regions,_popularRegions = popularRegions;
+  const _Brand({this.id, this.name, this.logo, this.colorHex, final  List<String>? regions, final  List<String>? popularRegions, this.isCustom = false}): _regions = regions,_popularRegions = popularRegions;
   factory _Brand.fromJson(Map<String, dynamic> json) => _$BrandFromJson(json);
 
 @override final  String? id;
@@ -239,6 +240,7 @@ class _Brand implements Brand {
   return EqualUnmodifiableListView(value);
 }
 
+@override@JsonKey() final  bool isCustom;
 
 /// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
@@ -253,16 +255,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._popularRegions, _popularRegions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Brand&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._popularRegions, _popularRegions)&&(identical(other.isCustom, isCustom) || other.isCustom == isCustom));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_popularRegions));
+int get hashCode => Object.hash(runtimeType,id,name,logo,colorHex,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_popularRegions),isCustom);
 
 @override
 String toString() {
-  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popularRegions: $popularRegions)';
+  return 'Brand(id: $id, name: $name, logo: $logo, colorHex: $colorHex, regions: $regions, popularRegions: $popularRegions, isCustom: $isCustom)';
 }
 
 
@@ -273,7 +275,7 @@ abstract mixin class _$BrandCopyWith<$Res> implements $BrandCopyWith<$Res> {
   factory _$BrandCopyWith(_Brand value, $Res Function(_Brand) _then) = __$BrandCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? name, String? logo, String? colorHex, List<String>? regions, List<String>? popularRegions
+ String? id, String? name, String? logo, String? colorHex, List<String>? regions, List<String>? popularRegions, bool isCustom
 });
 
 
@@ -290,7 +292,7 @@ class __$BrandCopyWithImpl<$Res>
 
 /// Create a copy of Brand
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popularRegions = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? logo = freezed,Object? colorHex = freezed,Object? regions = freezed,Object? popularRegions = freezed,Object? isCustom = null,}) {
   return _then(_Brand(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -298,7 +300,8 @@ as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to
 as String?,colorHex: freezed == colorHex ? _self.colorHex : colorHex // ignore: cast_nullable_to_non_nullable
 as String?,regions: freezed == regions ? _self._regions : regions // ignore: cast_nullable_to_non_nullable
 as List<String>?,popularRegions: freezed == popularRegions ? _self._popularRegions : popularRegions // ignore: cast_nullable_to_non_nullable
-as List<String>?,
+as List<String>?,isCustom: null == isCustom ? _self.isCustom : isCustom // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
