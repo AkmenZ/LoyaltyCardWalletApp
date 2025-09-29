@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auto_size_text/flutter_auto_size_text.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
@@ -43,15 +44,15 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
 
   // colors list
   final List<Color> myColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.cyan,
-    Colors.blue,
-    Colors.purple,
-    Colors.pink,
-    Colors.brown,
+    Colors.red.shade800,
+    Colors.orange.shade800,
+    Colors.yellow.shade800,
+    Colors.green.shade800,
+    Colors.cyan.shade800,
+    Colors.blue.shade800,
+    Colors.purple.shade800,
+    Colors.pink.shade800,
+    Colors.brown.shade800,
     Colors.grey.shade800,
   ];
 
@@ -119,13 +120,14 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                             height: MediaQuery.of(context).size.width * 0.20,
                             fit: BoxFit.contain,
                           ),
-                          Text(
+                          AutoSizeText(
                             _nameCtrl.text,
                             style: const TextStyle(
                               color: onSeed,
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                             ),
+                            maxLines: 1,
                           ),
                         ],
                       ),
@@ -153,7 +155,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                   autofocus: true,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  maxLength: 50,
+                  maxLength: 30,
                   onChanged: (_) =>
                       setState(() {}), // rebuild to update preview
                   material: (_, __) => MaterialTextFormFieldData(

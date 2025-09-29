@@ -146,49 +146,51 @@ class _AddCardModalState extends State<AddCardModal> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 20.0,
-          children: [
-            PlatformElevatedButton(
-              onPressed: () {
-                // navigate to custom card modal
-                Navigator.of(context).push(
-                  platformPageRoute(
-                    context: context,
-                    builder: (_) => const CustomCardModal(),
-                  ),
-                );
-              },
-              // add custom card button
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(context.platformIcons.add, color: onSeed),
-                  const Text(
-                    'Add Custom Card',
-                    style: TextStyle(color: onSeed),
-                  ),
-                  const Icon(Icons.add_card, color: onSeed),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 20.0,
+            children: [
+              PlatformElevatedButton(
+                onPressed: () {
+                  // navigate to custom card modal
+                  Navigator.of(context).push(
+                    platformPageRoute(
+                      context: context,
+                      builder: (_) => const CustomCardModal(),
+                    ),
+                  );
+                },
+                // add custom card button
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(context.platformIcons.add, color: onSeed),
+                    const Text(
+                      'Add Custom Card',
+                      style: TextStyle(color: onSeed),
+                    ),
+                    const Icon(Icons.add_card, color: onSeed),
+                  ],
+                ),
+                material: (_, __) => MaterialElevatedButtonData(
+                  style: ElevatedButton.styleFrom(backgroundColor: seed),
+                ),
+                cupertino: (_, __) {
+                  return CupertinoElevatedButtonData(
+                    color: seed,
+                    sizeStyle: CupertinoButtonSize.small,
+                  );
+                },
               ),
-              material: (_, __) => MaterialElevatedButtonData(
-                style: ElevatedButton.styleFrom(backgroundColor: seed),
-              ),
-              cupertino: (_, __) {
-                return CupertinoElevatedButtonData(
-                  color: seed,
-                  sizeStyle: CupertinoButtonSize.small,
-                );
-              },
-            ),
-            // search widget
-            _buildSearchField(context),
-            // filtered brands list
-            Expanded(child: BrandsList(brands: _filteredBrands)),
-          ],
+              // search widget
+              _buildSearchField(context),
+              // filtered brands list
+              Expanded(child: BrandsList(brands: _filteredBrands)),
+            ],
+          ),
         ),
       ),
     );

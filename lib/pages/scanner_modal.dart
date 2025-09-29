@@ -52,6 +52,8 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
     final rawValue = first.rawValue?.trim();
     if (rawValue == null || rawValue.isEmpty) return;
 
+    final displayValue = barcodes.first.displayValue;
+
     _handledFirstResult = true;
 
     // Build the card from Brand + scan result
@@ -65,9 +67,11 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
       }
     }();
 
+    String processedBarcode = displayValue ?? rawValue;
+
     final newCard = LoyaltyCard(
       merchant: widget.brand.name,
-      barcode: rawValue,
+      barcode: processedBarcode,
       barcodeType: barcodeType,
       colorHex: widget.brand.colorHex,
       dateAdded: DateTime.now().toIso8601String(),
@@ -83,6 +87,10 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
 
     // insert into DB via provider
     await ref.read(loyaltyCardsProvider.notifier).insertCard(newCard);
+
+    print(
+      'Scanned barcode: $rawValue (type: $barcodeType), Scanned display: $displayValue, added card: $newCard',
+    );
 
     if (!mounted) return;
     // close modal

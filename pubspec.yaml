@@ -21,13 +21,17 @@ dependencies:
   sembast: ^3.8.5+1
   path_provider: ^2.1.5
   barcode_widget: ^2.0.4
-  mobile_scanner: ^7.0.1
+  mobile_scanner: ^7.1.2
   modal_bottom_sheet: ^3.0.0
   flutter_platform_widgets: ^9.0.0
   country_flags: ^4.0.1
   dropdown_button2: ^3.0.0-beta.23
   shared_preferences: ^2.5.3
   flex_color_picker: ^3.7.1
+  flutter_auto_size_text: ^4.1.0
+  screen_brightness: ^2.1.7
+  share_plus: ^12.0.0
+  screenshot: ^3.0.0
 
 dev_dependencies:
   flutter_test:

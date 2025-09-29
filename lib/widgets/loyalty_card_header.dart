@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auto_size_text/flutter_auto_size_text.dart';
+import 'package:loyalty_cards_app/theme.dart';
 
 class LoyaltyCardHeader extends StatelessWidget {
   final String? colorHex;
@@ -31,31 +33,35 @@ class LoyaltyCardHeader extends StatelessWidget {
         child: brandLogo != null
             ? Image.asset(brandLogo!, fit: BoxFit.contain)
             : isCustom
-                ? Column(
-                    children: [
-                      if (customLogo != null)
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset(
-                              customLogo!,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      Text(
-                        merchant ?? 'Unknown',
-                        style: Theme.of(context).textTheme.titleMedium,
-                        textAlign: TextAlign.center,
+            ? Column(
+                children: [
+                  if (customLogo != null)
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Image.asset(customLogo!, fit: BoxFit.contain),
                       ),
-                      const SizedBox(height: 12.0),
-                    ],
-                  )
-                : Text(
+                    ),
+                  AutoSizeText(
                     merchant ?? 'Unknown',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: TextStyle(
+                      color: onSeed,
+                      fontWeight: FontWeight.w700,
+                    ),
                     textAlign: TextAlign.center,
+                    maxLines: 1,
+                    minFontSize: 8,
+                    maxFontSize: 20,
+                    overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(height: 12.0),
+                ],
+              )
+            : Text(
+                merchant ?? 'Unknown',
+                style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }

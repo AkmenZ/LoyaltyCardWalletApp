@@ -32,6 +32,14 @@
     "popularRegions": ["ie", "gb", "pl"]
   },
   {
+    "id": "tkmaxx",
+    "name": "Tkmaxx",
+    "logo": "assets/logos/tkmaxx-logo.png",
+    "colorHex": "#FF3131",
+    "regions": ["ie", "gb"],
+    "popularRegions": ["ie", "gb"]
+  },
+  {
     "id": "asda",
     "name": "Asda",
     "logo": "assets/logos/asda-logo.png",
@@ -83,7 +91,7 @@
     "id": "circlek",
     "name": "Circle K",
     "logo": "assets/logos/circle-k-logo.png",
-    "colorHex": "#FFFFFF",
+    "colorHex": "#FF3131",
     "regions": ["ie", "gb", "lv", "lt", "ee", "pl"],
     "popularRegions": []
   },
@@ -110,6 +118,14 @@
     "colorHex": "#FDE121",
     "regions": ["lv"],
     "popularRegions": []
+  },
+  {
+    "id": "top",
+    "name": "Top",
+    "logo": "assets/logos/top-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": ["lv"]
   },
   {
     "id": "depo",

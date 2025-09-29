@@ -12,8 +12,9 @@ import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_widget.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
-class CardPage extends ConsumerWidget {
+class CardPage extends ConsumerStatefulWidget {
   const CardPage({
     super.key,
     required this.loyaltyCardId,
@@ -24,6 +25,25 @@ class CardPage extends ConsumerWidget {
   final int loyaltyCardId;
   final String merchant;
   final Brand? brand;
+
+  @override
+  ConsumerState<CardPage> createState() => _CardPageState();
+}
+
+class _CardPageState extends ConsumerState<CardPage> {
+  @override
+  void initState() {
+    super.initState();
+    // set screen brightness to max when viewing card
+    ScreenBrightness.instance.setApplicationScreenBrightness(1.0);
+  }
+
+  @override
+  void dispose() {
+    // reset screen brightness when leaving page
+    ScreenBrightness.instance.resetApplicationScreenBrightness();
+    super.dispose();
+  }
 
   // open edit card modal
   void _openEditCardModal(
@@ -48,12 +68,12 @@ class CardPage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cardAsync = ref.watch(loyaltyCardByIdProvider(loyaltyCardId));
+  Widget build(BuildContext context) {
+    final cardAsync = ref.watch(loyaltyCardByIdProvider(widget.loyaltyCardId));
 
     return CustomScaffold(
       appBar: CustomPlatformAppBar(
-        title: Text(merchant),
+        title: Text(widget.merchant),
         previousPageTitle: 'Cards',
         trailingActions: [
           PlatformIconButton(
@@ -61,7 +81,7 @@ class CardPage extends ConsumerWidget {
             onPressed: () {
               final card = cardAsync.asData?.value;
               if (card != null) {
-                _openEditCardModal(context, card, brand);
+                _openEditCardModal(context, card, widget.brand);
               }
             },
           ),
@@ -79,41 +99,43 @@ class CardPage extends ConsumerWidget {
               ],
             );
           }
-          return Column(
-            spacing: 20.0,
-            children: [
-              // card display
-              LoyaltyCardWidget(loyaltyCard: card, brand: brand),
-              // spacer
-              const Spacer(),
-              // share button
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: PlatformElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement share functionality
-                  },
-                  child: Row(
-                    spacing: 20.0,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(context.platformIcons.share, color: onSeed),
-                      const Text('Share', style: TextStyle(color: onSeed)),
-                    ],
+          return SafeArea(
+            child: Column(
+              spacing: 20.0,
+              children: [
+                // card display
+                LoyaltyCardWidget(loyaltyCard: card, brand: widget.brand),
+                // spacer
+                const Spacer(),
+                // share button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: PlatformElevatedButton(
+                    onPressed: () {
+                      // TODO: Implement share functionality
+                    },
+                    child: Row(
+                      spacing: 20.0,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(context.platformIcons.share, color: onSeed),
+                        const Text('Share', style: TextStyle(color: onSeed)),
+                      ],
+                    ),
+                    material: (_, __) => MaterialElevatedButtonData(
+                      style: ElevatedButton.styleFrom(backgroundColor: seed),
+                    ),
+                    cupertino: (_, __) {
+                      return CupertinoElevatedButtonData(
+                        color: seed,
+                        sizeStyle: CupertinoButtonSize.small,
+                      );
+                    },
                   ),
-                  material: (_, __) => MaterialElevatedButtonData(
-                    style: ElevatedButton.styleFrom(backgroundColor: seed),
-                  ),
-                  cupertino: (_, __) {
-                    return CupertinoElevatedButtonData(
-                      color: seed,
-                      sizeStyle: CupertinoButtonSize.small,
-                    );
-                  },
                 ),
-              ),
-              const SizedBox(height: 20.0),
-            ],
+                const SizedBox(height: 10.0),
+              ],
+            ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
