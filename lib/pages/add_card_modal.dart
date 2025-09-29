@@ -125,7 +125,7 @@ class _AddCardModalState extends State<AddCardModal> {
   Widget _earthIcon({double size = _flagSize}) {
     return ClipOval(
       child: Image.asset(
-        'assets/images/earth-icon.png',
+        'assets/icons/earth-icon.png',
         width: size,
         height: size,
         fit: BoxFit.cover,

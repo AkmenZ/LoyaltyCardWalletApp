@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:loyalty_cards_app/pages/add_card_modal.dart';
 import 'package:loyalty_cards_app/pages/card_page.dart';
 import 'package:loyalty_cards_app/providers/brands_provider.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
+import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -85,10 +87,35 @@ class HomePage extends ConsumerWidget {
                   return brandsAsync.when(
                     data: (brands) {
                       if (cards.isEmpty) {
-                        return ListView(
-                          children: const [
-                            SizedBox(height: 120),
-                            Center(child: Text('No cards yet. Add some!')),
+                        return Column(
+                          spacing: 16.0,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('No cards yet. Add some!'),
+                            PlatformIconButton(
+                              icon: Icon(
+                                context.platformIcons.add,
+                                color: onSeed,
+                              ),
+                              // open add card modal
+                              onPressed: () => _openAddCardModal(
+                                context,
+                                brandsAsync.asData?.value ?? [],
+                              ),
+                              material: (_, __) => MaterialIconButtonData(
+                                padding: EdgeInsets.zero,
+                                style: IconButton.styleFrom(
+                                  backgroundColor: seed,
+                                ),
+                              ),
+                              cupertino: (_, __) => CupertinoIconButtonData(
+                                padding: EdgeInsets.zero,
+                                sizeStyle: CupertinoButtonSize.large,
+                                borderRadius: BorderRadius.circular(30),
+                                color: seed,
+                              ),
+                            ),
                           ],
                         );
                       }

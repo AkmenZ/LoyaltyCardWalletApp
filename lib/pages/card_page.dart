@@ -13,6 +13,8 @@ import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_widget.dart';
 import 'package:screen_brightness/screen_brightness.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardPage extends ConsumerStatefulWidget {
   const CardPage({
@@ -31,6 +33,8 @@ class CardPage extends ConsumerStatefulWidget {
 }
 
 class _CardPageState extends ConsumerState<CardPage> {
+  final ScreenshotController screenshotController = ScreenshotController();
+
   @override
   void initState() {
     super.initState();
@@ -65,6 +69,68 @@ class _CardPageState extends ConsumerState<CardPage> {
         },
       ),
     );
+  }
+
+  // capture and share card as image
+  Future<void> _captureAndShareCard(LoyaltyCard card) async {
+    try {
+      // capture the card widget as an image
+      final image = await screenshotController.captureFromWidget(
+        Material(
+          color: Colors.black,
+          type: MaterialType.transparency,
+          child: Stack(
+            children: [
+              LoyaltyCardWidget(loyaltyCard: card, brand: widget.brand),
+              Positioned(
+                top: 26,
+                left: 26,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6.0),
+                  child: Image.asset(
+                    'assets/icons/app-icon.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 32,
+                right: 36,
+                child: Opacity(
+                  opacity: 0.8,
+                  child: Text(
+                    'GoCard',
+                    style: TextStyle(
+                      color: Colors.grey.shade400,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        delay: Duration(milliseconds: 50),
+      );
+
+      final merchant = card.merchant ?? 'unknown';
+
+      final params = ShareParams(
+        files: [
+          XFile.fromData(image, name: 'gocard_${merchant.toLowerCase()}_card.png'),
+        ],
+        fileNameOverrides: ['gocard_${merchant.toLowerCase()}_card.png'],
+      );
+
+      // share the captured image
+      await SharePlus.instance.share(params);
+    } catch (e) {
+      // handle any errors that occur during capture or sharing
+      debugPrint('Error capturing or sharing card: $e');
+    }
   }
 
   @override
@@ -112,7 +178,8 @@ class _CardPageState extends ConsumerState<CardPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: PlatformElevatedButton(
                     onPressed: () {
-                      // TODO: Implement share functionality
+                      // capture and share card
+                      _captureAndShareCard(card);
                     },
                     child: Row(
                       spacing: 20.0,

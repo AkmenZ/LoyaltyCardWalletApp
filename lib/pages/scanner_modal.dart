@@ -88,10 +88,6 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
     // insert into DB via provider
     await ref.read(loyaltyCardsProvider.notifier).insertCard(newCard);
 
-    print(
-      'Scanned barcode: $rawValue (type: $barcodeType), Scanned display: $displayValue, added card: $newCard',
-    );
-
     if (!mounted) return;
     // close modal
     Navigator.of(context, rootNavigator: true).pop(rawValue);
