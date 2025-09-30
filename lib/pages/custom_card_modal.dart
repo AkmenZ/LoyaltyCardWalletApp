@@ -68,6 +68,8 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
     'assets/images/pharmacy.png',
     'assets/images/burger.png',
     'assets/images/pizza.png',
+    'assets/images/train.png',
+    'assets/images/star.png',
   ];
 
   @override

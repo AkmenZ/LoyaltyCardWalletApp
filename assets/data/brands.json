@@ -40,6 +40,14 @@
     "popularRegions": ["ie", "gb"]
   },
   {
+    "id": "hollandbarrett",
+    "name": "Holland & Barrett",
+    "logo": "assets/logos/holland-barrett-logo.png",
+    "colorHex": "#0A714E",
+    "regions": ["ie", "gb"],
+    "popularRegions": []
+  },
+  {
     "id": "asda",
     "name": "Asda",
     "logo": "assets/logos/asda-logo.png",
@@ -88,11 +96,27 @@
     "popularRegions": ["ie", "gb", "lv", "lt", "ee", "pl", "de", "cz"]
   },
   {
+    "id": "sportland",
+    "name": "Sportland",
+    "logo": "assets/logos/sportland-logo.png",
+    "colorHex": "#CC0101",
+    "regions": ["lv", "lt", "ee"],
+    "popularRegions": []
+  },
+  {
     "id": "circlek",
     "name": "Circle K",
     "logo": "assets/logos/circle-k-logo.png",
     "colorHex": "#FF3131",
     "regions": ["ie", "gb", "lv", "lt", "ee", "pl"],
+    "popularRegions": []
+  },
+  {
+    "id": "virsi",
+    "name": "Virši",
+    "logo": "assets/logos/virsi-logo.png",
+    "colorHex": "#24356E",
+    "regions": ["lv"],
     "popularRegions": []
   },
   {
@@ -121,9 +145,17 @@
   },
   {
     "id": "top",
-    "name": "Top",
+    "name": "Top!",
     "logo": "assets/logos/top-logo.png",
     "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": ["lv"]
+  },
+  {
+    "id": "mego",
+    "name": "Mego",
+    "logo": "assets/logos/mego-logo.png",
+    "colorHex": "#00357A",
     "regions": ["lv"],
     "popularRegions": ["lv"]
   },
@@ -136,10 +168,34 @@
     "popularRegions": []
   },
   {
+    "id": "drogas",
+    "name": "Drogas",
+    "logo": "assets/logos/drogas-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "kursi",
+    "name": "Kurši",
+    "logo": "assets/logos/kursi-logo.png",
+    "colorHex": "#E53647",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
     "id": "ksenukai",
     "name": "Ksenukai",
     "logo": "assets/logos/ksenukai-logo.png",
     "colorHex": "#000000",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "majaidarzam",
+    "name": "Mājai un Dārzam",
+    "logo": "assets/logos/majai-darzam-logo.png",
+    "colorHex": "#FFFFFF",
     "regions": ["lv"],
     "popularRegions": []
   },
@@ -149,6 +205,14 @@
     "logo": "assets/logos/lido-logo.png",
     "colorHex": "#2C5A9A",
     "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "neste",
+    "name": "Neste",
+    "logo": "assets/logos/neste-logo.png",
+    "colorHex": "#00357A",
+    "regions": ["lv", "lt", "ee"],
     "popularRegions": []
   },
   {
@@ -166,6 +230,14 @@
     "colorHex": "#FFFFFF",
     "regions": ["de", "pl", "cz"],
     "popularRegions": ["de", "pl", "cz"]
+  },
+  {
+    "id": "rewe",
+    "name": "REWE",
+    "logo": "assets/logos/rewe-logo.png",
+    "colorHex": "#FF3131",
+    "regions": ["de"],
+    "popularRegions": ["de"]
   },
   {
     "id": "edeka",
@@ -190,5 +262,29 @@
     "colorHex": "#006524",
     "regions": ["pl"],
     "popularRegions": ["pl"]
+  },
+  {
+    "id": "costa",
+    "name": "Costa",
+    "logo": "assets/logos/costa-logo.png",
+    "colorHex": "#7A0000",
+    "regions": ["ie", "gb", "lv", "pl", "cz"],
+    "popularRegions": []
+  },
+  {
+    "id": "douglas",
+    "name": "Douglas",
+    "logo": "assets/logos/douglas-logo.png",
+    "colorHex": "#000000",
+    "regions": ["lv", "lt", "ee", "pl", "de", "cz"],
+    "popularRegions": []
+  },
+  {
+    "id": "albert",
+    "name": "Albert",
+    "logo": "assets/logos/albert-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["cz"],
+    "popularRegions": ["cz"]
   }
 ]
