@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/pages/add_card_manually_modal.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -98,7 +99,7 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
     return CustomScaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: CustomPlatformAppBar(
-        title: const Text('Scan'),
+        title: Text(S.of(context).scan),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -148,8 +149,8 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
                 color: Colors.black.withAlpha(75),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text(
-                'Position the barcode within the frame to scan',
+              child: Text(
+                S.of(context).position_barcode,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -174,8 +175,8 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
                   ),
                 );
               },
-              child: const Text(
-                'Enter Code Manually',
+              child: Text(
+                S.of(context).enter_manually,
                 style: TextStyle(
                   color: Colors.white,
                   decoration: TextDecoration.underline,

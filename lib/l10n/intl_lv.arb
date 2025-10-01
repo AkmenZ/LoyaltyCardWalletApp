@@ -1,0 +1,20 @@
+{
+  "@@locale": "lv",
+  "cards": "Manas Kartes",
+  "no_cards_yet": "Kartes vēl nav pievienotas.",
+  "edit_card": "Rediģēt Karti",
+  "add_card": "Pievienot Jaunu Karti",
+  "add_custom_card": "Izveidot Pielāgotu Karti",
+  "enter_manually": "Ievadīt Manuāli",
+  "save": "Saglabāt",
+  "continue_to_scan": "Turpināt",
+  "delete": "Dzēst",
+  "share": "Kopīgot",
+  "barcode": "Svītrkods",
+  "note": "Piezīme (pēc izvēles)",
+  "name": "Nosaukums",
+  "scan": "Skenēt",
+  "please_enter_name": "Lūdzu, ievadiet nosaukumu!",
+  "please_enter_barcode": "Lūdzu, ievadiet svītrkodu!",
+  "position_barcode": "Lai noskanētu, notēmējiet svītrkodu rāmī"
+}

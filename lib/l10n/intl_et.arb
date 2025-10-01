@@ -1,0 +1,20 @@
+{
+  "@@locale": "et",
+  "cards": "Minu Kaardid",
+  "no_cards_yet": "Kaardid pole veel lisatud.",
+  "edit_card": "Muuda Kaarti",
+  "add_card": "Lisa Uus Kaart",
+  "add_custom_card": "Loo Kohandatud Kaart",
+  "enter_manually": "Sisesta Käsitsi",
+  "save": "Salvesta",
+  "continue_to_scan": "Jätka",
+  "delete": "Kustuta",
+  "share": "Jaga",
+  "barcode": "Triipkood",
+  "note": "Märkus (valikuline)",
+  "name": "Nimi",
+  "scan": "Skaneeri",
+  "please_enter_name": "Palun sisesta nimi!",
+  "please_enter_barcode": "Palun sisesta triipkood!",
+  "position_barcode": "Skaneerimiseks suuna triipkood raami"
+}

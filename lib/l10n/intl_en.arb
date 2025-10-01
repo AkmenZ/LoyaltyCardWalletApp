@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "cards": "My Cards",
+  "no_cards_yet": "No cards yet. Add some!",
+  "edit_card": "Edit Card",
+  "add_card": "Add New Card",
+  "add_custom_card": "Add Custom Card",
+  "enter_manually": "Enter Manually",
+  "save": "Save",
+  "continue_to_scan": "Continue",
+  "delete": "Delete",
+  "share": "Share",
+  "barcode": "Barcode",
+  "note": "Note (optional)",
+  "name": "Name",
+  "scan": "Scan",
+  "please_enter_name": "Please enter a name!",
+  "please_enter_barcode": "Please enter a barcode!",
+  "position_barcode": "Position the barcode within the frame to scan"
+}

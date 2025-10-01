@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
@@ -22,6 +23,7 @@ class AddCardManuallyModal extends ConsumerStatefulWidget {
 }
 
 class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
+  final _formKey = GlobalKey<FormState>();
   late final TextEditingController _barcodeCtrl;
 
   @override
@@ -35,30 +37,33 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
     _barcodeCtrl.dispose();
     super.dispose();
   }
-
+  
+  // save method
   Future<void> _save() async {
-    // get the barcode value
-    final newBarcode = _barcodeCtrl.text.trim();
+    if ((_formKey.currentState?.validate() ?? false)) {
+      // get the barcode value
+      final newBarcode = _barcodeCtrl.text.trim();
 
-    // create new LoyaltyCard instance
-    final newCard = LoyaltyCard(
-      merchant: widget.brand.name,
-      barcode: newBarcode.isEmpty ? null : newBarcode,
-      barcodeType: determineBarcodeType(newBarcode),
-      colorHex: widget.brand.colorHex,
-      dateAdded: DateTime.now().toIso8601String(),
-      favorite: false,
-      note: null,
-      isCustom: widget.brand.isCustom,
-      customLogo: widget.brand.isCustom ? widget.brand.logo : null,
-    );
+      // create new LoyaltyCard instance
+      final newCard = LoyaltyCard(
+        merchant: widget.brand.name,
+        barcode: newBarcode.isEmpty ? null : newBarcode,
+        barcodeType: determineBarcodeType(newBarcode),
+        colorHex: widget.brand.colorHex,
+        dateAdded: DateTime.now().toIso8601String(),
+        favorite: false,
+        note: null,
+        isCustom: widget.brand.isCustom,
+        customLogo: widget.brand.isCustom ? widget.brand.logo : null,
+      );
 
-    // insert into DB via provider
-    await ref.read(loyaltyCardsProvider.notifier).insertCard(newCard);
+      // insert into DB via provider
+      await ref.read(loyaltyCardsProvider.notifier).insertCard(newCard);
 
-    if (!mounted) return;
-    // close modal
-    Navigator.of(context, rootNavigator: true).pop();
+      if (!mounted) return;
+      // close modal
+      Navigator.of(context, rootNavigator: true).pop();
+    }
   }
 
   @override
@@ -69,7 +74,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       resizeToAvoidBottomInset: true,
       appBar: CustomPlatformAppBar(
-        title: const Text('Add Card'),
+        title: Text(S.of(context).add_card),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -94,27 +99,37 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
                 ),
                 const SizedBox(height: 16),
                 // barcode text field
-                PlatformTextFormField(
-                  controller: _barcodeCtrl,
-                  autofocus: true,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  maxLength: 50,
-                  material: (_, __) => MaterialTextFormFieldData(
-                    decoration: InputDecoration(
-                      labelText: 'Barcode',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      counterText: '',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                Form(
+                  key: _formKey,
+                  child: PlatformTextFormField(
+                    controller: _barcodeCtrl,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    maxLength: 50,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return S.of(context).please_enter_barcode;
+                      }
+                      return null;
+                    },
+                    material: (_, __) => MaterialTextFormFieldData(
+                      decoration: InputDecoration(
+                        labelText: S.of(context).barcode,
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        counterText: '',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
-                  ),
-                  cupertino: (_, __) => CupertinoTextFormFieldData(
-                    placeholder: 'Barcode',
-                    decoration: BoxDecoration(
-                      color: cupertinoTheme.barBackgroundColor,
-                      borderRadius: BorderRadius.circular(8),
+                    cupertino: (_, __) => CupertinoTextFormFieldData(
+                      placeholder: S.of(context).barcode,
+                      decoration: BoxDecoration(
+                        color: cupertinoTheme.barBackgroundColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 ),
@@ -128,7 +143,10 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
               width: double.infinity,
               child: PlatformElevatedButton(
                 onPressed: _save,
-                child: Text('Save', style: TextStyle(color: onSeed)),
+                child: Text(
+                  S.of(context).save,
+                  style: TextStyle(color: onSeed),
+                ),
                 material: (_, __) => MaterialElevatedButtonData(
                   style: ElevatedButton.styleFrom(backgroundColor: seed),
                 ),

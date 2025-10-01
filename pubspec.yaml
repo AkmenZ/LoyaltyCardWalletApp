@@ -12,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_riverpod: ^3.0.0
   riverpod_annotation: ^3.0.0
   cupertino_icons: ^1.0.8
@@ -32,6 +34,8 @@ dependencies:
   screen_brightness: ^2.1.7
   share_plus: ^12.0.0
   screenshot: ^3.0.0
+  intl_utils: ^2.8.11
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -57,3 +61,10 @@ flutter:
     - assets/data/
     - assets/icons/
 
+# localization configuration
+flutter_intl:
+  enabled: true
+  arb_dir: lib/l10n
+  output_dir: lib/generated
+  class_name: S
+  main_locale: en

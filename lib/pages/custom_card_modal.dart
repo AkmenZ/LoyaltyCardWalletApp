@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auto_size_text/flutter_auto_size_text.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/pages/scanner_modal.dart';
 import 'package:loyalty_cards_app/theme.dart';
@@ -19,6 +20,7 @@ class CustomCardModal extends ConsumerStatefulWidget {
 }
 
 class _CustomCardModalState extends ConsumerState<CustomCardModal> {
+  final _formKey = GlobalKey<FormState>();
   late final TextEditingController _nameCtrl;
   Color? currentColor;
   String? selectedIcon;
@@ -80,7 +82,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       resizeToAvoidBottomInset: true,
       appBar: CustomPlatformAppBar(
-        title: const Text('Add Custom Card'),
+        title: Text(S.of(context).add_custom_card),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -152,29 +154,39 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                 ),
                 const SizedBox(height: 16),
                 // name input
-                PlatformTextFormField(
-                  controller: _nameCtrl,
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  maxLength: 30,
-                  onChanged: (_) =>
-                      setState(() {}), // rebuild to update preview
-                  material: (_, __) => MaterialTextFormFieldData(
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      counterText: '',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                Form(
+                  key: _formKey,
+                  child: PlatformTextFormField(
+                    controller: _nameCtrl,
+                    autofocus: true,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    maxLength: 30,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    onChanged: (_) =>
+                        setState(() {}), // rebuild to update preview
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return S.of(context).please_enter_name;
+                      }
+                      return null;
+                    },
+                    material: (_, __) => MaterialTextFormFieldData(
+                      decoration: InputDecoration(
+                        labelText: S.of(context).name,
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        counterText: '',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
-                  ),
-                  cupertino: (_, __) => CupertinoTextFormFieldData(
-                    placeholder: 'Name',
-                    decoration: BoxDecoration(
-                      color: cupertinoTheme.barBackgroundColor,
-                      borderRadius: BorderRadius.circular(8),
+                    cupertino: (_, __) => CupertinoTextFormFieldData(
+                      placeholder: S.of(context).name,
+                      decoration: BoxDecoration(
+                        color: cupertinoTheme.barBackgroundColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 ),
@@ -188,27 +200,32 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
               width: double.infinity,
               child: PlatformElevatedButton(
                 onPressed: () {
-                  // define brand
-                  // brand for custom cards
-                  brand = Brand(
-                    name: _nameCtrl.text.isEmpty
-                        ? 'Custom Card'
-                        : _nameCtrl.text,
-                    colorHex: currentColor!.value
-                        .toRadixString(16)
-                        .padLeft(8, '0'),
-                    logo: selectedIcon!,
-                    isCustom: true,
-                  );
-                  // navigate to scanner modal
-                  Navigator.of(context).push(
-                    platformPageRoute(
-                      context: context,
-                      builder: (_) => ScannerModal(brand: brand!),
-                    ),
-                  );
+                  if (_formKey.currentState?.validate() ?? false) {
+                    // brand for custom cards
+                    brand = Brand(
+                      name: _nameCtrl.text.isEmpty
+                          ? 'Custom Card'
+                          : _nameCtrl.text,
+                      colorHex: currentColor!
+                          .toARGB32()
+                          .toRadixString(16)
+                          .padLeft(8, '0'),
+                      logo: selectedIcon!,
+                      isCustom: true,
+                    );
+                    // navigate to scanner modal
+                    Navigator.of(context).push(
+                      platformPageRoute(
+                        context: context,
+                        builder: (_) => ScannerModal(brand: brand!),
+                      ),
+                    );
+                  }
                 },
-                child: const Text('Continue', style: TextStyle(color: onSeed)),
+                child: Text(
+                  S.of(context).continue_to_scan,
+                  style: TextStyle(color: onSeed),
+                ),
                 material: (_, __) => MaterialElevatedButtonData(
                   style: ElevatedButton.styleFrom(backgroundColor: seed),
                 ),

@@ -1,0 +1,20 @@
+{
+  "@@locale": "cs",
+  "cards": "Moje Karty",
+  "no_cards_yet": "Žádné karty zatím nebyly přidány.",
+  "edit_card": "Upravit Kartu",
+  "add_card": "Přidat Novou Kartu",
+  "add_custom_card": "Vytvořit Vlastní Kartu",
+  "enter_manually": "Zadat Ručně",
+  "save": "Uložit",
+  "continue_to_scan": "Pokračovat",
+  "delete": "Smazat",
+  "share": "Sdílet",
+  "barcode": "Čárový Kód",
+  "note": "Poznámka (volitelné)",
+  "name": "Název",
+  "scan": "Skenovat",
+  "please_enter_name": "Prosím, zadejte název!",
+  "please_enter_barcode": "Prosím, zadejte čárový kód!",
+  "position_barcode": "Pro skenování namiřte čárový kód do rámečku"
+}

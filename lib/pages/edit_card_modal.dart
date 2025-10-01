@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
@@ -21,6 +22,7 @@ class EditCardModal extends ConsumerStatefulWidget {
 }
 
 class _EditCardModalState extends ConsumerState<EditCardModal> {
+  final _formKey = GlobalKey<FormState>();
   late final TextEditingController _barcodeCtrl;
   late final TextEditingController _noteCtrl;
 
@@ -42,16 +44,21 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
 
   // save changes method
   Future<void> _save() async {
-    final newBarcode = _barcodeCtrl.text.trim();
+    if ((_formKey.currentState?.validate() ?? false)) {
+      final newBarcode = _barcodeCtrl.text.trim();
+      final newNote = _noteCtrl.text.trim();
 
-    final updated = widget.loyaltyCard.copyWith(
-      barcode: newBarcode.isEmpty ? null : newBarcode,
-    );
+      final updated = widget.loyaltyCard.copyWith(
+        barcode: newBarcode.isEmpty ? null : newBarcode,
+        note: newNote.isEmpty ? null : newNote,
+      );
 
-    await ref.read(loyaltyCardsProvider.notifier).updateCard(updated);
+      // update card in DB via provider
+      await ref.read(loyaltyCardsProvider.notifier).updateCard(updated);
 
-    if (!mounted) return;
-    Navigator.of(context, rootNavigator: true).pop();
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
+    }
   }
 
   @override
@@ -62,7 +69,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       resizeToAvoidBottomInset: true,
       appBar: CustomPlatformAppBar(
-        title: const Text('Edit Card'),
+        title: Text(S.of(context).edit_card),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -85,38 +92,50 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                   customLogo: widget.loyaltyCard.customLogo,
                 ),
                 const SizedBox(height: 16),
-                PlatformTextFormField(
-                  controller: _barcodeCtrl,
-                  autofocus: true,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  maxLength: 50,
-                  material: (_, __) => MaterialTextFormFieldData(
-                    decoration: InputDecoration(
-                      labelText: 'Barcode',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      counterText: '',
-                      border: OutlineInputBorder(
+                Form(
+                  key: _formKey,
+                  // barcode text field
+                  child: PlatformTextFormField(
+                    controller: _barcodeCtrl,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    maxLength: 50,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return S.of(context).please_enter_barcode;
+                      }
+                      return null;
+                    },
+                    material: (_, __) => MaterialTextFormFieldData(
+                      decoration: InputDecoration(
+                        labelText: S.of(context).barcode,
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        counterText: '',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                    cupertino: (_, __) => CupertinoTextFormFieldData(
+                      placeholder: S.of(context).barcode,
+                      decoration: BoxDecoration(
+                        color: cupertinoTheme.barBackgroundColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                   ),
-                  cupertino: (_, __) => CupertinoTextFormFieldData(
-                    placeholder: 'Barcode',
-                    decoration: BoxDecoration(
-                      color: cupertinoTheme.barBackgroundColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 16),
+                // note text field
                 PlatformTextFormField(
                   controller: _noteCtrl,
                   maxLength: 50,
                   keyboardType: TextInputType.visiblePassword,
                   material: (_, __) => MaterialTextFormFieldData(
                     decoration: InputDecoration(
-                      labelText: 'Note (optional)',
+                      labelText: S.of(context).note,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       counterText: '',
                       border: OutlineInputBorder(
@@ -125,7 +144,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                     ),
                   ),
                   cupertino: (_, __) => CupertinoTextFormFieldData(
-                    placeholder: 'Note (optional)',
+                    placeholder: S.of(context).note,
                     decoration: BoxDecoration(
                       color: cupertinoTheme.barBackgroundColor,
                       borderRadius: BorderRadius.circular(8),
@@ -146,7 +165,10 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                   width: double.infinity,
                   child: PlatformElevatedButton(
                     onPressed: _save,
-                    child: const Text('Save', style: TextStyle(color: onSeed)),
+                    child: Text(
+                      S.of(context).save,
+                      style: TextStyle(color: onSeed),
+                    ),
                     material: (_, __) => MaterialElevatedButtonData(
                       style: ElevatedButton.styleFrom(backgroundColor: seed),
                     ),
@@ -182,8 +204,8 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                           color: Colors.red,
                         ),
                         const SizedBox(width: 6),
-                        const Text(
-                          'Delete',
+                        Text(
+                          S.of(context).delete,
                           style: TextStyle(color: Colors.red),
                         ),
                       ],

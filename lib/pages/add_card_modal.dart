@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/pages/custom_card_modal.dart';
 import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
@@ -138,7 +139,7 @@ class _AddCardModalState extends State<AddCardModal> {
     return CustomScaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: CustomPlatformAppBar(
-        title: const Text('Add New Card'),
+        title: Text(S.of(context).add_card),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.clear),
@@ -168,8 +169,8 @@ class _AddCardModalState extends State<AddCardModal> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(context.platformIcons.add, color: onSeed),
-                    const Text(
-                      'Add Custom Card',
+                    Text(
+                      S.of(context).add_custom_card,
                       style: TextStyle(color: onSeed),
                     ),
                     const Icon(Icons.add_card, color: onSeed),

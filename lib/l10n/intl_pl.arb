@@ -1,0 +1,20 @@
+{
+  "@@locale": "pl",
+  "cards": "Moje Karty",
+  "no_cards_yet": "Nie dodano jeszcze żadnych kart.",
+  "edit_card": "Edytuj Kartę",
+  "add_card": "Dodaj Nową Kartę",
+  "add_custom_card": "Utwórz Własną Kartę",
+  "enter_manually": "Wprowadź Ręcznie",
+  "save": "Zapisz",
+  "continue_to_scan": "Kontynuuj",
+  "delete": "Usuń",
+  "share": "Udostępnij",
+  "barcode": "Kod kreskowy",
+  "note": "Notatka (opcjonalnie)",
+  "name": "Nazwa",
+  "scan": "Skanuj",
+  "please_enter_name": "Proszę wprowadzić nazwę!",
+  "please_enter_barcode": "Proszę wprowadzić kod kreskowy!",
+  "position_barcode": "Aby zeskanować, ustaw kod kreskowy w ramce"
+}

@@ -1,0 +1,20 @@
+{
+  "@@locale": "lt",
+  "cards": "Mano Kortelės",
+  "no_cards_yet": "Kortelės dar nepridėtos.",
+  "edit_card": "Redaguoti Kortelę",
+  "add_card": "Pridėti Naują Kortelę",
+  "add_custom_card": "Sukurti Pasirinktą Kortelę",
+  "enter_manually": "Įvesti Rankiniu būdu",
+  "save": "Išsaugoti",
+  "continue_to_scan": "Tęsti",
+  "delete": "Ištrinti",
+  "share": "Dalintis",
+  "barcode": "Brūkšninis Kodas",
+  "note": "Pastaba (neprivaloma)",
+  "name": "Pavadinimas",
+  "scan": "Skenuoti",
+  "please_enter_name": "Prašome įvesti pavadinimą!",
+  "please_enter_barcode": "Prašome įvesti brūkšninį kodą!",
+  "position_barcode": "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį"
+}

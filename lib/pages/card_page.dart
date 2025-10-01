@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -120,7 +121,10 @@ class _CardPageState extends ConsumerState<CardPage> {
 
       final params = ShareParams(
         files: [
-          XFile.fromData(image, name: 'gocard_${merchant.toLowerCase()}_card.png'),
+          XFile.fromData(
+            image,
+            name: 'gocard_${merchant.toLowerCase()}_card.png',
+          ),
         ],
         fileNameOverrides: ['gocard_${merchant.toLowerCase()}_card.png'],
       );
@@ -140,7 +144,7 @@ class _CardPageState extends ConsumerState<CardPage> {
     return CustomScaffold(
       appBar: CustomPlatformAppBar(
         title: Text(widget.merchant),
-        previousPageTitle: 'Cards',
+        previousPageTitle: S.of(context).cards,
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.edit),
@@ -186,7 +190,10 @@ class _CardPageState extends ConsumerState<CardPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(context.platformIcons.share, color: onSeed),
-                        const Text('Share', style: TextStyle(color: onSeed)),
+                        Text(
+                          S.of(context).share,
+                          style: TextStyle(color: onSeed),
+                        ),
                       ],
                     ),
                     material: (_, __) => MaterialElevatedButtonData(

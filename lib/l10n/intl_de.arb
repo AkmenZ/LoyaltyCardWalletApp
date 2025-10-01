@@ -1,0 +1,20 @@
+{
+  "@@locale": "de",
+  "cards": "Meine Karten",
+  "no_cards_yet": "Noch keine Karten hinzugefügt.",
+  "edit_card": "Karte bearbeiten",
+  "add_card": "Neue Karte hinzufügen",
+  "add_custom_card": "Eigene Karte erstellen",
+  "enter_manually": "Manuell eingeben",
+  "save": "Speichern",
+  "continue_to_scan": "Weiter",
+  "delete": "Löschen",
+  "share": "Teilen",
+  "barcode": "Barcode",
+  "note": "Notiz (optional)",
+  "name": "Name",
+  "scan": "Scannen",
+  "please_enter_name": "Bitte geben Sie einen Namen ein!",
+  "please_enter_barcode": "Bitte geben Sie einen Barcode ein!",
+  "position_barcode": "Um zu scannen, richten Sie den Barcode in den Rahmen"
+}
