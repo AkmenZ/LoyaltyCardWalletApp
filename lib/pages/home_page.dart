@@ -83,41 +83,43 @@ class HomePage extends ConsumerWidget {
                   return brandsAsync.when(
                     data: (brands) {
                       if (cards.isEmpty) {
-                        return Column(
-                          spacing: 16.0,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(S.of(context).no_cards_yet),
-                            PlatformIconButton(
-                              icon: Icon(
-                                context.platformIcons.add,
-                                color: onSeed,
-                              ),
-                              // open add card modal
-                              onPressed: () => _openAddCardModal(
-                                context,
-                                brandsAsync.asData?.value ?? [],
-                              ),
-                              material: (_, __) => MaterialIconButtonData(
-                                padding: EdgeInsets.zero,
-                                style: IconButton.styleFrom(
-                                  backgroundColor: seed,
+                        return Center(
+                          child: Column(
+                            spacing: 16.0,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(S.of(context).no_cards_yet),
+                              PlatformIconButton(
+                                icon: Icon(
+                                  context.platformIcons.add,
+                                  color: onSeed,
+                                ),
+                                // open add card modal
+                                onPressed: () => _openAddCardModal(
+                                  context,
+                                  brandsAsync.asData?.value ?? [],
+                                ),
+                                material: (_, __) => MaterialIconButtonData(
+                                  padding: EdgeInsets.zero,
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: seed,
+                                  ),
+                                ),
+                                cupertino: (_, __) => CupertinoIconButtonData(
+                                  padding: EdgeInsets.zero,
+                                  sizeStyle: CupertinoButtonSize.large,
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: seed,
                                 ),
                               ),
-                              cupertino: (_, __) => CupertinoIconButtonData(
-                                padding: EdgeInsets.zero,
-                                sizeStyle: CupertinoButtonSize.large,
-                                borderRadius: BorderRadius.circular(30),
-                                color: seed,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       }
 
                       return GridView.builder(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(16),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
