@@ -92,8 +92,8 @@
     "name": "Lidl",
     "logo": "assets/logos/lidl-logo.png",
     "colorHex": "#094FA9",
-    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de", "cz"],
-    "popularRegions": ["ie", "gb", "lv", "lt", "ee", "pl", "de", "cz"]
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
+    "popularRegions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"]
   },
   {
     "id": "sportland",
@@ -176,6 +176,14 @@
     "popularRegions": []
   },
   {
+    "id": "menessaptieka",
+    "name": "Mēness Aptieka",
+    "logo": "assets/logos/meness-aptieka-logo.png",
+    "colorHex": "#012E62",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
     "id": "kursi",
     "name": "Kurši",
     "logo": "assets/logos/kursi-logo.png",
@@ -228,8 +236,8 @@
     "name": "Kaufland",
     "logo": "assets/logos/kaufland-logo.png",
     "colorHex": "#FFFFFF",
-    "regions": ["de", "pl", "cz"],
-    "popularRegions": ["de", "pl", "cz"]
+    "regions": ["de", "pl"],
+    "popularRegions": ["de", "pl"]
   },
   {
     "id": "rewe",
@@ -268,7 +276,7 @@
     "name": "Costa",
     "logo": "assets/logos/costa-logo.png",
     "colorHex": "#7A0000",
-    "regions": ["ie", "gb", "lv", "pl", "cz"],
+    "regions": ["ie", "gb", "lv", "pl"],
     "popularRegions": []
   },
   {
@@ -276,15 +284,7 @@
     "name": "Douglas",
     "logo": "assets/logos/douglas-logo.png",
     "colorHex": "#000000",
-    "regions": ["lv", "lt", "ee", "pl", "de", "cz"],
+    "regions": ["lv", "lt", "ee", "pl", "de"],
     "popularRegions": []
-  },
-  {
-    "id": "albert",
-    "name": "Albert",
-    "logo": "assets/logos/albert-logo.png",
-    "colorHex": "#FFFFFF",
-    "regions": ["cz"],
-    "popularRegions": ["cz"]
   }
 ]
