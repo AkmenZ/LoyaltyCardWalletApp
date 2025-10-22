@@ -48,6 +48,30 @@
     "popularRegions": []
   },
   {
+    "id": "spar",
+    "name": "Spar",
+    "logo": "assets/logos/spar-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["ie", "gb"],
+    "popularRegions": []
+  },
+  {
+    "id": "applegreen",
+    "name": "Applegreen",
+    "logo": "assets/logos/applegreen-logo.png",
+    "colorHex": "#4B721C",
+    "regions": ["ie"],
+    "popularRegions": []
+  },
+  {
+    "id": "insomniacoffee",
+    "name": "Insomnia Coffee",
+    "logo": "assets/logos/insomnia-coffee-logo.png",
+    "colorHex": "#AE122A",
+    "regions": ["ie", "gb"],
+    "popularRegions": []
+  },
+  {
     "id": "asda",
     "name": "Asda",
     "logo": "assets/logos/asda-logo.png",
@@ -268,6 +292,14 @@
     "name": "Zabka",
     "logo": "assets/logos/zabka-logo.png",
     "colorHex": "#006524",
+    "regions": ["pl"],
+    "popularRegions": ["pl"]
+  },
+  {
+    "id": "carrefour",
+    "name": "Carrefour",
+    "logo": "assets/logos/carrefour-logo.png",
+    "colorHex": "#FFFFFF",
     "regions": ["pl"],
     "popularRegions": ["pl"]
   },
