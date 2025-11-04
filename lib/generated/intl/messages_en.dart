@@ -25,7 +25,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_card": MessageLookupByLibrary.simpleMessage("Add New Card"),
     "add_custom_card": MessageLookupByLibrary.simpleMessage("Add Custom Card"),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cards": MessageLookupByLibrary.simpleMessage("My Cards"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this card?",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Continue"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Edit Card"),

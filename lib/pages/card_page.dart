@@ -173,7 +173,37 @@ class _CardPageState extends ConsumerState<CardPage> {
               spacing: 20.0,
               children: [
                 // card display
-                LoyaltyCardWidget(loyaltyCard: card, brand: widget.brand),
+                Stack(
+                  children: [
+                    LoyaltyCardWidget(loyaltyCard: card, brand: widget.brand),
+                    if (card.note != null)
+                      Positioned(
+                        top: 40,
+                        right: 40,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 4.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surface.withValues(alpha: 0.7),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: Text(
+                            card.note!,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
                 // spacer
                 const Spacer(),
                 // share button

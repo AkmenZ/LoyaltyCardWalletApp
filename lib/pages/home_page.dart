@@ -226,16 +226,36 @@ class HomePage extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                // note positioned at bottom left
+                                // note positioned at top right
                                 Positioned(
-                                  bottom: 8,
-                                  left: 8,
+                                  top: 6,
+                                  right: 6,
                                   child: (card.note != null)
-                                      ? Text(
-                                          card.note!,
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.bodySmall,
+                                      ? Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6.0,
+                                            vertical: 2.0,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .surface
+                                                .withValues(alpha: 0.7),
+                                            borderRadius: BorderRadius.circular(
+                                              4.0,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            card.note!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurface,
+                                                ),
+                                          ),
                                         )
                                       : SizedBox.shrink(),
                                 ),

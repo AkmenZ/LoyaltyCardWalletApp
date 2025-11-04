@@ -7,6 +7,7 @@
   "add_custom_card": "Loo Kohandatud Kaart",
   "enter_manually": "Sisesta Käsitsi",
   "save": "Salvesta",
+  "cancel": "Tühista",
   "continue_to_scan": "Jätka",
   "delete": "Kustuta",
   "share": "Jaga",
@@ -14,6 +15,7 @@
   "note": "Märkus (valikuline)",
   "name": "Nimi",
   "scan": "Skaneeri",
+  "confirm_delete_card": "Kas oled kindel, et soovid selle kaardi kustutada?",
   "please_enter_name": "Palun sisesta nimi!",
   "please_enter_barcode": "Palun sisesta triipkood!",
   "position_barcode": "Skaneerimiseks suuna triipkood raami"

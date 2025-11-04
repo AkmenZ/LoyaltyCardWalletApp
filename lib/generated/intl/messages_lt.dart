@@ -27,7 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sukurti Pasirinktą Kortelę",
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Brūkšninis Kodas"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Atšaukti"),
     "cards": MessageLookupByLibrary.simpleMessage("Mano Kortelės"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Ar tikrai norite ištrinti šią kortelę?",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Tęsti"),
     "delete": MessageLookupByLibrary.simpleMessage("Ištrinti"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Redaguoti Kortelę"),

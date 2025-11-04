@@ -27,7 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Izveidot Pielāgotu Karti",
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Svītrkods"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
     "cards": MessageLookupByLibrary.simpleMessage("Manas Kartes"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Vai tiešām vēlaties dzēst šo karti?",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Turpināt"),
     "delete": MessageLookupByLibrary.simpleMessage("Dzēst"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Rediģēt Karti"),

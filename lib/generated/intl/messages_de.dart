@@ -27,7 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Eigene Karte erstellen",
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
     "cards": MessageLookupByLibrary.simpleMessage("Meine Karten"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Weiter"),
     "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Karte bearbeiten"),

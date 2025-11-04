@@ -104,6 +104,11 @@ class S {
     return Intl.message('Save', name: 'save', desc: '', args: []);
   }
 
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
   /// `Continue`
   String get continue_to_scan {
     return Intl.message(
@@ -142,6 +147,16 @@ class S {
   /// `Scan`
   String get scan {
     return Intl.message('Scan', name: 'scan', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to delete this card?`
+  String get confirm_delete_card {
+    return Intl.message(
+      'Are you sure you want to delete this card?',
+      name: 'confirm_delete_card',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Please enter a name!`

@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Utwórz Własną Kartę",
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Kod kreskowy"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Anuluj"),
     "cards": MessageLookupByLibrary.simpleMessage("Moje Karty"),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Kontynuuj"),
     "delete": MessageLookupByLibrary.simpleMessage("Usuń"),

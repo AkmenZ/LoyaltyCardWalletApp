@@ -7,6 +7,7 @@
   "add_custom_card": "Sukurti Pasirinktą Kortelę",
   "enter_manually": "Įvesti Rankiniu būdu",
   "save": "Išsaugoti",
+  "cancel": "Atšaukti",
   "continue_to_scan": "Tęsti",
   "delete": "Ištrinti",
   "share": "Dalintis",
@@ -14,6 +15,7 @@
   "note": "Pastaba (neprivaloma)",
   "name": "Pavadinimas",
   "scan": "Skenuoti",
+  "confirm_delete_card": "Ar tikrai norite ištrinti šią kortelę?",
   "please_enter_name": "Prašome įvesti pavadinimą!",
   "please_enter_barcode": "Prašome įvesti brūkšninį kodą!",
   "position_barcode": "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį"

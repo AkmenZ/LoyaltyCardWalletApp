@@ -27,7 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Loo Kohandatud Kaart",
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Triipkood"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Tühista"),
     "cards": MessageLookupByLibrary.simpleMessage("Minu Kaardid"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Kas oled kindel, et soovid selle kaardi kustutada?",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Jätka"),
     "delete": MessageLookupByLibrary.simpleMessage("Kustuta"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Muuda Kaarti"),

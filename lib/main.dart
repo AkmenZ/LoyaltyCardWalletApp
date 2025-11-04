@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:loyalty_cards_app/generated/l10n.dart';
@@ -17,11 +18,14 @@ void main() async {
   // preserve splash screen while app initializes
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  // lock device orientation to portrait up
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   // initialize shared preferences
   await SharedPrefs.init();
 
-  // 1 second delay to preserve splash screen to look smoother
-  await Future.delayed(const Duration(seconds: 1));
+  // small 500 milliseconds delay to preserve splash screen to look smoother
+  await Future.delayed(const Duration(milliseconds: 500));
 
   // remove splash screen
   FlutterNativeSplash.remove();

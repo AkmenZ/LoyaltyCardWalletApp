@@ -7,6 +7,7 @@
   "add_custom_card": "Eigene Karte erstellen",
   "enter_manually": "Manuell eingeben",
   "save": "Speichern",
+  "cancel": "Abbrechen",
   "continue_to_scan": "Weiter",
   "delete": "Löschen",
   "share": "Teilen",
@@ -14,6 +15,7 @@
   "note": "Notiz (optional)",
   "name": "Name",
   "scan": "Scannen",
+  "confirm_delete_card": "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
   "please_enter_name": "Bitte geben Sie einen Namen ein!",
   "please_enter_barcode": "Bitte geben Sie einen Barcode ein!",
   "position_barcode": "Um zu scannen, richten Sie den Barcode in den Rahmen"

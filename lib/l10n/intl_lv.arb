@@ -7,6 +7,7 @@
   "add_custom_card": "Izveidot Pielāgotu Karti",
   "enter_manually": "Ievadīt Manuāli",
   "save": "Saglabāt",
+  "cancel": "Atcelt",
   "continue_to_scan": "Turpināt",
   "delete": "Dzēst",
   "share": "Kopīgot",
@@ -14,6 +15,7 @@
   "note": "Piezīme (pēc izvēles)",
   "name": "Nosaukums",
   "scan": "Skenēt",
+  "confirm_delete_card": "Vai tiešām vēlaties dzēst šo karti?",
   "please_enter_name": "Lūdzu, ievadiet nosaukumu!",
   "please_enter_barcode": "Lūdzu, ievadiet svītrkodu!",
   "position_barcode": "Lai noskanētu, notēmējiet svītrkodu rāmī"

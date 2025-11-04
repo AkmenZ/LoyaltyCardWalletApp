@@ -185,14 +185,44 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                   width: double.infinity,
                   child: PlatformTextButton(
                     onPressed: () async {
-                      await ref
-                          .read(loyaltyCardsProvider.notifier)
-                          .deleteCard(widget.loyaltyCard.id!);
-                      if (context.mounted) {
-                        Navigator.of(
-                          context,
-                          rootNavigator: true,
-                        ).popUntil((route) => route.isFirst);
+                      // show platform-specific confirmation dialog
+                      final confirmed = await showPlatformDialog(
+                        context: context,
+                        builder: (context) => PlatformAlertDialog(
+                          title: Text('${widget.loyaltyCard.merchant}'),
+                          content: Text(S.of(context).confirm_delete_card),
+                          actions: [
+                            PlatformDialogAction(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text(S.of(context).cancel),
+                            ),
+                            PlatformDialogAction(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: Text(S.of(context).delete),
+                              cupertino: (_, __) => CupertinoDialogActionData(
+                                isDestructiveAction: true,
+                              ),
+                              material: (_, __) => MaterialDialogActionData(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      // delete if confirmed
+                      if (confirmed ?? false) {
+                        await ref
+                            .read(loyaltyCardsProvider.notifier)
+                            .deleteCard(widget.loyaltyCard.id!);
+                        if (context.mounted) {
+                          Navigator.of(
+                            context,
+                            rootNavigator: true,
+                          ).popUntil((route) => route.isFirst);
+                        }
                       }
                     },
                     child: Row(
