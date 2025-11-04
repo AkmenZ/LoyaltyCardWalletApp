@@ -49,6 +49,23 @@ class HomePage extends ConsumerWidget {
     );
   }
 
+  // open Backup Modal
+  // void _openBackupModal(BuildContext context) {
+  //   showCupertinoModalBottomSheet(
+  //     context: context,
+  //     expand: true,
+  //     barrierColor: Colors.black.withValues(alpha: 0.7),
+  //     builder: (context) => Navigator(
+  //       onGenerateRoute: (settings) {
+  //         return platformPageRoute(
+  //           context: context,
+  //           builder: (context) => BackupModal(),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loyaltyCardsAsync = ref.watch(loyaltyCardsProvider);
@@ -59,13 +76,13 @@ class HomePage extends ConsumerWidget {
         title: Text(S.of(context).cards),
         leading: PlatformIconButton(
           icon: Icon(context.platformIcons.cloud),
-          onPressed: () {
-            // TODO: Implement Sync with Cloud feature
-          },
+          // TODO work on this when backup packages are updated to intl 0.20.2 +
+          // onPressed: () {},
         ),
         trailingActions: [
           PlatformIconButton(
             icon: Icon(context.platformIcons.add),
+            // open add card modal
             onPressed: () {
               _openAddCardModal(context, brandsAsync.asData?.value ?? []);
             },

@@ -6,7 +6,6 @@ import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/edit_card_modal.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
@@ -101,7 +100,7 @@ class _CardPageState extends ConsumerState<CardPage> {
                 child: Opacity(
                   opacity: 0.8,
                   child: Text(
-                    'GoCard',
+                    'GoCards',
                     style: TextStyle(
                       color: Colors.grey.shade400,
                       fontSize: 12,
@@ -123,10 +122,10 @@ class _CardPageState extends ConsumerState<CardPage> {
         files: [
           XFile.fromData(
             image,
-            name: 'gocard_${merchant.toLowerCase()}_card.png',
+            name: 'gocards_${merchant.toLowerCase()}_card.png',
           ),
         ],
-        fileNameOverrides: ['gocard_${merchant.toLowerCase()}_card.png'],
+        fileNameOverrides: ['gocards_${merchant.toLowerCase()}_card.png'],
       );
 
       // share the captured image

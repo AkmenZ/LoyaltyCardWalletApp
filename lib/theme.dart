@@ -8,7 +8,10 @@ const Color seed = Colors.indigoAccent;
 const Color onSeed = Colors.white;
 
 final ThemeData materialLightTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.light),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: seed,
+    brightness: Brightness.light,
+  ),
   useMaterial3: true,
   appBarTheme: const AppBarTheme(
     backgroundColor: CupertinoColors.systemGrey5,
@@ -19,7 +22,10 @@ final ThemeData materialLightTheme = ThemeData(
 );
 
 final ThemeData materialDarkTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.dark),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: seed,
+    brightness: Brightness.dark,
+  ),
   useMaterial3: true,
   appBarTheme: AppBarTheme(
     backgroundColor: CupertinoColors.systemGrey5.darkColor,
