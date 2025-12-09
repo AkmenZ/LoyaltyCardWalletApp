@@ -17,11 +17,11 @@ class LoyaltyCardWidget extends StatelessWidget {
     final type = (loyaltyCard.barcodeType ?? '').trim().toLowerCase();
 
     return Card(
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(16.0),
       color: onSeed,
       elevation: 8,
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           spacing: 20.0,
           mainAxisSize: MainAxisSize.min,
@@ -48,7 +48,7 @@ class LoyaltyCardWidget extends StatelessWidget {
                   textPadding: 20.0,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.shadow,
-                    fontSize: 24,
+                    fontSize: _fontSize(data.length),
                   ),
                   drawText: !_isQrLike(type),
                   backgroundColor: Colors.transparent,
@@ -71,6 +71,14 @@ class LoyaltyCardWidget extends StatelessWidget {
 
   static bool _isQrLike(String t) =>
       t.contains('qr') || t.contains('aztec') || t.contains('matrix');
+
+  static double _fontSize(int length) {
+    // font size based on barcode data length:
+    if (length <= 20) return 24.0;
+    if (length <= 30) return 16.0;
+    if (length <= 40) return 12.0;
+    return 10.0;
+  }
 
   static Barcode _symbologyFromString(String type) {
     switch (type) {

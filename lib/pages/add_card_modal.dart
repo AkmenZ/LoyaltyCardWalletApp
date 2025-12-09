@@ -205,6 +205,7 @@ class _AddCardModalState extends State<AddCardModal> {
       material: (_, __) => SearchBar(
         hintText: 'Aa...',
         elevation: WidgetStateProperty.all(0),
+        constraints: const BoxConstraints(maxHeight: 48.0),
         leading: const Icon(Icons.search),
         trailing: [_buildRegionDropdown(context)], // region dropdown
         onChanged: (value) => setState(() => _search = value),
