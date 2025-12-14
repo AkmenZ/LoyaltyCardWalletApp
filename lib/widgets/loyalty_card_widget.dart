@@ -38,19 +38,56 @@ class LoyaltyCardWidget extends StatelessWidget {
               ),
             if (data.isEmpty)
               const Text('No barcode available', textAlign: TextAlign.center)
+            else if (_isQrLike(type))
+              // QR code layout
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1.3,
+                    child: BarcodeWidget(
+                      barcode: _symbologyFromString(type),
+                      data: data,
+                      padding: const EdgeInsets.all(16.0),
+                      drawText: false,
+                      backgroundColor: Colors.transparent,
+                      errorBuilder: (context, err) => Center(
+                        child: Text(
+                          'Invalid ${type.isEmpty ? 'code128' : type}: $err',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // display text below QR code
+                  Text(
+                    data,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: _fontSize(data.length),
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              )
             else
+              // linear barcode layout
               AspectRatio(
-                aspectRatio: _isQrLike(type) ? 1 : 2,
+                aspectRatio: 2.0,
                 child: BarcodeWidget(
                   barcode: _symbologyFromString(type),
                   data: data,
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   textPadding: 20.0,
+                  drawText: true,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.shadow,
                     fontSize: _fontSize(data.length),
                   ),
-                  drawText: !_isQrLike(type),
                   backgroundColor: Colors.transparent,
                   errorBuilder: (context, err) => Center(
                     child: Text(

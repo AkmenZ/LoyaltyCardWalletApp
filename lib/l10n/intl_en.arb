@@ -18,5 +18,15 @@
   "confirm_delete_card": "Are you sure you want to delete this card?",
   "please_enter_name": "Please enter a name!",
   "please_enter_barcode": "Please enter a barcode!",
-  "position_barcode": "Position the barcode within the frame to scan"
+  "position_barcode": "Position the barcode within the frame to scan",
+  "pick_from_gallery": "Pick from Gallery",
+  "no_barcode_found": "No barcode found",
+  "could_not_read_barcode": "Could not read the barcode from this image",
+  "failed_to_analyze_image": "Failed to analyze image",
+  "failed_to_load_image": "Failed to load image",
+  "error": "Error",
+  "success": "Success",
+  "card_added_successfully": "Card added successfully",
+  "card_updated_successfully": "Card updated successfully",
+  "card_deleted_successfully": "Card deleted successfully"
 }

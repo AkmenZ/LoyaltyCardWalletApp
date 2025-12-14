@@ -18,5 +18,15 @@
   "confirm_delete_card": "Ar tikrai norite ištrinti šią kortelę?",
   "please_enter_name": "Prašome įvesti pavadinimą!",
   "please_enter_barcode": "Prašome įvesti brūkšninį kodą!",
-  "position_barcode": "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį"
+  "position_barcode": "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį",
+  "pick_from_gallery": "Pasirinkti iš galerijos",
+  "no_barcode_found": "Brūkšninis kodas nerastas",
+  "could_not_read_barcode": "Nepavyko nuskaityti brūkšninio kodo iš šio vaizdo",
+  "failed_to_analyze_image": "Nepavyko analizuoti vaizdo",
+  "failed_to_load_image": "Nepavyko įkelti vaizdo",
+  "error": "Klaida",
+  "success": "Viskas yra izdevies",
+  "card_added_successfully": "Kortelė sėkmingai pridėta",
+  "card_updated_successfully": "Kortelė sėkmingai atnaujinta",
+  "card_deleted_successfully": "Kortelė sėkmingai ištrinta"
 }

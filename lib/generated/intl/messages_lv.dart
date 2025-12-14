@@ -28,19 +28,44 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Svītrkods"),
     "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte pievienota",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte dzēsta",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte atjaunināta",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("Manas Kartes"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Vai tiešām vēlaties dzēst šo karti?",
     ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Turpināt"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Kods no šī attēla nav nolasāms",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Dzēst"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Rediģēt Karti"),
     "enter_manually": MessageLookupByLibrary.simpleMessage("Ievadīt Manuāli"),
+    "error": MessageLookupByLibrary.simpleMessage("Kļūda"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Neizdevās izanalizēt attēlu",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Neizdevās ielādēt attēlu",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Nosaukums"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "Kods nav atrasts",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "Kartes vēl nav pievienotas.",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Piezīme (pēc izvēles)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
+      "Izvēlēties no galerijas",
+    ),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Lūdzu, ievadiet svītrkodu!",
     ),
@@ -53,5 +78,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Saglabāt"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenēt"),
     "share": MessageLookupByLibrary.simpleMessage("Kopīgot"),
+    "success": MessageLookupByLibrary.simpleMessage("Viss ir izdevies"),
   };
 }

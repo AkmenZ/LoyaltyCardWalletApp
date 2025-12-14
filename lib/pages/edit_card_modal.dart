@@ -7,6 +7,7 @@ import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/utils/toast_utils.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
@@ -57,7 +58,16 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
       await ref.read(loyaltyCardsProvider.notifier).updateCard(updated);
 
       if (!mounted) return;
+
+      // close modal
       Navigator.of(context, rootNavigator: true).pop();
+
+      // show success toast
+      ToastUtils.showSuccess(
+        context,
+        title: S.of(context).success,
+        description: S.of(context).card_updated_successfully,
+      );
     }
   }
 
@@ -218,10 +228,17 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                             .read(loyaltyCardsProvider.notifier)
                             .deleteCard(widget.loyaltyCard.id!);
                         if (context.mounted) {
+                          // close modal and go back to home
                           Navigator.of(
                             context,
                             rootNavigator: true,
                           ).popUntil((route) => route.isFirst);
+                          // show success toast
+                          ToastUtils.showSuccess(
+                            context,
+                            title: S.of(context).success,
+                            description: S.of(context).card_deleted_successfully,
+                          );
                         }
                       }
                     },

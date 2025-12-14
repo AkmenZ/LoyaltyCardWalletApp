@@ -28,21 +28,46 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Brūkšninis Kodas"),
     "cancel": MessageLookupByLibrary.simpleMessage("Atšaukti"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kortelė sėkmingai pridėta",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kortelė sėkmingai ištrinta",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kortelė sėkmingai atnaujinta",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("Mano Kortelės"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Ar tikrai norite ištrinti šią kortelę?",
     ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Tęsti"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Nepavyko nuskaityti brūkšninio kodo iš šio vaizdo",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Ištrinti"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Redaguoti Kortelę"),
     "enter_manually": MessageLookupByLibrary.simpleMessage(
       "Įvesti Rankiniu būdu",
     ),
+    "error": MessageLookupByLibrary.simpleMessage("Klaida"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Nepavyko analizuoti vaizdo",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Nepavyko įkelti vaizdo",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Pavadinimas"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "Brūkšninis kodas nerastas",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "Kortelės dar nepridėtos.",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Pastaba (neprivaloma)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
+      "Pasirinkti iš galerijos",
+    ),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Prašome įvesti brūkšninį kodą!",
     ),
@@ -55,5 +80,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Išsaugoti"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenuoti"),
     "share": MessageLookupByLibrary.simpleMessage("Dalintis"),
+    "success": MessageLookupByLibrary.simpleMessage("Viskas yra izdevies"),
   };
 }

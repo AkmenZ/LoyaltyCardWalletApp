@@ -18,5 +18,15 @@
   "confirm_delete_card": "Vai tiešām vēlaties dzēst šo karti?",
   "please_enter_name": "Lūdzu, ievadiet nosaukumu!",
   "please_enter_barcode": "Lūdzu, ievadiet svītrkodu!",
-  "position_barcode": "Lai noskanētu, notēmējiet svītrkodu rāmī"
+  "position_barcode": "Lai noskanētu, notēmējiet svītrkodu rāmī",
+  "pick_from_gallery": "Izvēlēties no galerijas",
+  "no_barcode_found": "Kods nav atrasts",
+  "could_not_read_barcode": "Kods no šī attēla nav nolasāms",
+  "failed_to_analyze_image": "Neizdevās izanalizēt attēlu",
+  "failed_to_load_image": "Neizdevās ielādēt attēlu",
+  "error": "Kļūda",
+  "success": "Viss ir izdevies",
+  "card_added_successfully": "Karte pievienota",
+  "card_updated_successfully": "Karte atjaunināta",
+  "card_deleted_successfully": "Karte dzēsta"
 }

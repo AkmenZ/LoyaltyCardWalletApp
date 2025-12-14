@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+5
+version: 1.0.0+6
 
 environment:
   sdk: ^3.9.2
@@ -23,7 +23,7 @@ dependencies:
   sembast: ^3.8.5+1
   path_provider: ^2.1.5
   barcode_widget: ^2.0.4
-  mobile_scanner: ^7.1.2
+  mobile_scanner: ^7.1.4
   modal_bottom_sheet: ^3.0.0
   flutter_platform_widgets: ^9.0.0
   country_flags: ^4.0.1
@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.20.2
   toastification: ^3.0.3
   flutter_native_splash: ^2.4.7
+  image_picker: ^1.2.1
 
 dev_dependencies:
   flutter_test:

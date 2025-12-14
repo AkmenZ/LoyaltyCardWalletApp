@@ -26,19 +26,44 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage("Add Custom Card"),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Card added successfully",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Card deleted successfully",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Card updated successfully",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("My Cards"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete this card?",
     ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Continue"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Could not read the barcode from this image",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Edit Card"),
     "enter_manually": MessageLookupByLibrary.simpleMessage("Enter Manually"),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Failed to analyze image",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Failed to load image",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "No barcode found",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "No cards yet. Add some!",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Note (optional)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
+      "Pick from Gallery",
+    ),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Please enter a barcode!",
     ),
@@ -51,5 +76,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "scan": MessageLookupByLibrary.simpleMessage("Scan"),
     "share": MessageLookupByLibrary.simpleMessage("Share"),
+    "success": MessageLookupByLibrary.simpleMessage("Success"),
   };
 }

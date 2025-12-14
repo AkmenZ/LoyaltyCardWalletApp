@@ -28,19 +28,44 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
     "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte erfolgreich hinzugefügt",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte erfolgreich gelöscht",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karte erfolgreich aktualisiert",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("Meine Karten"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
     ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Weiter"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Konnte den Barcode aus diesem Bild nicht lesen",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Karte bearbeiten"),
     "enter_manually": MessageLookupByLibrary.simpleMessage("Manuell eingeben"),
+    "error": MessageLookupByLibrary.simpleMessage("Fehler"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Bildanalyse fehlgeschlagen",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Bild konnte nicht geladen werden",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "Kein Barcode gefunden",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "Noch keine Karten hinzugefügt.",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Notiz (optional)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
+      "Aus Galerie auswählen",
+    ),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Bitte geben Sie einen Barcode ein!",
     ),
@@ -53,5 +78,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Speichern"),
     "scan": MessageLookupByLibrary.simpleMessage("Scannen"),
     "share": MessageLookupByLibrary.simpleMessage("Teilen"),
+    "success": MessageLookupByLibrary.simpleMessage("Erfolg"),
   };
 }

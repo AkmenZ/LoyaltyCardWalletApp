@@ -17,5 +17,15 @@
   "scan": "Skanuj",
   "please_enter_name": "Proszę wprowadzić nazwę!",
   "please_enter_barcode": "Proszę wprowadzić kod kreskowy!",
-  "position_barcode": "Aby zeskanować, ustaw kod kreskowy w ramce"
+  "position_barcode": "Aby zeskanować, ustaw kod kreskowy w ramce",
+  "pick_from_gallery": "Wybierz z Galerii",
+  "no_barcode_found": "Nie znaleziono kodu kreskowego",
+  "could_not_read_barcode": "Nie można odczytać kodu kreskowego z tego obrazu",
+  "failed_to_analyze_image": "Nie udało się przeanalizować obrazu",
+  "failed_to_load_image": "Nie udało się załadować obrazu",
+  "error": "Błąd",
+  "success": "Sukces",
+  "card_added_successfully": "Karta została pomyślnie dodana",
+  "card_updated_successfully": "Karta została pomyślnie zaktualizowana",
+  "card_deleted_successfully": "Karta została pomyślnie usunięta"
 }

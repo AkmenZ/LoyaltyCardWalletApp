@@ -164,7 +164,7 @@ class _AddCardModalState extends State<AddCardModal> {
                     ),
                   );
                 },
-                // add custom card button
+                // add custom button
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

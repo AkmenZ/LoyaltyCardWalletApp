@@ -28,16 +28,41 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Kod kreskowy"),
     "cancel": MessageLookupByLibrary.simpleMessage("Anuluj"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karta została pomyślnie dodana",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karta została pomyślnie usunięta",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karta została pomyślnie zaktualizowana",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("Moje Karty"),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Kontynuuj"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Nie można odczytać kodu kreskowego z tego obrazu",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Usuń"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Edytuj Kartę"),
     "enter_manually": MessageLookupByLibrary.simpleMessage("Wprowadź Ręcznie"),
+    "error": MessageLookupByLibrary.simpleMessage("Błąd"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Nie udało się przeanalizować obrazu",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Nie udało się załadować obrazu",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Nazwa"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "Nie znaleziono kodu kreskowego",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "Nie dodano jeszcze żadnych kart.",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Notatka (opcjonalnie)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
+      "Wybierz z Galerii",
+    ),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Proszę wprowadzić kod kreskowy!",
     ),
@@ -50,5 +75,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Zapisz"),
     "scan": MessageLookupByLibrary.simpleMessage("Skanuj"),
     "share": MessageLookupByLibrary.simpleMessage("Udostępnij"),
+    "success": MessageLookupByLibrary.simpleMessage("Sukces"),
   };
 }

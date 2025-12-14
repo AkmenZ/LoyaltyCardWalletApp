@@ -188,6 +188,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Pick from Gallery`
+  String get pick_from_gallery {
+    return Intl.message(
+      'Pick from Gallery',
+      name: 'pick_from_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No barcode found`
+  String get no_barcode_found {
+    return Intl.message(
+      'No barcode found',
+      name: 'no_barcode_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not read the barcode from this image`
+  String get could_not_read_barcode {
+    return Intl.message(
+      'Could not read the barcode from this image',
+      name: 'could_not_read_barcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to analyze image`
+  String get failed_to_analyze_image {
+    return Intl.message(
+      'Failed to analyze image',
+      name: 'failed_to_analyze_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load image`
+  String get failed_to_load_image {
+    return Intl.message(
+      'Failed to load image',
+      name: 'failed_to_load_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message('Success', name: 'success', desc: '', args: []);
+  }
+
+  /// `Card added successfully`
+  String get card_added_successfully {
+    return Intl.message(
+      'Card added successfully',
+      name: 'card_added_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card updated successfully`
+  String get card_updated_successfully {
+    return Intl.message(
+      'Card updated successfully',
+      name: 'card_updated_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card deleted successfully`
+  String get card_deleted_successfully {
+    return Intl.message(
+      'Card deleted successfully',
+      name: 'card_deleted_successfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

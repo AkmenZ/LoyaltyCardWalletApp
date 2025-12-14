@@ -24,8 +24,8 @@ void main() async {
   // initialize shared preferences
   await SharedPrefs.init();
 
-  // small 300 milliseconds delay to preserve splash screen to look smoother
-  await Future.delayed(const Duration(milliseconds: 300));
+  // small 200 milliseconds delay to preserve splash screen to look smoother
+  await Future.delayed(const Duration(milliseconds: 200));
 
   // remove splash screen
   FlutterNativeSplash.remove();

@@ -18,5 +18,15 @@
   "confirm_delete_card": "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
   "please_enter_name": "Bitte geben Sie einen Namen ein!",
   "please_enter_barcode": "Bitte geben Sie einen Barcode ein!",
-  "position_barcode": "Um zu scannen, richten Sie den Barcode in den Rahmen"
+  "position_barcode": "Um zu scannen, richten Sie den Barcode in den Rahmen",
+  "pick_from_gallery": "Aus Galerie auswählen",
+  "no_barcode_found": "Kein Barcode gefunden",
+  "could_not_read_barcode": "Konnte den Barcode aus diesem Bild nicht lesen",
+  "failed_to_analyze_image": "Bildanalyse fehlgeschlagen",
+  "failed_to_load_image": "Bild konnte nicht geladen werden",
+  "error": "Fehler",
+  "success": "Erfolg",
+  "card_added_successfully": "Karte erfolgreich hinzugefügt",
+  "card_updated_successfully": "Karte erfolgreich aktualisiert",
+  "card_deleted_successfully": "Karte erfolgreich gelöscht"
 }

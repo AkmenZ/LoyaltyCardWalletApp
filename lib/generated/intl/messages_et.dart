@@ -28,19 +28,42 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "barcode": MessageLookupByLibrary.simpleMessage("Triipkood"),
     "cancel": MessageLookupByLibrary.simpleMessage("Tühista"),
+    "card_added_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kaart on edukalt lisatud",
+    ),
+    "card_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kaart on edukalt kustutatud",
+    ),
+    "card_updated_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kaart on edukalt uuendatud",
+    ),
     "cards": MessageLookupByLibrary.simpleMessage("Minu Kaardid"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Kas oled kindel, et soovid selle kaardi kustutada?",
     ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Jätka"),
+    "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
+      "Triipkoodi sellest pildist ei õnnestunud lugeda",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Kustuta"),
     "edit_card": MessageLookupByLibrary.simpleMessage("Muuda Kaarti"),
     "enter_manually": MessageLookupByLibrary.simpleMessage("Sisesta Käsitsi"),
+    "error": MessageLookupByLibrary.simpleMessage("Viga"),
+    "failed_to_analyze_image": MessageLookupByLibrary.simpleMessage(
+      "Pildi analüüsimine ebaõnnestus",
+    ),
+    "failed_to_load_image": MessageLookupByLibrary.simpleMessage(
+      "Pildi laadimine ebaõnnestus",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Nimi"),
+    "no_barcode_found": MessageLookupByLibrary.simpleMessage(
+      "Triipkoodi ei leitud",
+    ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
       "Kaardid pole veel lisatud.",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Märkus (valikuline)"),
+    "pick_from_gallery": MessageLookupByLibrary.simpleMessage("Vali galerii"),
     "please_enter_barcode": MessageLookupByLibrary.simpleMessage(
       "Palun sisesta triipkood!",
     ),
@@ -53,5 +76,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Salvesta"),
     "scan": MessageLookupByLibrary.simpleMessage("Skaneeri"),
     "share": MessageLookupByLibrary.simpleMessage("Jaga"),
+    "success": MessageLookupByLibrary.simpleMessage("Edu"),
   };
 }

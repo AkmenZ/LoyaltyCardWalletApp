@@ -7,6 +7,7 @@ import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/utils/toast_utils.dart';
 import 'package:loyalty_cards_app/validators.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
@@ -63,6 +64,13 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
       if (!mounted) return;
       // close modal
       Navigator.of(context, rootNavigator: true).pop();
+
+      // show success toast
+      ToastUtils.showSuccess(
+        context,
+        title: S.of(context).success,
+        description: S.of(context).card_added_successfully,
+      );
     }
   }
 
