@@ -233,13 +233,19 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                             context,
                             rootNavigator: true,
                           ).popUntil((route) => route.isFirst);
-                          // show success toast
-                          ToastUtils.showSuccess(
-                            context,
-                            title: S.of(context).success,
-                            description: S.of(context).card_deleted_successfully,
-                          );
                         }
+                        // show success toast
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (context.mounted) {
+                            ToastUtils.showSuccess(
+                              context,
+                              title: S.of(context).success,
+                              description: S
+                                  .of(context)
+                                  .card_deleted_successfully,
+                            );
+                          }
+                        });
                       }
                     },
                     child: Row(

@@ -88,7 +88,7 @@ class _CardPageState extends ConsumerState<CardPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6.0),
                   child: Image.asset(
-                    'assets/icons/app-icon.png',
+                    'assets/icons/gocards-icon.png',
                     width: 30,
                     height: 30,
                   ),

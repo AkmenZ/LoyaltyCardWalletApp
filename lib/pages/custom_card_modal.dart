@@ -102,38 +102,56 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                   child: AspectRatio(
                     aspectRatio: 16 / 10,
                     child: Container(
+                      // card preview container
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: currentColor,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.shadow.withValues(alpha: 0.4),
+                            blurRadius: 3,
+                            offset: const Offset(3, 3),
                           ),
                         ],
                       ),
-                      child: Column(
-                        spacing: 4.0,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            selectedIcon!,
-                            width: MediaQuery.of(context).size.width * 0.20,
-                            height: MediaQuery.of(context).size.width * 0.20,
-                            fit: BoxFit.contain,
+                      child: Container(
+                        // gradient overlay
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.white.withValues(alpha: 0.2),
+                              Colors.white.withValues(alpha: 0.1),
+                              Colors.black.withValues(alpha: 0.1),
+                            ],
                           ),
-                          AutoSizeText(
-                            _nameCtrl.text,
-                            style: const TextStyle(
-                              color: onSeed,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+                        ),
+                        child: Column(
+                          spacing: 4.0,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              selectedIcon!,
+                              width: MediaQuery.of(context).size.width * 0.20,
+                              height: MediaQuery.of(context).size.width * 0.20,
+                              fit: BoxFit.contain,
                             ),
-                            maxLines: 1,
-                          ),
-                        ],
+                            AutoSizeText(
+                              _nameCtrl.text,
+                              style: const TextStyle(
+                                color: onSeed,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

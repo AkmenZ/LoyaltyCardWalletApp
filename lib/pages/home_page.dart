@@ -13,6 +13,7 @@ import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:toastification/toastification.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -136,7 +137,12 @@ class HomePage extends ConsumerWidget {
                       }
 
                       return GridView.builder(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 16,
+                          bottom: 32,
+                        ),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -158,10 +164,14 @@ class HomePage extends ConsumerWidget {
                           );
 
                           return GestureDetector(
-                            onTap: () => _openCard(context, card, brand),
+                            onTap: () {
+                              toastification.dismissAll();
+                              _openCard(context, card, brand);
+                            },
                             child: Stack(
                               children: [
                                 Container(
+                                  // card container
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     color: card.colorHex != null
@@ -173,56 +183,74 @@ class HomePage extends ConsumerWidget {
                                         : Theme.of(context).cardColor,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.1,
-                                        ),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .shadow
+                                            .withValues(alpha: 0.4),
+                                        blurRadius: 3,
+                                        offset: const Offset(3, 3),
                                       ),
                                     ],
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    // card brand
-                                    child: Center(
-                                      child: brand.logo != null
-                                          ? Image.asset(
-                                              brand.logo!,
-                                              fit: BoxFit.contain,
-                                            )
-                                          // custom card
-                                          : Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                if (card.isCustom)
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                            12.0,
-                                                          ),
-                                                      child: Image.asset(
-                                                        card.customLogo ??
-                                                            'assets/images/custom.png',
-                                                        fit: BoxFit.contain,
+                                  child: Container(
+                                    // gradient overlay
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Colors.white.withValues(alpha: 0.2),
+                                          Colors.white.withValues(alpha: 0.1),
+                                          Colors.black.withValues(alpha: 0.1),
+                                        ],
+                                      ),
+                                    ),
+                                    // card content
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      // card brand
+                                      child: Center(
+                                        child: brand.logo != null
+                                            ? Image.asset(
+                                                brand.logo!,
+                                                fit: BoxFit.contain,
+                                              )
+                                            // custom card
+                                            : Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  if (card.isCustom)
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                              12.0,
+                                                            ),
+                                                        child: Image.asset(
+                                                          card.customLogo ??
+                                                              'assets/icons/gocards-icon-tp.png',
+                                                          fit: BoxFit.contain,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                Text(
-                                                  card.merchant ?? 'Unknown',
-                                                  style: TextStyle(
-                                                    color: _getTextColor(
-                                                      card.colorHex,
+                                                  Text(
+                                                    card.merchant ?? 'Unknown',
+                                                    style: TextStyle(
+                                                      color: _getTextColor(
+                                                        card.colorHex,
+                                                      ),
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
-                                                    fontWeight: FontWeight.w500,
+                                                    textAlign: TextAlign.center,
                                                   ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ],
-                                            ),
+                                                ],
+                                              ),
+                                      ),
                                     ),
                                   ),
                                 ),

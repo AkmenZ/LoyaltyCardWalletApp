@@ -112,6 +112,14 @@
     "popularRegions": ["gb"]
   },
   {
+    "id": "superdrug",
+    "name": "Superdrug",
+    "logo": "assets/logos/superdrug-logo.png",
+    "colorHex": "#E0E0E0",
+    "regions": ["gb"],
+    "popularRegions": ["gb"]
+  },
+  {
     "id": "lidl",
     "name": "Lidl",
     "logo": "assets/logos/lidl-logo.png",
@@ -245,6 +253,14 @@
     "logo": "assets/logos/neste-logo.png",
     "colorHex": "#00357A",
     "regions": ["lv", "lt", "ee"],
+    "popularRegions": []
+  },
+  {
+    "id": "spiritsandwine",
+    "name": "Spirits & Wine",
+    "logo": "assets/logos/spirits-and-wine-logo.png",
+    "colorHex": "#DC002E",
+    "regions": ["lv"],
     "popularRegions": []
   },
   {
