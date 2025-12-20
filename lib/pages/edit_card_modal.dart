@@ -137,7 +137,7 @@ class _EditCardModalState extends ConsumerState<EditCardModal> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 10.0),
                 // note text field
                 PlatformTextFormField(
                   controller: _noteCtrl,

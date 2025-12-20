@@ -38,13 +38,27 @@ class IconPicker extends StatelessWidget {
                     width: path == selectedAssetPath ? 3 : 1,
                   ),
                 ),
-                child: Center(
-                  child: Image.asset(
-                    path,
-                    width: boxSize * 0.7,
-                    height: boxSize * 0.7,
-                    fit: BoxFit.contain,
-                  ),
+                child: Stack(
+                  children: [
+                    // icon image
+                    Center(
+                      child: Image.asset(
+                        path,
+                        width: boxSize * 0.7,
+                        height: boxSize * 0.7,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    // check icon overlay when selected
+                    if (path == selectedAssetPath)
+                      Center(
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: boxSize * 0.56,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),

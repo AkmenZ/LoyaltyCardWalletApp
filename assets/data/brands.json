@@ -64,6 +64,14 @@
     "popularRegions": []
   },
   {
+    "id": "eason",
+    "name": "Eason",
+    "logo": "assets/logos/eason-logo.png",
+    "colorHex": "#B7D02E",
+    "regions": ["ie"],
+    "popularRegions": []
+  },
+  {
     "id": "insomniacoffee",
     "name": "Insomnia Coffee",
     "logo": "assets/logos/insomnia-coffee-logo.png",
@@ -123,7 +131,7 @@
     "id": "lidl",
     "name": "Lidl",
     "logo": "assets/logos/lidl-logo.png",
-    "colorHex": "#094FA9",
+    "colorHex": "#1F71B8",
     "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
     "popularRegions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"]
   },
@@ -256,10 +264,42 @@
     "popularRegions": []
   },
   {
+    "id": "viada",
+    "name": "Viada",
+    "logo": "assets/logos/viada-logo.png",
+    "colorHex": "#E5183D",
+    "regions": ["lv", "lt"],
+    "popularRegions": []
+  },
+  {
     "id": "spiritsandwine",
     "name": "Spirits & Wine",
     "logo": "assets/logos/spirits-and-wine-logo.png",
     "colorHex": "#DC002E",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "janisroze",
+    "name": "Jānis Roze",
+    "logo": "assets/logos/janis-roze-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "zvaigzneabc",
+    "name": "Zvaigzne ABC",
+    "logo": "assets/logos/zvaigzne-abc-logo.png",
+    "colorHex": "#000000",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "branchess",
+    "name": "Branchess",
+    "logo": "assets/logos/branchess-logo.png",
+    "colorHex": "#FFFFFF",
     "regions": ["lv"],
     "popularRegions": []
   },
@@ -270,6 +310,22 @@
     "colorHex": "#FFFFFF",
     "regions": ["lt"],
     "popularRegions": ["lt"]
+  },
+  {
+    "id": "selver",
+    "name": "Selver",
+    "logo": "assets/logos/selver-logo.png",
+    "colorHex": "#E0E0E0",
+    "regions": ["ee"],
+    "popularRegions": ["ee"]
+  },
+  {
+    "id": "prisma",
+    "name": "Prisma",
+    "logo": "assets/logos/prisma-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["ee"],
+    "popularRegions": ["ee"]
   },
   {
     "id": "kaufland",
@@ -333,6 +389,22 @@
     "logo": "assets/logos/douglas-logo.png",
     "colorHex": "#000000",
     "regions": ["lv", "lt", "ee", "pl", "de"],
+    "popularRegions": []
+  },
+  {
+    "id": "ikea",
+    "name": "IKEA",
+    "logo": "assets/logos/ikea-logo.png",
+    "colorHex": "#0158A3",
+    "regions": ["ie", "gb", "lv", "lt", "pl", "de"],
+    "popularRegions": []
+  },
+  {
+    "id": "jysk",
+    "name": "JYSK",
+    "logo": "assets/logos/jysk-logo.png",
+    "colorHex": "#00357A",
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
     "popularRegions": []
   }
 ]

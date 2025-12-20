@@ -26,24 +26,28 @@ class AddCardManuallyModal extends ConsumerStatefulWidget {
 class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _barcodeCtrl;
+  late final TextEditingController _noteCtrl;
 
   @override
   void initState() {
     super.initState();
     _barcodeCtrl = TextEditingController(text: '');
+    _noteCtrl = TextEditingController(text: '');
   }
 
   @override
   void dispose() {
     _barcodeCtrl.dispose();
+    _noteCtrl.dispose();
     super.dispose();
   }
-  
+
   // save method
   Future<void> _save() async {
     if ((_formKey.currentState?.validate() ?? false)) {
       // get the barcode value
       final newBarcode = _barcodeCtrl.text.trim();
+      final newNote = _noteCtrl.text.trim();
 
       // create new LoyaltyCard instance
       final newCard = LoyaltyCard(
@@ -53,7 +57,7 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
         colorHex: widget.brand.colorHex,
         dateAdded: DateTime.now().toIso8601String(),
         favorite: false,
-        note: null,
+        note: newNote.isEmpty ? null : newNote,
         isCustom: widget.brand.isCustom,
         customLogo: widget.brand.isCustom ? widget.brand.logo : null,
       );
@@ -109,36 +113,64 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
                 // barcode text field
                 Form(
                   key: _formKey,
-                  child: PlatformTextFormField(
-                    controller: _barcodeCtrl,
-                    autofocus: true,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    maxLength: 50,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return S.of(context).please_enter_barcode;
-                      }
-                      return null;
-                    },
-                    material: (_, __) => MaterialTextFormFieldData(
-                      decoration: InputDecoration(
-                        labelText: S.of(context).barcode,
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        counterText: '',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                  child: Column(
+                    children: [
+                      PlatformTextFormField(
+                        controller: _barcodeCtrl,
+                        autofocus: true,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
+                        maxLength: 50,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return S.of(context).please_enter_barcode;
+                          }
+                          return null;
+                        },
+                        material: (_, __) => MaterialTextFormFieldData(
+                          decoration: InputDecoration(
+                            labelText: S.of(context).barcode,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            counterText: '',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        cupertino: (_, __) => CupertinoTextFormFieldData(
+                          placeholder: S.of(context).barcode,
+                          decoration: BoxDecoration(
+                            color: cupertinoTheme.barBackgroundColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                       ),
-                    ),
-                    cupertino: (_, __) => CupertinoTextFormFieldData(
-                      placeholder: S.of(context).barcode,
-                      decoration: BoxDecoration(
-                        color: cupertinoTheme.barBackgroundColor,
-                        borderRadius: BorderRadius.circular(8),
+                      const SizedBox(height: 10.0),
+                      // note text field
+                      PlatformTextFormField(
+                        controller: _noteCtrl,
+                        maxLength: 50,
+                        keyboardType: TextInputType.visiblePassword,
+                        material: (_, __) => MaterialTextFormFieldData(
+                          decoration: InputDecoration(
+                            labelText: S.of(context).note,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            counterText: '',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        cupertino: (_, __) => CupertinoTextFormFieldData(
+                          placeholder: S.of(context).note,
+                          decoration: BoxDecoration(
+                            color: cupertinoTheme.barBackgroundColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],

@@ -56,22 +56,30 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
     Colors.pink.shade800,
     Colors.brown.shade800,
     Colors.grey.shade800,
+    Colors.black,
+    Colors.white,
   ];
 
   // icons list
   final icons = [
     'assets/images/grocery.png',
     'assets/images/shopping.png',
+    'assets/images/clothes.png',
     'assets/images/restaurant.png',
     'assets/images/gym.png',
     'assets/images/spa.png',
     'assets/images/sports.png',
     'assets/images/coffee.png',
+    'assets/images/books.png',
     'assets/images/pharmacy.png',
+    'assets/images/diy.png',
+    'assets/images/bed.png',
     'assets/images/burger.png',
     'assets/images/pizza.png',
     'assets/images/train.png',
+    'assets/images/fuel.png',
     'assets/images/star.png',
+    'assets/images/heart.png',
   ];
 
   @override
