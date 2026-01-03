@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Karta została pomyślnie zaktualizowana",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("Moje Karty"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karty zostały pomyślnie przywrócone",
+    ),
     "continue_to_scan": MessageLookupByLibrary.simpleMessage("Kontynuuj"),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Nie można odczytać kodu kreskowego z tego obrazu",
@@ -71,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Aby zeskanować, ustaw kod kreskowy w ramce",
+    ),
+    "restore": MessageLookupByLibrary.simpleMessage(
+      "Przywróć Z Kopii Zapasowej",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Zapisz"),
     "scan": MessageLookupByLibrary.simpleMessage("Skanuj"),

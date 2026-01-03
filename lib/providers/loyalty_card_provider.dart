@@ -1,4 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
+import 'package:loyalty_cards_app/services/backup_service.dart';
+import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:loyalty_cards_app/db/sembast_database.dart';
 import 'package:loyalty_cards_app/db/loyalty_card.dao.dart';
@@ -8,8 +12,9 @@ part 'loyalty_card_provider.g.dart';
 
 @riverpod
 class LoyaltyCards extends _$LoyaltyCards {
-  // final LoyaltyCardBackupService _backupService = LoyaltyCardBackupService();
-
+  final _backupService = BackupService();
+  bool _isAutoBackupEnabled = false;
+  
   Future<T> _withDao<T>(
     Future<T> Function(LoyaltyCardSembastDao dao) action,
   ) async {
@@ -22,34 +27,30 @@ class LoyaltyCards extends _$LoyaltyCards {
     }
   }
 
-  Future<List<LoyaltyCard>> _fetch() {
-    return _withDao((dao) => dao.getAll());
-  }
-
-  // syncs current cards to backup if backup is enabled
-  // runs async without blocking the UI
-  // Future<void> _syncBackupIfEnabled(List<LoyaltyCard> cards) async {
-  //   try {
-  //     final isEnabled = await _backupService.isBackupEnabled();
-  //     if (isEnabled) {
-  //       // not awaited to avoid blocking UI
-  //       _backupService.backupCards(cards).catchError((e) {
-  //         log('Backup sync error: $e');
-  //       });
-  //     }
-  //   } catch (e) {
-  //     log('Error checking backup status: $e');
-  //   }
-  // }
-
+  // initial load
   @override
-  FutureOr<List<LoyaltyCard>> build() {
-    return _fetch();
+  FutureOr<List<LoyaltyCard>> build() async {
+    // load setting from SharedPrefs
+    final isEnabled = SharedPrefs.getBool('auto_backup_enabled');
+    _isAutoBackupEnabled = isEnabled ?? false;
+
+    // load data
+    final data = await _withDao((dao) => dao.getAll());
+
+    // catchup auto-backup if enabled
+    // ensures any changes made while device was offline are backed up
+    if (_isAutoBackupEnabled) {
+      // small delay to let the UI render first
+      Future.delayed(const Duration(seconds: 3), _triggerAutoBackup);
+    }
+
+    return data;
   }
 
+  // --- CRUD Operations ---
   Future<void> loadCards() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(_fetch);
+    state = await AsyncValue.guard(() => _withDao((dao) => dao.getAll()));
   }
 
   Future<LoyaltyCard?> loadCardById(int id) async {
@@ -71,73 +72,97 @@ class LoyaltyCards extends _$LoyaltyCards {
   Future<void> insertCard(LoyaltyCard card) async {
     await _withDao((dao) => dao.insert(card));
     await loadCards();
-    
-    // sync to backup after cards are loaded
-    // if (state.hasValue) {
-    //   await _syncBackupIfEnabled(state.asData!.value);
-    // }
+    _triggerAutoBackup();
   }
 
   Future<void> updateCard(LoyaltyCard card) async {
     await _withDao((dao) => dao.update(card));
     await loadCards();
-    
-    // sync to backup after cards are loaded
-    // if (state.hasValue) {
-    //   await _syncBackupIfEnabled(state.asData!.value);
-    // }
+    _triggerAutoBackup();
   }
 
   Future<void> deleteCard(int id) async {
     await _withDao((dao) => dao.delete(id));
     await loadCards();
-    
-    // sync to backup after cards are loaded
-    // if (state.hasValue) {
-    //   await _syncBackupIfEnabled(state.asData!.value);
-    // }
+    _triggerAutoBackup();
   }
 
-  // enable backup and immediately sync all current cards
-  // Future<void> enableBackup() async {
-  //   if (state.hasValue) {
-  //     await _backupService.backupCards(state.asData!.value);
-  //     await _backupService.setBackupEnabled(true);
-  //   }
-  // }
+  // --- Cloud Backup Management ---
+  Future<void> _triggerAutoBackup() async {
+    if (!_isAutoBackupEnabled) return;
 
-  // disable backup (doesn't delete backed up data)
-  // Future<void> disableBackup() async {
-  //   await _backupService.setBackupEnabled(false);
-  // }
+    try {
+      // Don't await this if you want it completely background, 
+      // but waiting ensures data consistency before next op
+      final path = await SembastDatabase.filePath();
+      await _backupService.backupDatabase(path);
+      log('☁️ Auto-backup complete');
+    } catch (e) {
+      log('☁️ Auto-backup failed: $e');
+    }
+  }
 
-  // check if backup is enabled
-  // Future<bool> isBackupEnabled() => _backupService.isBackupEnabled();
+  // force a backup
+  Future<void> forceBackup() async {
+    final path = await SembastDatabase.filePath();
+    await _backupService.backupDatabase(path);
+  }
 
-  // restore all cards from backup (overwrites local data)
-  // Future<void> restoreFromBackup() async {
-  //   final backupCards = await _backupService.restoreCards();
+  /// restore from Cloud
+  Future<void> restoreFromCloud() async {
+    state = const AsyncLoading();
+    try {
+      // download to temp
+      final tempPath = await _backupService.restoreDatabase();
+      
+      if (tempPath != null) {
+        // get DB path
+        final dbPath = await SembastDatabase.filePath();
+        
+        // overwrite
+        final backupFile = File(tempPath);
+        await backupFile.copy(dbPath);
+        
+        // cleanup temp
+        if (await backupFile.exists()) await backupFile.delete();
+
+        // reload application state
+        await loadCards();
+      } else {
+        throw Exception("No backup found on cloud");
+      }
+    } catch (e) {
+      // reload old data if restore failed
+      await loadCards();
+      rethrow;
+    }
+  }
+
+  // --- Settings Management ---
+  bool get isBackupEnabled => _isAutoBackupEnabled;
+
+  Future<void> toggleBackup(bool isEnabled) async {
+    _isAutoBackupEnabled = isEnabled;
     
-  //   // clear local DB
-  //   final current = state.asData?.value ?? [];
-  //   for (final card in current) {
-  //     if (card.id != null) {
-  //       await _withDao((dao) => dao.delete(card.id!));
-  //     }
-  //   }
-    
-  //   // insert backup cards
-  //   for (final card in backupCards) {
-  //     await _withDao((dao) => dao.insert(card));
-  //   }
-    
-  //   await loadCards();
-  // }
-
-  // clear backup data
-  // Future<void> clearBackup() async {
-  //   await _backupService.clearBackup();
-  // }
+    // save to SharedPrefs
+    await SharedPrefs.setBool('auto_backup_enabled', isEnabled);
+    // if turned ON, do an immediate backup
+    if (isEnabled) {
+      try {
+        await forceBackup();
+      } catch (e) {
+        log("Initial backup failed: $e");
+        _isAutoBackupEnabled = false;
+        await SharedPrefs.setBool('auto_backup_enabled', false);
+        // propagate error
+        rethrow;
+      }
+    }
+  }
+  
+  Future<bool> checkCloudBackupExists() async {
+    return _backupService.isBackupAvailable();
+  }
 }
 
 @riverpod

@@ -129,6 +129,16 @@ class S {
     return Intl.message('Share', name: 'share', desc: '', args: []);
   }
 
+  /// `Restore From Backup`
+  String get restore {
+    return Intl.message(
+      'Restore From Backup',
+      name: 'restore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Barcode`
   String get barcode {
     return Intl.message('Barcode', name: 'barcode', desc: '', args: []);
@@ -274,6 +284,16 @@ class S {
     return Intl.message(
       'Card deleted successfully',
       name: 'card_deleted_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cards restored successfully`
+  String get cards_restored_successfully {
+    return Intl.message(
+      'Cards restored successfully',
+      name: 'cards_restored_successfully',
       desc: '',
       args: [],
     );

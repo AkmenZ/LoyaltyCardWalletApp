@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Karte atjaunināta",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("Manas Kartes"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kartes atjaunotas veiksmīgi",
+    ),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Vai tiešām vēlaties dzēst šo karti?",
     ),
@@ -75,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Lai noskanētu, notēmējiet svītrkodu rāmī",
     ),
+    "restore": MessageLookupByLibrary.simpleMessage("Atjaunot No Dublējuma"),
     "save": MessageLookupByLibrary.simpleMessage("Saglabāt"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenēt"),
     "share": MessageLookupByLibrary.simpleMessage("Kopīgot"),

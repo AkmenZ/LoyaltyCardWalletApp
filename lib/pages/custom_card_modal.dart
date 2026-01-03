@@ -133,8 +133,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                             end: Alignment.bottomRight,
                             colors: [
                               Colors.white.withValues(alpha: 0.2),
-                              Colors.white.withValues(alpha: 0.1),
-                              Colors.black.withValues(alpha: 0.1),
+                              Colors.transparent,
                             ],
                           ),
                         ),

@@ -25,7 +25,7 @@ class SharedPrefs {
   static String? getString(String key) {
     final p = _prefs;
     if (p == null) {
-      throw StateError('SharedPrefs.init() must be called before getString.');
+      throw StateError('SharedPrefs not initialized');
     }
     return p.getString(key);
   }
@@ -34,27 +34,41 @@ class SharedPrefs {
     return getString(key) ?? fallback;
   }
 
+  static bool? getBool(String key) {
+    final p = _prefs;
+    if (p == null) throw StateError('SharedPrefs not initialized');
+    return p.getBool(key);
+  }
+
   // setters (async)
   static Future<void> setString(String key, String value) async {
     final p = _prefs;
     if (p == null) {
-      throw StateError('SharedPrefs.init() must be called before setString.');
+      throw StateError('SharedPrefs not initialized');
     }
     return p.setString(key, value);
   }
 
+  static Future<void> setBool(String key, bool value) async {
+    final p = _prefs;
+    if (p == null) throw StateError('SharedPrefs not initialized');
+    return p.setBool(key, value);
+  }
+
+  // remove key
   static Future<void> remove(String key) async {
     final p = _prefs;
     if (p == null) {
-      throw StateError('SharedPrefs.init() must be called before remove.');
+      throw StateError('SharedPrefs not initialized');
     }
     return p.remove(key);
   }
 
+  // clear all keys
   static Future<void> clear() async {
     final p = _prefs;
     if (p == null) {
-      throw StateError('SharedPrefs.init() must be called before clear.');
+      throw StateError('SharedPrefs not initialized');
     }
     await p.clear();
   }

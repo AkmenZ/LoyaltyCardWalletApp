@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Kaart on edukalt uuendatud",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("Minu Kaardid"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kaardid on edukalt taastatud",
+    ),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Kas oled kindel, et soovid selle kaardi kustutada?",
     ),
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Skaneerimiseks suuna triipkood raami",
     ),
+    "restore": MessageLookupByLibrary.simpleMessage("Taasta Varundusest"),
     "save": MessageLookupByLibrary.simpleMessage("Salvesta"),
     "scan": MessageLookupByLibrary.simpleMessage("Skaneeri"),
     "share": MessageLookupByLibrary.simpleMessage("Jaga"),

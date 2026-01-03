@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Card updated successfully",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("My Cards"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Cards restored successfully",
+    ),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete this card?",
     ),
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Position the barcode within the frame to scan",
     ),
+    "restore": MessageLookupByLibrary.simpleMessage("Restore From Backup"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "scan": MessageLookupByLibrary.simpleMessage("Scan"),
     "share": MessageLookupByLibrary.simpleMessage("Share"),

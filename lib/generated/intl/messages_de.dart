@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Karte erfolgreich aktualisiert",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("Meine Karten"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Karten erfolgreich wiederhergestellt",
+    ),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
     ),
@@ -74,6 +77,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Um zu scannen, richten Sie den Barcode in den Rahmen",
+    ),
+    "restore": MessageLookupByLibrary.simpleMessage(
+      "Aus Sicherung Wiederherstellen",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Speichern"),
     "scan": MessageLookupByLibrary.simpleMessage("Scannen"),

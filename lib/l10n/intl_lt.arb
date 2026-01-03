@@ -11,6 +11,7 @@
   "continue_to_scan": "Tęsti",
   "delete": "Ištrinti",
   "share": "Dalintis",
+  "restore": "Atkurti Iš Atsarginės Kopijos",
   "barcode": "Brūkšninis Kodas",
   "note": "Pastaba (neprivaloma)",
   "name": "Pavadinimas",
@@ -28,5 +29,6 @@
   "success": "Viskas yra izdevies",
   "card_added_successfully": "Kortelė sėkmingai pridėta",
   "card_updated_successfully": "Kortelė sėkmingai atnaujinta",
-  "card_deleted_successfully": "Kortelė sėkmingai ištrinta"
+  "card_deleted_successfully": "Kortelė sėkmingai ištrinta",
+  "cards_restored_successfully": "Kortelės sėkmingai atstatytos"
 }

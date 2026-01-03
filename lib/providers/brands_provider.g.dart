@@ -10,7 +10,7 @@ part of 'brands_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(brandsList)
-const brandsListProvider = BrandsListProvider._();
+final brandsListProvider = BrandsListProvider._();
 
 final class BrandsListProvider
     extends
@@ -20,7 +20,7 @@ final class BrandsListProvider
           FutureOr<List<Brand>>
         >
     with $FutureModifier<List<Brand>>, $FutureProvider<List<Brand>> {
-  const BrandsListProvider._()
+  BrandsListProvider._()
     : super(
         from: null,
         argument: null,

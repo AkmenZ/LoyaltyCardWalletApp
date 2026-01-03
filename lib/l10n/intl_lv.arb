@@ -11,6 +11,7 @@
   "continue_to_scan": "Turpināt",
   "delete": "Dzēst",
   "share": "Kopīgot",
+  "restore": "Atjaunot No Dublējuma",
   "barcode": "Svītrkods",
   "note": "Piezīme (pēc izvēles)",
   "name": "Nosaukums",
@@ -28,5 +29,6 @@
   "success": "Viss ir izdevies",
   "card_added_successfully": "Karte pievienota",
   "card_updated_successfully": "Karte atjaunināta",
-  "card_deleted_successfully": "Karte dzēsta"
+  "card_deleted_successfully": "Karte dzēsta",
+  "cards_restored_successfully": "Kartes atjaunotas veiksmīgi"
 }

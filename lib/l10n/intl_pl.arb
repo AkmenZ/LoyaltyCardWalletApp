@@ -11,6 +11,7 @@
   "continue_to_scan": "Kontynuuj",
   "delete": "Usuń",
   "share": "Udostępnij",
+  "restore": "Przywróć Z Kopii Zapasowej",
   "barcode": "Kod kreskowy",
   "note": "Notatka (opcjonalnie)",
   "name": "Nazwa",
@@ -27,5 +28,6 @@
   "success": "Sukces",
   "card_added_successfully": "Karta została pomyślnie dodana",
   "card_updated_successfully": "Karta została pomyślnie zaktualizowana",
-  "card_deleted_successfully": "Karta została pomyślnie usunięta"
+  "card_deleted_successfully": "Karta została pomyślnie usunięta",
+  "cards_restored_successfully": "Karty zostały pomyślnie przywrócone"
 }

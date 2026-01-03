@@ -56,8 +56,45 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+
+    // packaging block to handle duplicate files
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0"
+            )
+        }
+    }
 }
 
 flutter {
     source = "../.."
+}
+
+// dependencies to handle backup
+dependencies {
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    
+    // Google API Client (with HTTP transport)
+    implementation("com.google.api-client:google-api-client-android:1.33.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    
+    // Google Drive API
+    implementation("com.google.apis:google-api-services-drive:v3-rev20220815-2.0.0")
+
+    // HTTP Transport for Android
+    implementation("com.google.http-client:google-http-client-android:1.42.0")
+    implementation("com.google.http-client:google-http-client-gson:1.42.0")
+    
+    // Coroutines for async operations
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android: 1.7.3")
 }

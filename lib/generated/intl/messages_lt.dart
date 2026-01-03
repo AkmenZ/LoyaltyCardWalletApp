@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Kortelė sėkmingai atnaujinta",
     ),
     "cards": MessageLookupByLibrary.simpleMessage("Mano Kortelės"),
+    "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
+      "Kortelės sėkmingai atstatytos",
+    ),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Ar tikrai norite ištrinti šią kortelę?",
     ),
@@ -76,6 +79,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį",
+    ),
+    "restore": MessageLookupByLibrary.simpleMessage(
+      "Atkurti Iš Atsarginės Kopijos",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Išsaugoti"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenuoti"),

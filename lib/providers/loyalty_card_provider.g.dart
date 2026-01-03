@@ -10,11 +10,11 @@ part of 'loyalty_card_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(LoyaltyCards)
-const loyaltyCardsProvider = LoyaltyCardsProvider._();
+final loyaltyCardsProvider = LoyaltyCardsProvider._();
 
 final class LoyaltyCardsProvider
     extends $AsyncNotifierProvider<LoyaltyCards, List<LoyaltyCard>> {
-  const LoyaltyCardsProvider._()
+  LoyaltyCardsProvider._()
     : super(
         from: null,
         argument: null,
@@ -33,14 +33,13 @@ final class LoyaltyCardsProvider
   LoyaltyCards create() => LoyaltyCards();
 }
 
-String _$loyaltyCardsHash() => r'23d331501b9267fe4e46c5b0577965f6661a485a';
+String _$loyaltyCardsHash() => r'683b381b2bfaeb752d9c716150eef5c42548bc90';
 
 abstract class _$LoyaltyCards extends $AsyncNotifier<List<LoyaltyCard>> {
   FutureOr<List<LoyaltyCard>> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref =
         this.ref as $Ref<AsyncValue<List<LoyaltyCard>>, List<LoyaltyCard>>;
     final element =
@@ -51,12 +50,12 @@ abstract class _$LoyaltyCards extends $AsyncNotifier<List<LoyaltyCard>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(loyaltyCardById)
-const loyaltyCardByIdProvider = LoyaltyCardByIdFamily._();
+final loyaltyCardByIdProvider = LoyaltyCardByIdFamily._();
 
 final class LoyaltyCardByIdProvider
     extends
@@ -66,7 +65,7 @@ final class LoyaltyCardByIdProvider
           FutureOr<LoyaltyCard?>
         >
     with $FutureModifier<LoyaltyCard?>, $FutureProvider<LoyaltyCard?> {
-  const LoyaltyCardByIdProvider._({
+  LoyaltyCardByIdProvider._({
     required LoyaltyCardByIdFamily super.from,
     required int super.argument,
   }) : super(
@@ -114,7 +113,7 @@ String _$loyaltyCardByIdHash() => r'2b6e676e9b08e4877ea3f4f6fcef10c203b5a0c3';
 
 final class LoyaltyCardByIdFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<LoyaltyCard?>, int> {
-  const LoyaltyCardByIdFamily._()
+  LoyaltyCardByIdFamily._()
     : super(
         retry: null,
         name: r'loyaltyCardByIdProvider',

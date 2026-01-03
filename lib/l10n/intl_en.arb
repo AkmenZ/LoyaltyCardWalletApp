@@ -11,6 +11,7 @@
   "continue_to_scan": "Continue",
   "delete": "Delete",
   "share": "Share",
+  "restore": "Restore From Backup",
   "barcode": "Barcode",
   "note": "Note (optional)",
   "name": "Name",
@@ -28,5 +29,6 @@
   "success": "Success",
   "card_added_successfully": "Card added successfully",
   "card_updated_successfully": "Card updated successfully",
-  "card_deleted_successfully": "Card deleted successfully"
+  "card_deleted_successfully": "Card deleted successfully",
+  "cards_restored_successfully": "Cards restored successfully"
 }

@@ -11,6 +11,7 @@
   "continue_to_scan": "Weiter",
   "delete": "Löschen",
   "share": "Teilen",
+  "restore": "Aus Sicherung Wiederherstellen",
   "barcode": "Barcode",
   "note": "Notiz (optional)",
   "name": "Name",
@@ -28,5 +29,6 @@
   "success": "Erfolg",
   "card_added_successfully": "Karte erfolgreich hinzugefügt",
   "card_updated_successfully": "Karte erfolgreich aktualisiert",
-  "card_deleted_successfully": "Karte erfolgreich gelöscht"
+  "card_deleted_successfully": "Karte erfolgreich gelöscht",
+  "cards_restored_successfully": "Karten erfolgreich wiederhergestellt"
 }

@@ -6,6 +6,7 @@ import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/add_card_modal.dart';
+import 'package:loyalty_cards_app/pages/backup_modal.dart';
 import 'package:loyalty_cards_app/pages/card_page.dart';
 import 'package:loyalty_cards_app/providers/brands_provider.dart';
 import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
@@ -51,21 +52,21 @@ class HomePage extends ConsumerWidget {
   }
 
   // open Backup Modal
-  // void _openBackupModal(BuildContext context) {
-  //   showCupertinoModalBottomSheet(
-  //     context: context,
-  //     expand: true,
-  //     barrierColor: Colors.black.withValues(alpha: 0.7),
-  //     builder: (context) => Navigator(
-  //       onGenerateRoute: (settings) {
-  //         return platformPageRoute(
-  //           context: context,
-  //           builder: (context) => BackupModal(),
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  void _openBackupModal(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      context: context,
+      expand: true,
+      barrierColor: Colors.black.withValues(alpha: 0.7),
+      builder: (context) => Navigator(
+        onGenerateRoute: (settings) {
+          return platformPageRoute(
+            context: context,
+            builder: (context) => BackupModal(),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,8 +78,8 @@ class HomePage extends ConsumerWidget {
         title: Text(S.of(context).cards),
         leading: PlatformIconButton(
           icon: Icon(context.platformIcons.cloud),
-          // TODO work on this when backup packages are updated to intl 0.20.2 +
-          // onPressed: () {},
+          // open backup modal
+          onPressed: () => _openBackupModal(context),
         ),
         trailingActions: [
           PlatformIconButton(
@@ -201,8 +202,7 @@ class HomePage extends ConsumerWidget {
                                         end: Alignment.bottomRight,
                                         colors: [
                                           Colors.white.withValues(alpha: 0.2),
-                                          Colors.white.withValues(alpha: 0.1),
-                                          Colors.black.withValues(alpha: 0.1),
+                                          Colors.transparent,
                                         ],
                                       ),
                                     ),

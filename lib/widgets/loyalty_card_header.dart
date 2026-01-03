@@ -34,12 +34,12 @@ class LoyaltyCardHeader extends StatelessWidget {
         // gradient overlay
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomRight,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
             colors: [
               Colors.white.withValues(alpha: 0.1),
+              Colors.transparent,
               Colors.white.withValues(alpha: 0.1),
-              Colors.black.withValues(alpha: 0.1),
             ],
           ),
         ),

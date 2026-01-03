@@ -18,13 +18,15 @@ class BrandsList extends StatelessWidget {
         itemBuilder: (context, index) {
           final brand = brands[index];
           return Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 0.5,
-                ), // bottom border
-              ),
+            decoration: BoxDecoration(
+              border: index < brands.length - 1
+                  ? Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.withValues(alpha: 0.5),
+                        width: 0.5,
+                      ),
+                    )
+                  : null,
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(
@@ -39,9 +41,7 @@ class BrandsList extends StatelessWidget {
                           int.parse(brand.colorHex!.replaceFirst('#', '0xff')),
                         )
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ), // 👈 rounded bg for logo
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: brand.logo != null
                     ? AspectRatio(

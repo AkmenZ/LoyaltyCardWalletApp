@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:loyalty_cards_app/generated/l10n.dart';
+import 'package:loyalty_cards_app/pages/splash_page.dart';
 import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
 import 'package:loyalty_cards_app/theme.dart';
-import 'package:loyalty_cards_app/pages/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:toastification/toastification.dart';
@@ -23,9 +23,6 @@ void main() async {
 
   // initialize shared preferences
   await SharedPrefs.init();
-
-  // small 200 milliseconds delay to preserve splash screen to look smoother
-  await Future.delayed(const Duration(milliseconds: 200));
 
   // remove splash screen
   FlutterNativeSplash.remove();
@@ -58,7 +55,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: const HomePage(),
+          home: const SplashPage(),
         ),
       ),
     );

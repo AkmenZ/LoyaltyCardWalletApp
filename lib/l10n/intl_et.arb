@@ -11,6 +11,7 @@
   "continue_to_scan": "Jätka",
   "delete": "Kustuta",
   "share": "Jaga",
+  "restore": "Taasta Varundusest",
   "barcode": "Triipkood",
   "note": "Märkus (valikuline)",
   "name": "Nimi",
@@ -28,5 +29,6 @@
   "success": "Edu",
   "card_added_successfully": "Kaart on edukalt lisatud",
   "card_updated_successfully": "Kaart on edukalt uuendatud",
-  "card_deleted_successfully": "Kaart on edukalt kustutatud"
+  "card_deleted_successfully": "Kaart on edukalt kustutatud",
+  "cards_restored_successfully": "Kaardid on edukalt taastatud"
 }
