@@ -43,9 +43,6 @@ class ColorPicker extends StatelessWidget {
                     width: color == selectedColor ? 3 : 1,
                   ),
                 ),
-                // child: color == selectedColor
-                //     ? Icon(Icons.check, color: Colors.white)
-                //     : null,
               ),
             ),
             SizedBox(height: spacing),

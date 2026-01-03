@@ -110,10 +110,10 @@ class S {
   }
 
   /// `Continue`
-  String get continue_to_scan {
+  String get confirm_continue {
     return Intl.message(
       'Continue',
-      name: 'continue_to_scan',
+      name: 'confirm_continue',
       desc: '',
       args: [],
     );
@@ -129,11 +129,51 @@ class S {
     return Intl.message('Share', name: 'share', desc: '', args: []);
   }
 
-  /// `Restore From Backup`
+  /// `Restore Data`
   String get restore {
+    return Intl.message('Restore Data', name: 'restore', desc: '', args: []);
+  }
+
+  /// `Cloud Backup`
+  String get cloud_backup {
     return Intl.message(
-      'Restore From Backup',
-      name: 'restore',
+      'Cloud Backup',
+      name: 'cloud_backup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto Backup`
+  String get auto_backup {
+    return Intl.message('Auto Backup', name: 'auto_backup', desc: '', args: []);
+  }
+
+  /// `Automatically save changes in Your account`
+  String get auto_backup_description {
+    return Intl.message(
+      'Automatically save changes in Your account',
+      name: 'auto_backup_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backup enabled and data saved`
+  String get backup_enabled {
+    return Intl.message(
+      'Backup enabled and data saved',
+      name: 'backup_enabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backup disabled`
+  String get backup_disabled {
+    return Intl.message(
+      'Backup disabled',
+      name: 'backup_disabled',
       desc: '',
       args: [],
     );
@@ -164,6 +204,16 @@ class S {
     return Intl.message(
       'Are you sure you want to delete this card?',
       name: 'confirm_delete_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This action will override Your currently saved loyalty cards, if previously saved backup data exists. Are you sure you want to proceed?`
+  String get confirm_restore_data {
+    return Intl.message(
+      'This action will override Your currently saved loyalty cards, if previously saved backup data exists. Are you sure you want to proceed?',
+      name: 'confirm_restore_data',
       desc: '',
       args: [],
     );

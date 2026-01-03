@@ -26,6 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Eigene Karte erstellen",
     ),
+    "auto_backup": MessageLookupByLibrary.simpleMessage(
+      "Automatische Sicherung",
+    ),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Änderungen in Ihrem Konto automatisch speichern",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage(
+      "Backup deaktiviert",
+    ),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Backup aktiviert und Daten gespeichert",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
     "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -41,10 +53,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Karten erfolgreich wiederhergestellt",
     ),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage("Cloud Sicherung"),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Weiter"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Sind Sie sicher, dass Sie diese Karte löschen möchten?",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Weiter"),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "Diese Aktion überschreibt Ihre derzeit gespeicherten Treuekarten, falls zuvor gespeicherte Sicherungsdaten vorhanden sind. Sind Sie sicher, dass Sie fortfahren möchten?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Konnte den Barcode aus diesem Bild nicht lesen",
     ),
@@ -63,7 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Kein Barcode gefunden",
     ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
-      "Noch keine Karten hinzugefügt.",
+      "Noch keine Karten hinzugefügt",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Notiz (optional)"),
     "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
@@ -78,9 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Um zu scannen, richten Sie den Barcode in den Rahmen",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage(
-      "Aus Sicherung Wiederherstellen",
-    ),
+    "restore": MessageLookupByLibrary.simpleMessage("Daten Wiederherstellen"),
     "save": MessageLookupByLibrary.simpleMessage("Speichern"),
     "scan": MessageLookupByLibrary.simpleMessage("Scannen"),
     "share": MessageLookupByLibrary.simpleMessage("Teilen"),

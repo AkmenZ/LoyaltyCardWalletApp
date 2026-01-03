@@ -26,6 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Loo Kohandatud Kaart",
     ),
+    "auto_backup": MessageLookupByLibrary.simpleMessage(
+      "Automaatne Varundamine",
+    ),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Muudatuste automaatne salvestamine Teie kontol",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage(
+      "Varundamine keelatud",
+    ),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Varundamine lubatud ja andmed salvestatud",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Triipkood"),
     "cancel": MessageLookupByLibrary.simpleMessage("Tühista"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -41,10 +53,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Kaardid on edukalt taastatud",
     ),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage("Pilves Varundamine"),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Jätka"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Kas oled kindel, et soovid selle kaardi kustutada?",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Jätka"),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "See toiming kirjutab üle Teie praegu salvestatud lojaalsuskaardid, kui varem salvestatud varukoopiaandmed on olemas. Kas olete kindel, et soovite jätkata?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Triipkoodi sellest pildist ei õnnestunud lugeda",
     ),
@@ -63,7 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Triipkoodi ei leitud",
     ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
-      "Kaardid pole veel lisatud.",
+      "Kaardid pole veel lisatud",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Märkus (valikuline)"),
     "pick_from_gallery": MessageLookupByLibrary.simpleMessage("Vali galerii"),
@@ -76,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Skaneerimiseks suuna triipkood raami",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage("Taasta Varundusest"),
+    "restore": MessageLookupByLibrary.simpleMessage("Taasta Andmed"),
     "save": MessageLookupByLibrary.simpleMessage("Salvesta"),
     "scan": MessageLookupByLibrary.simpleMessage("Skaneeri"),
     "share": MessageLookupByLibrary.simpleMessage("Jaga"),

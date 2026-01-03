@@ -26,6 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Sukurti Pasirinktą Kortelę",
     ),
+    "auto_backup": MessageLookupByLibrary.simpleMessage(
+      "Automatinė Atsarginė Kopija",
+    ),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Automatiškai išsaugoti pakeitimus jūsų paskyroje",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage(
+      "Atsarginė kopija išjungta",
+    ),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Atsarginė kopija įjungta ir duomenys išsaugoti",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Brūkšninis Kodas"),
     "cancel": MessageLookupByLibrary.simpleMessage("Atšaukti"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -41,10 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Kortelės sėkmingai atstatytos",
     ),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage(
+      "Debesų Atsarginė Kopija",
+    ),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Tęsti"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Ar tikrai norite ištrinti šią kortelę?",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Tęsti"),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "Šis veiksmas perrašys jūsų šiuo metu išsaugotas lojalumo korteles, jei yra anksčiau išsaugotų atsarginių duomenų. Ar tikrai norite tęsti?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Nepavyko nuskaityti brūkšninio kodo iš šio vaizdo",
     ),
@@ -65,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Brūkšninis kodas nerastas",
     ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
-      "Kortelės dar nepridėtos.",
+      "Kortelės dar nepridėtos",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Pastaba (neprivaloma)"),
     "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
@@ -80,9 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Norėdami nuskaityti, nukreipkite brūkšninį kodą į rėmelį",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage(
-      "Atkurti Iš Atsarginės Kopijos",
-    ),
+    "restore": MessageLookupByLibrary.simpleMessage("Atkurti Duomenis"),
     "save": MessageLookupByLibrary.simpleMessage("Išsaugoti"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenuoti"),
     "share": MessageLookupByLibrary.simpleMessage("Dalintis"),

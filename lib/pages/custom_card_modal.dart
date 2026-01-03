@@ -8,6 +8,7 @@ import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/pages/scanner_modal.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/color_picker.dart';
+import 'package:loyalty_cards_app/widgets/custom_elevated_button.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/icon_picker.dart';
@@ -57,7 +58,6 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
     Colors.brown.shade800,
     Colors.grey.shade800,
     Colors.black,
-    Colors.white,
   ];
 
   // icons list
@@ -78,6 +78,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
     'assets/images/pizza.png',
     'assets/images/train.png',
     'assets/images/fuel.png',
+    'assets/images/cinema.png',
     'assets/images/star.png',
     'assets/images/heart.png',
   ];
@@ -223,7 +224,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
             minimum: const EdgeInsets.all(16),
             child: SizedBox(
               width: double.infinity,
-              child: PlatformElevatedButton(
+              child: CustomElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
                     // brand for custom cards
@@ -248,18 +249,9 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
                   }
                 },
                 child: Text(
-                  S.of(context).continue_to_scan,
+                  S.of(context).confirm_continue,
                   style: TextStyle(color: onSeed),
                 ),
-                material: (_, __) => MaterialElevatedButtonData(
-                  style: ElevatedButton.styleFrom(backgroundColor: seed),
-                ),
-                cupertino: (_, __) {
-                  return CupertinoElevatedButtonData(
-                    color: seed,
-                    sizeStyle: CupertinoButtonSize.small,
-                  );
-                },
               ),
             ),
           ),

@@ -26,6 +26,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Izveidot Pielāgotu Karti",
     ),
+    "auto_backup": MessageLookupByLibrary.simpleMessage("Datu Dublēšana"),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Automātiski saglabā izmaiņas jūsu kontā",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage(
+      "Dublēšana izslēgta",
+    ),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Dublēšana ieslēgta un dati saglabāti",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Svītrkods"),
     "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -41,10 +51,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Kartes atjaunotas veiksmīgi",
     ),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage("Mākoņa Dublēšana"),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Turpināt"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Vai tiešām vēlaties dzēst šo karti?",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Turpināt"),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "Ja iepriekšējie dublējuma dati ir piejami, jūsu pašlaik saglabātās lojalitātes kartes tiks pārrakstītas. Vai tiešām vēlaties turpināt?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Kods no šī attēla nav nolasāms",
     ),
@@ -63,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Kods nav atrasts",
     ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
-      "Kartes vēl nav pievienotas.",
+      "Kartes vēl nav pievienotas",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Piezīme (pēc izvēles)"),
     "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
@@ -78,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Lai noskanētu, notēmējiet svītrkodu rāmī",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage("Atjaunot No Dublējuma"),
+    "restore": MessageLookupByLibrary.simpleMessage("Atjaunot Datus"),
     "save": MessageLookupByLibrary.simpleMessage("Saglabāt"),
     "scan": MessageLookupByLibrary.simpleMessage("Skenēt"),
     "share": MessageLookupByLibrary.simpleMessage("Kopīgot"),

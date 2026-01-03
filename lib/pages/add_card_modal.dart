@@ -9,6 +9,7 @@ import 'package:loyalty_cards_app/pages/custom_card_modal.dart';
 import 'package:loyalty_cards_app/services/shared_preferences_service.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/widgets/brands_list.dart';
+import 'package:loyalty_cards_app/widgets/custom_elevated_button.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 
@@ -149,12 +150,13 @@ class _AddCardModalState extends State<AddCardModal> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             spacing: 20.0,
             children: [
-              PlatformElevatedButton(
+              // add custom card button
+              CustomElevatedButton(
                 onPressed: () {
                   // navigate to custom card modal
                   Navigator.of(context).push(
@@ -164,7 +166,6 @@ class _AddCardModalState extends State<AddCardModal> {
                     ),
                   );
                 },
-                // add custom button
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -176,15 +177,6 @@ class _AddCardModalState extends State<AddCardModal> {
                     const Icon(Icons.add_card, color: onSeed),
                   ],
                 ),
-                material: (_, __) => MaterialElevatedButtonData(
-                  style: ElevatedButton.styleFrom(backgroundColor: seed),
-                ),
-                cupertino: (_, __) {
-                  return CupertinoElevatedButtonData(
-                    color: seed,
-                    sizeStyle: CupertinoButtonSize.small,
-                  );
-                },
               ),
               // search widget
               _buildSearchField(context),

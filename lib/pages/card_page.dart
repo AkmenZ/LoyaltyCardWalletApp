@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loyalty_cards_app/generated/l10n.dart';
 import 'package:loyalty_cards_app/models/brand.dart';
 import 'package:loyalty_cards_app/theme.dart';
+import 'package:loyalty_cards_app/widgets/custom_elevated_button.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:loyalty_cards_app/models/loyalty_card.dart';
 import 'package:loyalty_cards_app/pages/edit_card_modal.dart';
@@ -209,7 +210,7 @@ class _CardPageState extends ConsumerState<CardPage> {
                 // share button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: PlatformElevatedButton(
+                  child: CustomElevatedButton(
                     onPressed: () {
                       // capture and share card
                       _captureAndShareCard(card);
@@ -225,15 +226,6 @@ class _CardPageState extends ConsumerState<CardPage> {
                         ),
                       ],
                     ),
-                    material: (_, __) => MaterialElevatedButtonData(
-                      style: ElevatedButton.styleFrom(backgroundColor: seed),
-                    ),
-                    cupertino: (_, __) {
-                      return CupertinoElevatedButtonData(
-                        color: seed,
-                        sizeStyle: CupertinoButtonSize.small,
-                      );
-                    },
                   ),
                 ),
                 const SizedBox(height: 10.0),

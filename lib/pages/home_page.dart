@@ -71,15 +71,32 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loyaltyCardsAsync = ref.watch(loyaltyCardsProvider);
+    final isBackupEnabled = ref
+        .read(loyaltyCardsProvider.notifier)
+        .isBackupEnabled;
+
     final brandsAsync = ref.watch(brandsListProvider);
 
     return CustomScaffold(
       appBar: CustomPlatformAppBar(
         title: Text(S.of(context).cards),
+        // open backup modal
         leading: PlatformIconButton(
-          icon: Icon(context.platformIcons.cloud),
-          // open backup modal
+          icon: Badge(
+            isLabelVisible: loyaltyCardsAsync.hasValue,
+            label: isBackupEnabled
+                ? Icon(Icons.check, size: 8, color: onSeed)
+                : Icon(Icons.close, size: 8, color: onSeed),
+            backgroundColor: isBackupEnabled ? Colors.green : Colors.redAccent,
+            child: Icon(context.platformIcons.cloud),
+          ),
           onPressed: () => _openBackupModal(context),
+          material: (_, __) => MaterialIconButtonData(
+              padding: EdgeInsets.zero,
+            ),
+            cupertino: (_, __) => CupertinoIconButtonData(
+              sizeStyle: CupertinoButtonSize.large,
+            ),
         ),
         trailingActions: [
           PlatformIconButton(
@@ -88,220 +105,221 @@ class HomePage extends ConsumerWidget {
             onPressed: () {
               _openAddCardModal(context, brandsAsync.asData?.value ?? []);
             },
+            material: (_, __) => MaterialIconButtonData(
+              padding: EdgeInsets.zero,
+            ),
+            cupertino: (_, __) => CupertinoIconButtonData(
+              sizeStyle: CupertinoButtonSize.large,
+            ),
           ),
         ],
       ),
       body: Column(
         children: [
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: () =>
-                  ref.read(loyaltyCardsProvider.notifier).loadCards(),
-              child: loyaltyCardsAsync.when(
-                data: (cards) {
-                  return brandsAsync.when(
-                    data: (brands) {
-                      if (cards.isEmpty) {
-                        return Center(
-                          child: Column(
-                            spacing: 16.0,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+            child: loyaltyCardsAsync.when(
+              data: (cards) {
+                return brandsAsync.when(
+                  data: (brands) {
+                    if (cards.isEmpty) {
+                      return Center(
+                        child: Column(
+                          spacing: 16.0,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(S.of(context).no_cards_yet),
+                            PlatformIconButton(
+                              icon: Icon(
+                                context.platformIcons.add,
+                                color: onSeed,
+                              ),
+                              // open add card modal
+                              onPressed: () => _openAddCardModal(
+                                context,
+                                brandsAsync.asData?.value ?? [],
+                              ),
+                              material: (_, __) => MaterialIconButtonData(
+                                padding: EdgeInsets.zero,
+                                style: IconButton.styleFrom(
+                                  backgroundColor: seed,
+                                ),
+                              ),
+                              cupertino: (_, __) => CupertinoIconButtonData(
+                                padding: EdgeInsets.zero,
+                                sizeStyle: CupertinoButtonSize.large,
+                                borderRadius: BorderRadius.circular(30),
+                                color: seed,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    return GridView.builder(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        top: 16,
+                        bottom: 32,
+                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 1.5,
+                          ),
+                      itemCount: cards.length,
+                      itemBuilder: (context, index) {
+                        final card = cards[index];
+
+                        // find matching brand by merchant name (if not custom card)
+                        final brand = brands.firstWhere(
+                          (b) =>
+                              card.isCustom == false &&
+                              (b.name?.toLowerCase() ==
+                                  card.merchant?.toLowerCase()),
+                          orElse: () => Brand(isCustom: true),
+                        );
+
+                        return GestureDetector(
+                          onTap: () {
+                            toastification.dismissAll();
+                            _openCard(context, card, brand);
+                          },
+                          child: Stack(
                             children: [
-                              Text(S.of(context).no_cards_yet),
-                              PlatformIconButton(
-                                icon: Icon(
-                                  context.platformIcons.add,
-                                  color: onSeed,
+                              Container(
+                                // card container
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: card.colorHex != null
+                                      ? Color(
+                                          int.parse(
+                                            '0xFF${card.colorHex!.replaceFirst('#', '')}',
+                                          ),
+                                        )
+                                      : Theme.of(context).cardColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .shadow
+                                          .withValues(alpha: 0.4),
+                                      blurRadius: 3,
+                                      offset: const Offset(3, 3),
+                                    ),
+                                  ],
                                 ),
-                                // open add card modal
-                                onPressed: () => _openAddCardModal(
-                                  context,
-                                  brandsAsync.asData?.value ?? [],
-                                ),
-                                material: (_, __) => MaterialIconButtonData(
-                                  padding: EdgeInsets.zero,
-                                  style: IconButton.styleFrom(
-                                    backgroundColor: seed,
+                                child: Container(
+                                  // gradient overlay
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Colors.white.withValues(alpha: 0.2),
+                                        Colors.transparent,
+                                      ],
+                                    ),
+                                  ),
+                                  // card content
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    // card brand
+                                    child: Center(
+                                      child: brand.logo != null
+                                          ? Image.asset(
+                                              brand.logo!,
+                                              fit: BoxFit.contain,
+                                            )
+                                          // custom card
+                                          : Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                if (card.isCustom)
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                            12.0,
+                                                          ),
+                                                      child: Image.asset(
+                                                        card.customLogo ??
+                                                            'assets/icons/gocards-icon-tp.png',
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                Text(
+                                                  card.merchant ?? 'Unknown',
+                                                  style: TextStyle(
+                                                    color: _getTextColor(
+                                                      card.colorHex,
+                                                    ),
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            ),
+                                    ),
                                   ),
                                 ),
-                                cupertino: (_, __) => CupertinoIconButtonData(
-                                  padding: EdgeInsets.zero,
-                                  sizeStyle: CupertinoButtonSize.large,
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: seed,
-                                ),
+                              ),
+                              // note positioned at top right
+                              Positioned(
+                                top: 6,
+                                right: 6,
+                                child: (card.note != null)
+                                    ? Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 6.0,
+                                          vertical: 2.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface
+                                              .withValues(alpha: 0.7),
+                                          borderRadius: BorderRadius.circular(
+                                            4.0,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          card.note!,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurface,
+                                              ),
+                                        ),
+                                      )
+                                    : SizedBox.shrink(),
                               ),
                             ],
                           ),
                         );
-                      }
-
-                      return GridView.builder(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          top: 16,
-                          bottom: 32,
-                        ),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12,
-                              childAspectRatio: 1.5,
-                            ),
-                        itemCount: cards.length,
-                        itemBuilder: (context, index) {
-                          final card = cards[index];
-
-                          // find matching brand by merchant name (if not custom card)
-                          final brand = brands.firstWhere(
-                            (b) =>
-                                card.isCustom == false &&
-                                (b.name?.toLowerCase() ==
-                                    card.merchant?.toLowerCase()),
-                            orElse: () => Brand(isCustom: true),
-                          );
-
-                          return GestureDetector(
-                            onTap: () {
-                              toastification.dismissAll();
-                              _openCard(context, card, brand);
-                            },
-                            child: Stack(
-                              children: [
-                                Container(
-                                  // card container
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: card.colorHex != null
-                                        ? Color(
-                                            int.parse(
-                                              '0xFF${card.colorHex!.replaceFirst('#', '')}',
-                                            ),
-                                          )
-                                        : Theme.of(context).cardColor,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .shadow
-                                            .withValues(alpha: 0.4),
-                                        blurRadius: 3,
-                                        offset: const Offset(3, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Container(
-                                    // gradient overlay
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          Colors.white.withValues(alpha: 0.2),
-                                          Colors.transparent,
-                                        ],
-                                      ),
-                                    ),
-                                    // card content
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      // card brand
-                                      child: Center(
-                                        child: brand.logo != null
-                                            ? Image.asset(
-                                                brand.logo!,
-                                                fit: BoxFit.contain,
-                                              )
-                                            // custom card
-                                            : Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  if (card.isCustom)
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.all(
-                                                              12.0,
-                                                            ),
-                                                        child: Image.asset(
-                                                          card.customLogo ??
-                                                              'assets/icons/gocards-icon-tp.png',
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  Text(
-                                                    card.merchant ?? 'Unknown',
-                                                    style: TextStyle(
-                                                      color: _getTextColor(
-                                                        card.colorHex,
-                                                      ),
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ],
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                // note positioned at top right
-                                Positioned(
-                                  top: 6,
-                                  right: 6,
-                                  child: (card.note != null)
-                                      ? Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 6.0,
-                                            vertical: 2.0,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .surface
-                                                .withValues(alpha: 0.7),
-                                            borderRadius: BorderRadius.circular(
-                                              4.0,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            card.note!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.onSurface,
-                                                ),
-                                          ),
-                                        )
-                                      : SizedBox.shrink(),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (e, _) =>
-                        Center(child: Text('Error loading brands: $e')),
-                  );
-                },
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(child: Text('Error loading cards: $e')),
-              ),
+                      },
+                    );
+                  },
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (e, _) =>
+                      Center(child: Text('Error loading brands: $e')),
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(child: Text('Error loading cards: $e')),
             ),
           ),
         ],

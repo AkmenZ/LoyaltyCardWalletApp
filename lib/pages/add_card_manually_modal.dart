@@ -9,6 +9,7 @@ import 'package:loyalty_cards_app/providers/loyalty_card_provider.dart';
 import 'package:loyalty_cards_app/theme.dart';
 import 'package:loyalty_cards_app/utils/toast_utils.dart';
 import 'package:loyalty_cards_app/validators.dart';
+import 'package:loyalty_cards_app/widgets/custom_elevated_button.dart';
 import 'package:loyalty_cards_app/widgets/custom_platform_app_bar.dart';
 import 'package:loyalty_cards_app/widgets/custom_scaffold.dart';
 import 'package:loyalty_cards_app/widgets/loyalty_card_header.dart';
@@ -176,26 +177,17 @@ class _AddCardManuallyModalState extends ConsumerState<AddCardManuallyModal> {
               ],
             ),
           ),
-          // bottom button
+          // save button
           SafeArea(
             minimum: const EdgeInsets.all(16),
             child: SizedBox(
               width: double.infinity,
-              child: PlatformElevatedButton(
+              child: CustomElevatedButton(
                 onPressed: _save,
                 child: Text(
                   S.of(context).save,
                   style: TextStyle(color: onSeed),
                 ),
-                material: (_, __) => MaterialElevatedButtonData(
-                  style: ElevatedButton.styleFrom(backgroundColor: seed),
-                ),
-                cupertino: (_, __) {
-                  return CupertinoElevatedButtonData(
-                    color: seed,
-                    sizeStyle: CupertinoButtonSize.small,
-                  );
-                },
               ),
             ),
           ),

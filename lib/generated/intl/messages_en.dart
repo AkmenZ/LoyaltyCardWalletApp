@@ -24,6 +24,14 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "add_card": MessageLookupByLibrary.simpleMessage("Add New Card"),
     "add_custom_card": MessageLookupByLibrary.simpleMessage("Add Custom Card"),
+    "auto_backup": MessageLookupByLibrary.simpleMessage("Auto Backup"),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Automatically save changes in Your account",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage("Backup disabled"),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Backup enabled and data saved",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Barcode"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -39,10 +47,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Cards restored successfully",
     ),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage("Cloud Backup"),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Continue"),
     "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete this card?",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Continue"),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "This action will override Your currently saved loyalty cards, if previously saved backup data exists. Are you sure you want to proceed?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Could not read the barcode from this image",
     ),
@@ -76,7 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Position the barcode within the frame to scan",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage("Restore From Backup"),
+    "restore": MessageLookupByLibrary.simpleMessage("Restore Data"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "scan": MessageLookupByLibrary.simpleMessage("Scan"),
     "share": MessageLookupByLibrary.simpleMessage("Share"),

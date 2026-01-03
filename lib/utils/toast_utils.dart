@@ -10,7 +10,7 @@ class ToastUtils {
     toastification.show(
       context: context,
       type: ToastificationType.success,
-      style: ToastificationStyle.fillColored,
+      style: ToastificationStyle.flatColored,
       title: Text(title),
       description: Text(description),
       alignment: Alignment.bottomCenter,
@@ -47,7 +47,7 @@ class ToastUtils {
     toastification.show(
       context: context,
       type: ToastificationType.error,
-      style: ToastificationStyle.fillColored,
+      style: ToastificationStyle.flatColored,
       title: Text(title),
       description: Text(description),
       alignment: Alignment.bottomCenter,

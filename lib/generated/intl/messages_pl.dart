@@ -26,6 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Utwórz Własną Kartę",
     ),
+    "auto_backup": MessageLookupByLibrary.simpleMessage(
+      "Automatyczna kopia zapasowa",
+    ),
+    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
+      "Automatyczne zapisywanie zmian na Twoim koncie",
+    ),
+    "backup_disabled": MessageLookupByLibrary.simpleMessage(
+      "Kopia zapasowa wyłączona",
+    ),
+    "backup_enabled": MessageLookupByLibrary.simpleMessage(
+      "Kopia zapasowa włączona i dane zapisane",
+    ),
     "barcode": MessageLookupByLibrary.simpleMessage("Kod kreskowy"),
     "cancel": MessageLookupByLibrary.simpleMessage("Anuluj"),
     "card_added_successfully": MessageLookupByLibrary.simpleMessage(
@@ -41,7 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "cards_restored_successfully": MessageLookupByLibrary.simpleMessage(
       "Karty zostały pomyślnie przywrócone",
     ),
-    "continue_to_scan": MessageLookupByLibrary.simpleMessage("Kontynuuj"),
+    "cloud_backup": MessageLookupByLibrary.simpleMessage(
+      "Kopia zapasowa w chmurze",
+    ),
+    "confirm_continue": MessageLookupByLibrary.simpleMessage("Kontynuuj"),
+    "confirm_delete_card": MessageLookupByLibrary.simpleMessage(
+      "Czy na pewno chcesz usunąć tę kartę?",
+    ),
+    "confirm_restore_data": MessageLookupByLibrary.simpleMessage(
+      "Ta operacja nadpisze obecnie zapisane karty lojalnościowe, jeśli istnieją wcześniej zapisane dane kopii zapasowej. Czy na pewno chcesz kontynuować?",
+    ),
     "could_not_read_barcode": MessageLookupByLibrary.simpleMessage(
       "Nie można odczytać kodu kreskowego z tego obrazu",
     ),
@@ -60,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nie znaleziono kodu kreskowego",
     ),
     "no_cards_yet": MessageLookupByLibrary.simpleMessage(
-      "Nie dodano jeszcze żadnych kart.",
+      "Nie dodano jeszcze żadnych kart",
     ),
     "note": MessageLookupByLibrary.simpleMessage("Notatka (opcjonalnie)"),
     "pick_from_gallery": MessageLookupByLibrary.simpleMessage(
@@ -75,9 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "position_barcode": MessageLookupByLibrary.simpleMessage(
       "Aby zeskanować, ustaw kod kreskowy w ramce",
     ),
-    "restore": MessageLookupByLibrary.simpleMessage(
-      "Przywróć Z Kopii Zapasowej",
-    ),
+    "restore": MessageLookupByLibrary.simpleMessage("Przywróć Dane"),
     "save": MessageLookupByLibrary.simpleMessage("Zapisz"),
     "scan": MessageLookupByLibrary.simpleMessage("Skanuj"),
     "share": MessageLookupByLibrary.simpleMessage("Udostępnij"),

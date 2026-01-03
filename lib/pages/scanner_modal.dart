@@ -79,6 +79,8 @@ class _ScannerModalState extends ConsumerState<ScannerModal> {
       colorHex: widget.brand.colorHex,
       dateAdded: DateTime.now().toIso8601String(),
       favorite: false,
+      customLogo: widget.brand.isCustom ? widget.brand.logo : null,
+      isCustom: widget.brand.isCustom,
     );
 
     // save to DB
