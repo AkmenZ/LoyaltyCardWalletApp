@@ -27,10 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Utwórz Własną Kartę",
     ),
     "auto_backup": MessageLookupByLibrary.simpleMessage(
-      "Automatyczna kopia zapasowa",
+      "Kopia zapasowa danych",
     ),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Automatyczne zapisywanie zmian na Twoim koncie",
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Kopia zapasowa jest obecnie wyłączona. Włącz kopię zapasową, aby utrzymać synchronizację danych lokalnych i w chmurze!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage(
       "Kopia zapasowa wyłączona",

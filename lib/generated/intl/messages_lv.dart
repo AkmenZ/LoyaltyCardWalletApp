@@ -27,8 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Izveidot Pielāgotu Karti",
     ),
     "auto_backup": MessageLookupByLibrary.simpleMessage("Datu Dublēšana"),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Automātiski saglabā izmaiņas jūsu kontā",
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Dublēšana pašlaik ir atspējota. Ieslēdziet dublēšanu, lai saglabātu vietējos un mākoņa datus sinhronizētus!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage(
       "Dublēšana izslēgta",

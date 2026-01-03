@@ -26,11 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Loo Kohandatud Kaart",
     ),
-    "auto_backup": MessageLookupByLibrary.simpleMessage(
-      "Automaatne Varundamine",
-    ),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Muudatuste automaatne salvestamine Teie kontol",
+    "auto_backup": MessageLookupByLibrary.simpleMessage("Andmete Varundamine"),
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Varundamine on praegu keelatud. Luba varundamine, et hoida kohalikud ja pilveandmed sünkroonis!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage(
       "Varundamine keelatud",

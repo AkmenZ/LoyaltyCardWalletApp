@@ -14,7 +14,7 @@
   "restore": "Atjaunot Datus",
   "cloud_backup": "Mākoņa Dublēšana",
   "auto_backup": "Datu Dublēšana",
-  "auto_backup_description": "Automātiski saglabā izmaiņas jūsu kontā",
+  "auto_backup_disabled_disclaimer": "Dublēšana pašlaik ir atspējota. Ieslēdziet dublēšanu, lai saglabātu vietējos un mākoņa datus sinhronizētus!",
   "backup_enabled": "Dublēšana ieslēgta un dati saglabāti",
   "backup_disabled": "Dublēšana izslēgta",
   "barcode": "Svītrkods",

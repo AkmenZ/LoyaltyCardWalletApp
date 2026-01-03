@@ -26,11 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_custom_card": MessageLookupByLibrary.simpleMessage(
       "Eigene Karte erstellen",
     ),
-    "auto_backup": MessageLookupByLibrary.simpleMessage(
-      "Automatische Sicherung",
-    ),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Änderungen in Ihrem Konto automatisch speichern",
+    "auto_backup": MessageLookupByLibrary.simpleMessage("Daten Sicherung"),
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Sicherung ist derzeit deaktiviert. Aktivieren Sie die Sicherung, um lokale und Cloud-Daten synchron zu halten!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage(
       "Backup deaktiviert",

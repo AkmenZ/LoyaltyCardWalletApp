@@ -1,208 +1,135 @@
-import Flutter
 import UIKit
-import CloudKit
+import Flutter
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
-  override func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
     
-    let controller = window?.rootViewController as! FlutterViewController
-    setupCloudChannel(controller)
+    // Constant for the backup file name
+    let BACKUP_FILE_NAME = "gocards_backup.db"
     
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
-  
-  private func setupCloudChannel(_ controller: FlutterViewController) {
-    let channel = FlutterMethodChannel(
-      name: "com.hyperjam.gocards/cloud",
-      binaryMessenger: controller.binaryMessenger
-    )
-    
-    channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
-      switch call.method {
-      case "createBackup":
-        guard let args = call.arguments as? [String: Any],
-              let filePath = args["filePath"] as? String,
-              let backupName = args["backupName"] as? String else {
-          result(false)
-          return
-        }
-        self.createBackup(filePath: filePath, backupName: backupName) { success in
-          result(success)
-        }
+    override func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
-      case "updateBackup":
-        guard let args = call.arguments as? [String: Any],
-              let filePath = args["filePath"] as? String,
-              let backupName = args["backupName"] as? String else {
-          result(false)
-          return
-        }
-        self.updateBackup(filePath: filePath, backupName: backupName) { success in
-          result(success)
-        }
+        let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+        let channel = FlutterMethodChannel(name: "com.hyperjam.gocards/backup",
+                                           binaryMessenger: controller.binaryMessenger)
         
-      case "deleteBackup":
-        guard let args = call.arguments as? [String: Any],
-              let backupName = args["backupName"] as? String else {
-          result(false)
-          return
-        }
-        self.deleteBackup(backupName: backupName) { success in
-          result(success)
-        }
+        channel.setMethodCallHandler({
+            (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
+            
+            switch call.method {
+            case "backupDatabase":
+                self.backupDatabase(call: call, result: result)
+            case "restoreDatabase":
+                self.restoreDatabase(result: result)
+            case "isBackupAvailable":
+                self.checkBackup(result: result)
+            default:
+                result(FlutterMethodNotImplemented)
+            }
+        })
         
-      case "restoreBackup":
-        guard let args = call.arguments as? [String: Any],
-              let targetPath = args["targetPath"] as? String,
-              let backupName = args["backupName"] as? String else {
-          result(nil)
-          return
-        }
-        self.restoreBackup(targetPath: targetPath, backupName: backupName) { path in
-          result(path)
-        }
+        GeneratedPluginRegistrant.register(with: self)
+        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
         
-      case "isCloudAvailable":
-        self.isCloudAvailable { available in
-          result(available)
+    // Helper to get the iCloud Documents Directory URL
+    private func getiCloudDocumentsURL() -> URL? {
+        // nil means "use the default container for this app"
+        guard let url = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+            return nil
         }
-        
-      case "getBackupInfo":
-        guard let args = call.arguments as? [String: Any],
-              let backupName = args["backupName"] as? String else {
-          result(nil)
-          return
+        return url.appendingPathComponent("Documents")
+    }
+    
+    private func backupDatabase(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        // Run in background to avoid blocking UI
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let args = call.arguments as? [String: Any],
+                  let sourcePath = args["filePath"] as? String else {
+                DispatchQueue.main.async { result(FlutterError(code: "INVALID_ARGS", message: "Path required", details: nil)) }
+                return
+            }
+            
+            guard let documentsURL = self.getiCloudDocumentsURL() else {
+                DispatchQueue.main.async { result(FlutterError(code: "ICLOUD_UNAVAILABLE", message: "User is not signed into iCloud", details: nil)) }
+                return
+            }
+            
+            let fileManager = FileManager.default
+            let sourceURL = URL(fileURLWithPath: sourcePath)
+            let destinationURL = documentsURL.appendingPathComponent(self.BACKUP_FILE_NAME)
+            
+            do {
+                // Create Documents directory if it doesn't exist
+                if !fileManager.fileExists(atPath: documentsURL.path) {
+                    try fileManager.createDirectory(at: documentsURL, withIntermediateDirectories: true, attributes: nil)
+                }
+                
+                // Remove existing backup if present
+                if fileManager.fileExists(atPath: destinationURL.path) {
+                    try fileManager.removeItem(at: destinationURL)
+                }
+                
+                // Copy new file
+                try fileManager.copyItem(at: sourceURL, to: destinationURL)
+                
+                DispatchQueue.main.async { result(true) }
+            } catch {
+                DispatchQueue.main.async { result(FlutterError(code: "BACKUP_FAILED", message: error.localizedDescription, details: nil)) }
+            }
         }
-        self.getBackupInfo(backupName: backupName) { info in
-          result(info)
+    }
+    
+    private func restoreDatabase(result: @escaping FlutterResult) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let documentsURL = self.getiCloudDocumentsURL() else {
+                DispatchQueue.main.async { result(FlutterError(code: "ICLOUD_UNAVAILABLE", message: "User is not signed into iCloud", details: nil)) }
+                return
+            }
+            
+            let fileManager = FileManager.default
+            let backupURL = documentsURL.appendingPathComponent(self.BACKUP_FILE_NAME)
+            
+            if !fileManager.fileExists(atPath: backupURL.path) {
+                DispatchQueue.main.async { result(nil) } // No backup found
+                return
+            }
+            
+            // IMPORTANT: Trigger download if it's just a placeholder in iCloud
+            do {
+                try fileManager.startDownloadingUbiquitousItem(at: backupURL)
+                
+                // Copy to a temp location so Flutter can read it safely
+                let tempDir = fileManager.temporaryDirectory
+                let tempFileUrl = tempDir.appendingPathComponent("restored_temp.db")
+                
+                if fileManager.fileExists(atPath: tempFileUrl.path) {
+                    try fileManager.removeItem(at: tempFileUrl)
+                }
+                
+                try fileManager.copyItem(at: backupURL, to: tempFileUrl)
+                
+                DispatchQueue.main.async { result(tempFileUrl.path) }
+            } catch {
+                DispatchQueue.main.async { result(FlutterError(code: "RESTORE_FAILED", message: error.localizedDescription, details: nil)) }
+            }
         }
-        
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
-  }
-  
-  private func createBackup(filePath: String, backupName: String, completion: @escaping (Bool) -> Void) {
-    let container = CKContainer.default()
-    let database = container.privateCloudDatabase
-    
-    guard let fileData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
-      completion(false)
-      return
     }
     
-    let record = CKRecord(recordType: "LoyaltyCardBackup")
-    record["backupName"] = backupName
-    record["fileData"] = fileData
-    record["timestamp"] = Date()
-    
-    database.save(record) { _, error in
-      completion(error == nil)
+    private func checkBackup(result: @escaping FlutterResult) {
+        DispatchQueue.global(qos: .background).async {
+            guard let documentsURL = self.getiCloudDocumentsURL() else {
+                DispatchQueue.main.async { result(false) }
+                return
+            }
+            
+            let backupURL = documentsURL.appendingPathComponent(self.BACKUP_FILE_NAME)
+            let exists = FileManager.default.fileExists(atPath: backupURL.path)
+            
+            DispatchQueue.main.async { result(exists) }
+        }
     }
-  }
-  
-  private func updateBackup(filePath: String, backupName: String, completion: @escaping (Bool) -> Void) {
-    let container = CKContainer.default()
-    let database = container.privateCloudDatabase
-    
-    guard let fileData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
-      completion(false)
-      return
-    }
-    
-    let predicate = NSPredicate(format: "backupName == %@", backupName)
-    let query = CKQuery(recordType: "LoyaltyCardBackup", predicate: predicate)
-    
-    database.perform(query, inZoneWith: nil) { records, error in
-      guard let record = records?.first else {
-        self.createBackup(filePath: filePath, backupName: backupName, completion: completion)
-        return
-      }
-      
-      record["fileData"] = fileData
-      record["timestamp"] = Date()
-      
-      database.save(record) { _, error in
-        completion(error == nil)
-      }
-    }
-  }
-  
-  private func deleteBackup(backupName: String, completion: @escaping (Bool) -> Void) {
-    let container = CKContainer.default()
-    let database = container.privateCloudDatabase
-    
-    let predicate = NSPredicate(format: "backupName == %@", backupName)
-    let query = CKQuery(recordType: "LoyaltyCardBackup", predicate: predicate)
-    
-    database.perform(query, inZoneWith: nil) { records, error in
-      guard let record = records?.first else {
-        completion(false)
-        return
-      }
-      
-      database.delete(withRecordID: record.recordID) { _, error in
-        completion(error == nil)
-      }
-    }
-  }
-  
-  private func restoreBackup(targetPath: String, backupName: String, completion: @escaping (String?) -> Void) {
-    let container = CKContainer.default()
-    let database = container.privateCloudDatabase
-    
-    let predicate = NSPredicate(format: "backupName == %@", backupName)
-    let query = CKQuery(recordType: "LoyaltyCardBackup", predicate: predicate)
-    
-    database.perform(query, inZoneWith: nil) { records, error in
-      guard let record = records?.first,
-            let fileData = record["fileData"] as? Data else {
-        completion(nil)
-        return
-      }
-      
-      do {
-        try fileData.write(to: URL(fileURLWithPath: targetPath))
-        completion(targetPath)
-      } catch {
-        completion(nil)
-      }
-    }
-  }
-  
-  private func isCloudAvailable(completion: @escaping (Bool) -> Void) {
-    let container = CKContainer.default()
-    container.accountStatus { status, error in
-      completion(status == .available)
-    }
-  }
-  
-  private func getBackupInfo(backupName: String, completion: @escaping ([String: Any]?) -> Void) {
-    let container = CKContainer.default()
-    let database = container.privateCloudDatabase
-    
-    let predicate = NSPredicate(format: "backupName == %@", backupName)
-    let query = CKQuery(recordType: "LoyaltyCardBackup", predicate: predicate)
-    
-    database.perform(query, inZoneWith: nil) { records, error in
-      guard let record = records?.first else {
-        completion(nil)
-        return
-      }
-      
-      let info: [String: Any] = [
-        "backupName": record["backupName"] as? String ?? "",
-        "timestamp": record["timestamp"] as? Date ?? Date(),
-        "fileSize": (record["fileData"] as? Data)?.count ?? 0
-      ]
-      
-      completion(info)
-    }
-  }
 }

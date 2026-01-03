@@ -50,11 +50,15 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>NSUbiquitousContainers</key>
-		<dict>
-			<key>iCloud.com.hyperjam.gocards</key>
-			<dict>
-				<key>NSUbiquitousContainerIsDocumentScopePublic</key>
-				<false/>
+        <dict>
+           <key>iCloud.com.hyperjam.gocards</key>
+           <dict>
+               <key>NSUbiquitousContainerIsDocumentScopePublic</key>
+               <true/>
+			   <key>NSUbiquitousContainerName</key>
+			   <string>GoCards</string>
+			   <key>NSUbiquitousContainerSupportedFolderLevels</key>
+			   <string>Any</string>
 			</dict>
 		</dict>
 		<key>UIStatusBarHidden</key>

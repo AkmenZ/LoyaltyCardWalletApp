@@ -46,6 +46,7 @@ class _BackupModalState extends ConsumerState<BackupModal> {
     }
   }
 
+  // restore card data from backup
   Future<void> _performRestore(BuildContext context) async {
     final confirmed = await showPlatformDialog<bool>(
       context: context,
@@ -72,7 +73,13 @@ class _BackupModalState extends ConsumerState<BackupModal> {
     });
 
     try {
-      await ref.read(loyaltyCardsProvider.notifier).restoreFromCloud();
+      final notifier = ref.read(loyaltyCardsProvider.notifier);
+      await notifier.restoreFromCloud();
+
+      // ensure backup is enabled after restore
+      if (!notifier.isBackupEnabled) {
+        await notifier.toggleBackup(true);
+      }
 
       if (context.mounted) {
         setState(() => _lastStatus = S.of(context).success);
@@ -114,11 +121,19 @@ class _BackupModalState extends ConsumerState<BackupModal> {
           child: Column(
             spacing: 20.0,
             children: [
+              // platform icon and name
               if (Platform.isIOS)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.apple, size: 40, color: theme.inverseSurface),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: Icon(
+                        Icons.apple,
+                        size: 40,
+                        color: theme.inverseSurface,
+                      ),
+                    ),
                     Text(
                       'iCloud',
                       style: Theme.of(context).textTheme.titleLarge,
@@ -139,6 +154,9 @@ class _BackupModalState extends ConsumerState<BackupModal> {
                     ),
                   ],
                 ),
+              // disclaimer text
+              if (!isEnabled)
+                Text(S.of(context).auto_backup_disabled_disclaimer),
               // enable/disable backup switch
               Container(
                 padding: const EdgeInsets.all(16),
@@ -151,20 +169,9 @@ class _BackupModalState extends ConsumerState<BackupModal> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                S.of(context).auto_backup,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              Text(
-                                S.of(context).auto_backup_description,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
+                        Text(
+                          S.of(context).auto_backup,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         PlatformSwitch(
                           value: isEnabled,

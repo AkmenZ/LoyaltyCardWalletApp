@@ -24,9 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "add_card": MessageLookupByLibrary.simpleMessage("Add New Card"),
     "add_custom_card": MessageLookupByLibrary.simpleMessage("Add Custom Card"),
-    "auto_backup": MessageLookupByLibrary.simpleMessage("Auto Backup"),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Automatically save changes in Your account",
+    "auto_backup": MessageLookupByLibrary.simpleMessage("Data Backup"),
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Backup is currently disabled. Enable backup to keep local and cloud data in sync!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage("Backup disabled"),
     "backup_enabled": MessageLookupByLibrary.simpleMessage(

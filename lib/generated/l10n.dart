@@ -144,16 +144,16 @@ class S {
     );
   }
 
-  /// `Auto Backup`
+  /// `Data Backup`
   String get auto_backup {
-    return Intl.message('Auto Backup', name: 'auto_backup', desc: '', args: []);
+    return Intl.message('Data Backup', name: 'auto_backup', desc: '', args: []);
   }
 
-  /// `Automatically save changes in Your account`
-  String get auto_backup_description {
+  /// `Backup is currently disabled. Enable backup to keep local and cloud data in sync!`
+  String get auto_backup_disabled_disclaimer {
     return Intl.message(
-      'Automatically save changes in Your account',
-      name: 'auto_backup_description',
+      'Backup is currently disabled. Enable backup to keep local and cloud data in sync!',
+      name: 'auto_backup_disabled_disclaimer',
       desc: '',
       args: [],
     );

@@ -27,10 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sukurti Pasirinktą Kortelę",
     ),
     "auto_backup": MessageLookupByLibrary.simpleMessage(
-      "Automatinė Atsarginė Kopija",
+      "Duomenų Atsarginė Kopija",
     ),
-    "auto_backup_description": MessageLookupByLibrary.simpleMessage(
-      "Automatiškai išsaugoti pakeitimus jūsų paskyroje",
+    "auto_backup_disabled_disclaimer": MessageLookupByLibrary.simpleMessage(
+      "Atsarginė kopija šiuo metu išjungta. Įjunkite atsarginę kopiją, kad vietiniai ir debesų duomenys būtų sinchronizuojami!",
     ),
     "backup_disabled": MessageLookupByLibrary.simpleMessage(
       "Atsarginė kopija išjungta",

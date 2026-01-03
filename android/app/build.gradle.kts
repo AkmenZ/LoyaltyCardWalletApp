@@ -50,10 +50,22 @@ android {
         }
     }
 
-    buildTypes {
+        buildTypes {
         release {
-            // Use the release signing config (not the debug one)
+            // Signing config
             signingConfig = signingConfigs.getByName("release")
+
+            // Enables code shrinking (R8)
+            isMinifyEnabled = true
+            
+            // Enables resource shrinking
+            isShrinkResources = true
+
+            // Link the proguard rules
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
