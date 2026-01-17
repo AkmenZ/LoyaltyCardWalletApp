@@ -63,6 +63,7 @@ class _AddCardModalState extends State<AddCardModal> {
   }
 
   // filtered and sorted brands
+  // filtered and sorted brands
   List<Brand> get _filteredBrands {
     final q = _search.trim().toLowerCase();
     final region = _selectedRegion.toLowerCase();
@@ -96,7 +97,19 @@ class _AddCardModalState extends State<AddCardModal> {
     }).toList();
 
     if (region == 'all') {
-      list.sort(compareAlpha);
+      list.sort((a, b) {
+        // sort by number of popular regions (most popular first)
+        final aPopCount = a.popularRegions?.length ?? 0;
+        final bPopCount = b.popularRegions?.length ?? 0;
+
+        // compare counts in descending order
+        if (aPopCount != bPopCount) {
+          return bPopCount.compareTo(aPopCount);
+        }
+
+        // if counts are equal, sort alphabetically
+        return compareAlpha(a, b);
+      });
     } else {
       list.sort((a, b) {
         final aPop = isPopularInRegion(a, region);

@@ -43,7 +43,9 @@ class BackupManager(private val activity: Activity) {
      */
     fun backupDatabase(filePath: String, result: MethodChannel.Result) {
         val account = GoogleSignIn.getLastSignedInAccount(activity)
-        if (account != null) {
+        val driveScope = Scope(DriveScopes.DRIVE_FILE)
+
+        if (account != null && GoogleSignIn.hasPermissions(account, driveScope)) {
             // Already signed in
             initializeDriveService(account)
             performBackup(filePath, result)
@@ -62,7 +64,9 @@ class BackupManager(private val activity: Activity) {
      */
     fun restoreDatabase(result: MethodChannel.Result) {
         val account = GoogleSignIn.getLastSignedInAccount(activity)
-        if (account != null) {
+        val driveScope = Scope(DriveScopes.DRIVE_FILE)
+        
+        if (account != null && GoogleSignIn.hasPermissions(account, driveScope)) {
             initializeDriveService(account)
             performRestore(result)
         } else {
@@ -78,7 +82,9 @@ class BackupManager(private val activity: Activity) {
      */
     fun checkBackupAvailable(result: MethodChannel. Result) {
         val account = GoogleSignIn.getLastSignedInAccount(activity)
-        if (account != null) {
+        val driveScope = Scope(DriveScopes.DRIVE_FILE)
+
+        if (account != null && GoogleSignIn.hasPermissions(account, driveScope)) {
             initializeDriveService(account)
             performCheck(result)
         } else {
@@ -97,6 +103,13 @@ class BackupManager(private val activity: Activity) {
                 try {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                     val account = task.result
+                    val driveScope = Scope(DriveScopes.DRIVE_FILE)
+
+                    if (!GoogleSignIn.hasPermissions(account, driveScope)) {
+                         pendingResult?.error("PERMISSION_DENIED", "Google Drive permission was denied by user", null)
+                         return
+                    }
+                    
                     initializeDriveService(account)
                     
                     // Continue with the pending operation

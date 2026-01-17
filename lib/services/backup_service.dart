@@ -3,14 +3,14 @@ import 'dart:io';
 
 class BackupService {
   static const platform = MethodChannel('com.hyperjam.gocards/backup');
-  
+
   // singleton pattern
   static final BackupService _instance = BackupService._internal();
   factory BackupService() => _instance;
   BackupService._internal();
 
   bool get isSupported => Platform.isAndroid || Platform.isIOS;
-  
+
   String get platformName {
     if (Platform.isAndroid) return 'Google Drive';
     if (Platform.isIOS) return 'iCloud';
@@ -51,10 +51,16 @@ class BackupService {
 
   String _handleException(PlatformException e) {
     switch (e.code) {
-      case 'SIGN_IN_CANCELLED': return 'Sign in cancelled';
-      case 'SIGN_IN_FAILED': return 'Sign in failed';
-      case 'NO_BACKUP': return 'No backup found';
-      default: return e.message ?? 'Unknown error occurred';
+      case 'SIGN_IN_CANCELLED':
+        return 'Sign in cancelled';
+      case 'PERMISSION_DENIED':
+        return 'Google Drive permission is required to backup';
+      case 'SIGN_IN_FAILED':
+        return 'Sign in failed';
+      case 'NO_BACKUP':
+        return 'No backup found';
+      default:
+        return e.message ?? 'Unknown error occurred';
     }
   }
 }

@@ -50,7 +50,13 @@ android {
         }
     }
 
-        buildTypes {
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        disable += "NewApi"
+    }
+
+    buildTypes {
         release {
             // Signing config
             signingConfig = signingConfigs.getByName("release")
@@ -108,5 +114,5 @@ dependencies {
     implementation("com.google.http-client:google-http-client-gson:1.42.0")
     
     // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android: 1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }

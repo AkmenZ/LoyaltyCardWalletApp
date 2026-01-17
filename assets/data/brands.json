@@ -336,6 +336,14 @@
     "popularRegions": ["de", "pl"]
   },
   {
+    "id": "adac",
+    "name": "Adac",
+    "logo": "assets/logos/adac-logo.png",
+    "colorHex": "#FFCE00",
+    "regions": ["de"],
+    "popularRegions": []
+  },
+  {
     "id": "rewe",
     "name": "REWE",
     "logo": "assets/logos/rewe-logo.png",
@@ -348,6 +356,30 @@
     "name": "Edeka",
     "logo": "assets/logos/edeka-logo.png",
     "colorHex": "#FEE501",
+    "regions": ["de"],
+    "popularRegions": ["de"]
+  },
+  {
+    "id": "deutschlandcard",
+    "name": "Deutschland Card",
+    "logo": "assets/logos/deutschland-card-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["de"],
+    "popularRegions": ["de"]
+  },
+  {
+    "id": "payback",
+    "name": "Payback",
+    "logo": "assets/logos/payback-logo.png",
+    "colorHex": "#003EB0",
+    "regions": ["de"],
+    "popularRegions": ["de"]
+  },
+  {
+    "id": "rossmann",
+    "name": "Rossmann",
+    "logo": "assets/logos/rossmann-logo.png",
+    "colorHex": "#FFFFFF",
     "regions": ["de"],
     "popularRegions": ["de"]
   },
@@ -404,6 +436,22 @@
     "name": "JYSK",
     "logo": "assets/logos/jysk-logo.png",
     "colorHex": "#00357A",
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
+    "popularRegions": []
+  },
+  {
+    "id": "sport-adidas",
+    "name": "Adidas",
+    "logo": "assets/logos/adidas-logo.png",
+    "colorHex": "#0072CE",
+    "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
+    "popularRegions": []
+  },
+  {
+    "id": "sport-nike",
+    "name": "Nike",
+    "logo": "assets/logos/nike-logo.png",
+    "colorHex": "#000000",
     "regions": ["ie", "gb", "lv", "lt", "ee", "pl", "de"],
     "popularRegions": []
   }

@@ -22,10 +22,13 @@ class _SplashPageState extends State<SplashPage>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 700),
     );
 
-    _scale = CurvedAnimation(parent: _controller, curve: Curves.easeOutBack);
+    _scale = Tween<double>(
+      begin: 0.1,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward().whenComplete(_goHome);
   }
@@ -35,8 +38,8 @@ class _SplashPageState extends State<SplashPage>
     // replace splash with home page
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 400),
-        reverseTransitionDuration: const Duration(milliseconds: 400),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200),
         pageBuilder: (_, __, ___) => const HomePage(),
         transitionsBuilder: (_, animation, __, child) {
           return FadeTransition(opacity: animation, child: child);
@@ -58,7 +61,7 @@ class _SplashPageState extends State<SplashPage>
       body: Center(
         child: ScaleTransition(
           scale: _scale,
-          child: Image.asset('assets/icons/gocards-icon-tp.png', width: 200),
+          child: Image.asset('assets/icons/gocards-icon-tp.png', width: 240),
         ),
       ),
     );
