@@ -79,6 +79,7 @@ class _CustomCardModalState extends ConsumerState<CustomCardModal> {
     'assets/images/train.png',
     'assets/images/fuel.png',
     'assets/images/cinema.png',
+    'assets/images/pets.png',
     'assets/images/star.png',
     'assets/images/heart.png',
   ];

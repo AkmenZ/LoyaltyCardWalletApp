@@ -224,6 +224,14 @@
     "popularRegions": []
   },
   {
+    "id": "euroaptieka",
+    "name": "Euro Aptieka",
+    "logo": "assets/logos/euroaptieka-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
     "id": "kursi",
     "name": "Kurši",
     "logo": "assets/logos/kursi-logo.png",
@@ -256,6 +264,14 @@
     "popularRegions": []
   },
   {
+    "id": "lats",
+    "name": "Lats",
+    "logo": "assets/logos/lats-logo.png",
+    "colorHex": "#FFFFFF",
+    "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
     "id": "neste",
     "name": "Neste",
     "logo": "assets/logos/neste-logo.png",
@@ -268,6 +284,14 @@
     "name": "Viada",
     "logo": "assets/logos/viada-logo.png",
     "colorHex": "#E5183D",
+    "regions": ["lv", "lt"],
+    "popularRegions": []
+  },
+  {
+    "id": "vynoteka",
+    "name": "Vynoteka",
+    "logo": "assets/logos/vynoteka-logo.png",
+    "colorHex": "#A7295B",
     "regions": ["lv", "lt"],
     "popularRegions": []
   },
@@ -285,6 +309,14 @@
     "logo": "assets/logos/janis-roze-logo.png",
     "colorHex": "#FFFFFF",
     "regions": ["lv"],
+    "popularRegions": []
+  },
+  {
+    "id": "dinozoo",
+    "name": "DinoZoo",
+    "logo": "assets/logos/dinozoo-logo.png",
+    "colorHex": "#0F3A30",
+    "regions": ["lv", "lt", "ee"],
     "popularRegions": []
   },
   {
