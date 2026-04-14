@@ -33,7 +33,7 @@ final class LoyaltyCardsProvider
   LoyaltyCards create() => LoyaltyCards();
 }
 
-String _$loyaltyCardsHash() => r'683b381b2bfaeb752d9c716150eef5c42548bc90';
+String _$loyaltyCardsHash() => r'9c2d53372bab32667c7e61dbf64ec900171cfb1c';
 
 abstract class _$LoyaltyCards extends $AsyncNotifier<List<LoyaltyCard>> {
   FutureOr<List<LoyaltyCard>> build();

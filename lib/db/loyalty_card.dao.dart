@@ -32,12 +32,27 @@ class LoyaltyCardSembastDao {
   Future<List<LoyaltyCard>> getAll() async {
     final snaps = await _store.find(
       db,
-      finder: Finder(sortOrders: [SortOrder('merchant', true)]),
+      finder: Finder(
+        sortOrders: [SortOrder('favorite', false), SortOrder('merchant', true)],
+      ),
     );
     return snaps.map((s) {
       final value = Map<String, Object?>.from(s.value)..['id'] = s.key;
       return LoyaltyCard.fromJson(value);
     }).toList();
+  }
+
+  Future<LoyaltyCard> toggleFavorite(int id) async {
+    final snap = await _store.record(id).getSnapshot(db);
+    if (snap == null) throw ArgumentError('Card $id not found');
+
+    final current = snap.value['favorite'] as bool? ?? false;
+    await _store.record(id).update(db, {'favorite': !current});
+
+    final updated = Map<String, Object?>.from(snap.value)
+      ..['favorite'] = !current
+      ..['id'] = snap.key;
+    return LoyaltyCard.fromJson(updated);
   }
 
   Future<int> count() async {

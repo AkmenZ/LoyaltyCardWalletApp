@@ -87,6 +87,12 @@ class LoyaltyCards extends _$LoyaltyCards {
     _triggerAutoBackup();
   }
 
+  Future<void> toggleFavorite(int id) async {
+    await _withDao((dao) => dao.toggleFavorite(id));
+    await loadCards();
+    _triggerAutoBackup();
+  }
+
   // --- Cloud Backup Management ---
   Future<void> _triggerAutoBackup() async {
     if (!_isAutoBackupEnabled) return;

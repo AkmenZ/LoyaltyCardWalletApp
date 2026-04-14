@@ -91,12 +91,9 @@ class HomePage extends ConsumerWidget {
             child: Icon(context.platformIcons.cloud),
           ),
           onPressed: () => _openBackupModal(context),
-          material: (_, __) => MaterialIconButtonData(
-              padding: EdgeInsets.zero,
-            ),
-            cupertino: (_, __) => CupertinoIconButtonData(
-              sizeStyle: CupertinoButtonSize.large,
-            ),
+          material: (_, __) => MaterialIconButtonData(padding: EdgeInsets.zero),
+          cupertino: (_, __) =>
+              CupertinoIconButtonData(sizeStyle: CupertinoButtonSize.large),
         ),
         trailingActions: [
           PlatformIconButton(
@@ -105,12 +102,10 @@ class HomePage extends ConsumerWidget {
             onPressed: () {
               _openAddCardModal(context, brandsAsync.asData?.value ?? []);
             },
-            material: (_, __) => MaterialIconButtonData(
-              padding: EdgeInsets.zero,
-            ),
-            cupertino: (_, __) => CupertinoIconButtonData(
-              sizeStyle: CupertinoButtonSize.large,
-            ),
+            material: (_, __) =>
+                MaterialIconButtonData(padding: EdgeInsets.zero),
+            cupertino: (_, __) =>
+                CupertinoIconButtonData(sizeStyle: CupertinoButtonSize.large),
           ),
         ],
       ),
@@ -305,6 +300,33 @@ class HomePage extends ConsumerWidget {
                                         ),
                                       )
                                     : SizedBox.shrink(),
+                              ),
+
+                              // favorite icon at top left
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (card.id != null) {
+                                      ref
+                                          .read(loyaltyCardsProvider.notifier)
+                                          .toggleFavorite(card.id!);
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Icon(
+                                      card.favorite
+                                          ? Icons.star_rounded
+                                          : Icons.star_border_rounded,
+                                      size: 24,
+                                      color: card.favorite
+                                          ? Colors.amber
+                                          : Colors.grey.shade400,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
